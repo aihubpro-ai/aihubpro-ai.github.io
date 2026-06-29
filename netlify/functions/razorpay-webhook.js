@@ -1,47 +1,39 @@
 const crypto = require('crypto');
 
-exports.handler = async (event, context) => {
-  // 1. Sirf POST request allow karo
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
-
-  // 2. Signature verify karo - Security ke liye sabse zaroori
+exports.handler = async (event) => {
+  // 1. Razorpay signature verify karo
   const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
   const signature = event.headers['x-razorpay-signature'];
+  const body = event.body;
+  
+  const expectedSignature = crypto
+    .createHmac('sha256', webhookSecret)
+    .update(body)
+    .digest('hex');
 
-  const shasum = crypto.createHmac('sha256', webhookSecret);
-  shasum.update(event.body);
-  const digest = shasum.digest('hex');
-
-  // Agar signature match nahi hua to request fake hai
-  if (digest !== signature) {
-    console.error('❌ Invalid signature. Request rejected.');
+  if (signature !== expectedSignature) {
+    console.log('Invalid signature');
     return { statusCode: 400, body: 'Invalid signature' };
   }
 
-  // 3. Razorpay ka data parse karo
-  const body = JSON.parse(event.body);
-
-  // 4. Sirf 'payment.captured' event pe kaam karo
-  if (body.event === 'payment.captured') {
-    const payment = body.payload.payment.entity;
-    const user_email = payment.email;
-    const payment_id = payment.id;
-    const amount = payment.amount / 100; // paise to rupee
-
-    console.log(`✅ Payment SUCCESS: ${user_email}, ₹${amount}, ID: ${payment_id}`);
+  // 2. Payment data nikalo
+  const data = JSON.parse(body);
+  
+  if (data.event === 'payment.captured') {
+    const payment = data.payload.payment.entity;
+    const email = payment.email; 
+    const amount = payment.amount / 100;
     
-    // TODO: YAHAN DATABASE UPDATE KA CODE AAYEGA
-    // Abhi ke liye sirf log kar rahe hain
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ status: 'ok', message: 'Payment processed' })
+    console.log('Payment Success:', email, amount);
+    
+    // 3. TODO: YAHAN DB UPDATE KA CODE AAYEGA
+    // Tu DB bata dega to main ye complete kar dunga
+    
+    return { 
+      statusCode: 200, 
+      body: JSON.stringify({ success: true }) 
     };
   }
 
-  // 5. Baaki events ignore karo
-  console.log(`Event ignored: ${body.event}`);
   return { statusCode: 200, body: 'Event ignored' };
 };
