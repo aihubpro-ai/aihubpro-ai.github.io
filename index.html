@@ -6,64 +6,139 @@
   <title>AIHubPro 2026 - All-in-One AI Hub</title>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <style>
-    body { background: #0a1929; color: white; font-family: Arial, sans-serif; text-align: center; padding: 20px; margin: 0; }
-    h1 { color: #00d4ff; font-size: 48px; margin-bottom: 10px; }
-    h2 { color: #ffffff; font-size: 24px; margin-bottom: 40px; }
-    .plan { background: #1a2332; margin: 15px auto; padding: 25px; border-radius: 12px; max-width: 400px; border: 2px solid #00d4ff; }
-    .price { font-size: 36px; color: #00ff88; font-weight: bold; margin: 10px 0; }
-    .btn { background: #00d4ff; color: #000; padding: 15px 30px; border: none; border-radius: 8px; font-size: 18px; cursor: pointer; margin-top: 15px; font-weight: bold; width: 90%; }
-    .btn:hover { background: #00ff88; }
-    #trialTimer { position: fixed; top: 10px; right: 10px; background: red; padding: 10px 15px; border-radius: 5px; font-weight: bold; display: none; z-index: 999; }
-    .checkbox { margin: 30px auto; text-align: left; max-width: 400px; font-size: 14px; }
-    #buyPopup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; }
-    .popup-content { background: #1a2332; max-width: 500px; margin: 100px auto; padding: 30px; border-radius: 12px; border: 2px solid #00d4ff; }
-    .hike-text { font-size: 12px; color: #ffaa00; margin-top: 5px; }
+    body { background: #000; color: white; font-family: Arial, sans-serif; text-align: center; padding: 0; margin: 0; }
+    .hero { padding: 60px 20px; background: #000; }
+    .hero h1 { color: #FFD700; font-size: 48px; margin: 20px 0 10px 0; }
+    .hero p { color: #fff; font-size: 24px; margin: 0; }
+    .btn-main { margin-top: 30px; padding: 15px 40px; background: #FFD700; color: #000; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; }
+    .btn-main:hover { background: #ffed4e; }
+    .pricing { padding: 60px 20px; background: #0a0a0a; }
+    .plans { max-width: 1200px; margin: 0 auto; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+    .plan { flex: 1; min-width: 300px; background: #1a1a1a; border: 2px solid #333; border-radius: 12px; padding: 30px; text-align: center; }
+    .plan-pro { border: 2px solid #FFD700; }
+    .plan h3 { color: #fff; font-size: 28px; margin-bottom: 20px; }
+    .plan p { color: #999; margin: 15px 0; }
+    .price { color: #FFD700; font-size: 36px; margin: 30px 0; font-weight: bold; }
+    .btn { width: 100%; padding: 15px; background: #333; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-top: 10px; }
+    .btn:hover { background: #00ff88; color: #000; }
+    .btn-pro { background: #FFD700; color: #000; font-weight: bold; }
+    .btn-pro:hover { background: #ffed4e; }
+    .premium { max-width: 800px; margin: 30px auto 0; background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); border: 2px solid #FFD700; border-radius: 12px; padding: 40px; text-align: center; }
+    .premium h3 { color: #FFD700; font-size: 32px; }
+    .tools-note { text-align: center; margin-top: 30px; color: #666; font-size: 14px; line-height: 1.8; }
+    .checkbox { margin: 30px auto; text-align: left; max-width: 500px; font-size: 14px; color: #999; }
     .badge { color: #00ff88; margin-top: 40px; font-weight: bold; font-size: 18px; }
+    #trialTimer { position: fixed; top: 10px; right: 10px; background: red; padding: 10px 15px; border-radius: 5px; font-weight: bold; display: none; z-index: 999; }
+    #buyPopup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; }
+    .popup-content { background: #1a2332; max-width: 500px; margin: 100px auto; padding: 30px; border-radius: 12px; border: 2px solid #00d4ff; }
+    .footer { background: #000; color: #fff; padding: 60px 20px; text-align: center; }
+    .footer-box { text-align: left; background: #1a1a1a; padding: 30px; border-radius: 8px; margin-bottom: 40px; max-width: 1000px; margin-left: auto; margin-right: auto; }
+    .footer h3 { color: #FFD700; font-size: 24px; margin-bottom: 10px; }
+    .footer h4 { color: #FFD700; margin-bottom: 15px; }
+    .footer p { color: #999; line-height: 1.8; font-size: 14px; }
+    .footer a { color: #00d4ff; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <div id="trialTimer">Trial: <span id="time">05:00</span></div>
-  
-  <h1>AIHubPro</h1>
-  <h2>All-in-One AI Hub - ChatGPT, Claude, Gemini 🚀</h2>
 
-  <div class="plan">
-    <h3>FREE</h3>
-    <p>5 Minute Trial - 1 Query Only</p>
-    <div class="price">₹0</div>
-    <button class="btn" onclick="startTrial()">Start Free Trial</button>
+  <div class="hero">
+    <img src="https://via.placeholder.com/400x200/000000/FFD700?text=AIHubPro+Logo" alt="AIHubPro Logo" style="max-width: 400px;">
+    <h1>AIHubPro</h1>
+    <p>One Subscription. Every Top AI Model + Powerful AI Tools.</p>
+    <button class="btn-main" onclick="startTrial()">Start Free Trial</button>
   </div>
 
-  <div class="plan">
-    <h3>PRO</h3>
-    <p>50 Queries/Day + Priority Speed</p>
-    <div class="price">₹666/month</div>
-    <p class="hike-text">+9% every 1 April. Next: ₹726 on 1 Apr 2027</p>
+  <div class="pricing">
+    <div class="plans">
+      <div class="plan">
+        <h3>FREE</h3>
+        <p>5 Minute Trial</p>
+        <p>Limited Access</p>
+        <div class="price">₹0</div>
+        <button class="btn" onclick="startTrial()">Start Free Trial</button>
+      </div>
+
+      <div class="plan plan-pro">
+        <h3>PRO</h3>
+        <p>Priority Speed</p>
+        <p>All AI Models</p>
+        <p>+ Basic AI Tools*</p>
+        <div class="price">₹666/month</div>
+      </div>
+    </div>
+
+    <div class="premium">
+      <h3>PREMIUM</h3>
+      <p>Fastest Speed + Beta Features + Priority Support</p>
+      <p>API Access + Team Seats + Commercial Use</p>
+      <p>+ Premium AI Tools Suite**</p>
+      <div class="price" style="font-size: 40px;">₹999/month</div>
+    </div>
+
+    <div class="tools-note">
+      <p>*Basic Tools: AI Chat, PDF Summarizer, YouTube Summarizer</p>
+      <p>**Premium Tools: Image Generator, Video Creator, Code Assistant, Data Analyzer, SEO Writer, Voice Cloner + All Basic Tools</p>
+      <p style="margin-top: 15px; color: #888;">Prices in INR. Billed monthly. Cancel anytime.</p>
+    </div>
+
+    <div class="checkbox">
+      <input type="checkbox" id="agreeHike" required>
+      <label for="agreeHike">I agree to recurring billing and the <a href="/terms.html">Terms of Service</a>. Prices may be revised annually with 30-day prior notice as per Terms.</label>
+    </div>
+
+    <button class="btn btn-pro" onclick="buyPlan('PRO')" style="max-width: 400px;">Buy PRO ₹666</button>
+    <button class="btn btn-pro" onclick="buyPlan('PREMIUM')" style="max-width: 400px; margin-top: 10px;">Buy PREMIUM ₹999</button>
+
+    <div class="badge">✅ GST Compliant | Secure Payments | Terms Protected</div>
   </div>
-
-  <div class="plan">
-    <h3>PRO MAX</h3>
-    <p>Unlimited + API Access + Fastest</p>
-    <div class="price">₹999/month</div>
-    <p class="hike-text">+9% every 1 April. Next: ₹1,089 on 1 Apr 2027</p>
-  </div>
-
-  <div class="checkbox">
-    <input type="checkbox" id="agreeHike" required>
-    <label for="agreeHike">I agree to recurring billing + 9% yearly price increase on 1 April as per <a href="/terms.html" style="color:#00d4ff;">Terms Clause 16</a>. Cancel anytime.</label>
-  </div>
-
-  <button class="btn" onclick="buyPlan('PRO')">Buy PRO ₹666</button>
-  <button class="btn" onclick="buyPlan('PRO_MAX')">Buy PRO MAX ₹999</button>
-
-  <div class="badge">✅ GST Compliant | 9% Hike Policy Active | Terms Protected</div>
 
   <div id="buyPopup">
     <div class="popup-content">
       <h2>⏰ Trial Ended</h2>
       <p>Your 5-minute free trial is over. Upgrade now to continue using AIHubPro.</p>
-      <button class="btn" onclick="buyPlan('PRO')">Buy PRO ₹666</button>
-      <button class="btn" onclick="buyPlan('PRO_MAX')">Buy PRO MAX ₹999</button>
+      <button class="btn btn-pro" onclick="buyPlan('PRO')">Buy PRO ₹666</button>
+      <button class="btn btn-pro" onclick="buyPlan('PREMIUM')" style="margin-top: 10px;">Buy PREMIUM ₹999</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h3>AIHubPro</h3>
+    <p style="color: #999; margin-bottom: 5px;">AI • Digital • Growth</p>
+    <p style="color: #999; margin-bottom: 40px;">Learn • Download • Create • Earn • Grow</p>
+
+    <div style="margin-bottom: 40px;">
+      <h4 style="color: #fff;">Quick Links</h4>
+      <p style="color: #999; line-height: 2;">
+        <a href="/">Home</a> • <a href="#pricing">Pricing</a> • <a href="/login.html">Login</a> • <a href="/about.html">About</a> • <a href="/contact.html">Contact</a> • <a href="/privacy.html">Privacy Policy</a> • <a href="/terms.html">Terms of Service</a> • <a href="/refund.html">Refund Policy</a>
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h4>Disclaimer</h4>
+      <p>AIHubPro is an independent AI education and digital platform. We are not affiliated with, endorsed by, sponsored by, or officially associated with OpenAI, Anthropic, Google LLC, Meta, or any other AI company or organization. References to third-party products, services, trademarks, and brand names are provided for identification and educational purposes only. All trademarks, logos, and brand names are the property of their respective owners. AIHubPro makes no claim of ownership over any third-party trademarks or intellectual property.</p>
+    </div>
+
+    <div class="footer-box">
+      <h4>Governing Law & Jurisdiction</h4>
+      <p>These Terms shall be governed by and construed in accordance with the laws of India. Any dispute, claim, or legal proceeding arising out of or relating to AIHubPro, its services, or these Terms shall be subject to the exclusive jurisdiction of the competent courts located in Yamunanagar, Haryana, India.</p>
+    </div>
+
+    <p style="color: #666; font-size: 14px; margin-bottom: 30px;">Copyright © 2026 AIHubPro. All Rights Reserved.</p>
+
+    <div style="margin-bottom: 30px;">
+      <h4 style="color: #fff;">Built With Pride</h4>
+      <p style="color: #999;">Proudly Built in India 🇮🇳</p>
+    </div>
+
+    <div style="margin-bottom: 30px;">
+      <h4 style="color: #fff;">Our Mission</h4>
+      <p style="color: #999; max-width: 600px; margin: 0 auto;">Empowering creators, freelancers, students, entrepreneurs, and businesses with the power of Artificial Intelligence.</p>
+    </div>
+
+    <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #333;">
+      <p style="color: #FFD700; font-weight: bold; letter-spacing: 2px;">SMARTER • FASTER • STRONGER • FOREVER</p>
     </div>
   </div>
 
