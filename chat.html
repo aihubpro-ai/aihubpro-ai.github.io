@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIHubPro - Triple Engine AI</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #000; color: #FFD700; font-family: Arial, sans-serif; 
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+        }
+      .container { max-width: 800px; width: 90%; text-align: center; padding: 20px; }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 0 10px #FFD700; }
+      .status { font-size: 0.9rem; color: #00ff00; margin-bottom: 20px; }
+        #chat { height: 400px; overflow-y: auto; border: 2px solid #FFD700; 
+                border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: left; }
+      .msg { margin: 10px 0; padding: 10px; border-radius: 5px; }
+      .user { background: #333; color: #fff; text-align: right; }
+      .ai { background: #1a1a1a; color: #FFD700; border-left: 3px solid #FFD700; }
+      .engine { font-size: 0.7rem; color: #00ff00; opacity: 0.7; }
+        #input-area { display: flex; gap: 10px; }
+        #userInput { flex: 1; padding: 12px; background: #111; border: 2px solid #FFD700; 
+                     color: #FFD700; border-radius: 5px; font-size: 1rem; }
+        button { padding: 12px 25px; background: #FFD700; color: #000; border: none; 
+                 border-radius: 5px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #fff; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ AIHubPro Triple Engine</h1>
+        <div class="status" id="status">Engine: Ready</div>
+        <div id="chat"></div>
+        <div id="input-area">
+            <input type="text" id="userInput" placeholder="Ask anything..." />
+            <button id="sendBtn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+<script>
+// ===== YAHAN APNI TEENO KEY DAAL DE =====
+const GROQ_KEY = 'gsk_YAHAAN_GROQ_KEY_DAAL';
+const GEMINI_KEY = 'AIza_YAHAAN_GEMINI_KEY_DAAL';
+const HF_KEY = 'hf_YAHAAN_HF_KEY_DAAL';
+// ==========================================
+
+const chat = document.getElementById('chat');
+const status = document.getElementById('status');
+const userInput = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendBtn');
+
+userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendMessage();
+});
+
+function addMessage(text, sender, engine = '') {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `msg ${sender}`;
+    msgDiv.innerHTML = text + (engine? `<div class="engine">via ${engine}</div>` : '');
+    chat.appendChild(msgDiv);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+async function tryGroq(prompt) {
+    status.textContent = 'Engine: Groq Llama 3.3 70B...';
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            model: 'llama-3.3-70b-versatile',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.7, max_tokens: 800
+        })
+    });
+    if (!res.ok) throw new Error('Groq failed');
+    const data = await res.json();
+    return data.choices[0].message.content;
+}
+
+async function tryGemini(prompt) {
+    status.textContent = 'Engine: Gemini 1.5 Flash...';
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+    });
+    if (!res.ok) throw new Error('Gemini failed');
+    const data = await res.json();
+    return data.candidates[0].content.parts[0].text;
+}
+
+async function tryHF(prompt) {
+    status.textContent = 'Engine: HuggingFace...';
+    const res = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${HF_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ inputs: prompt, parameters: { max_new_tokens: 500 } })
+    });
+    if (!res.ok) throw new Error('HF failed');
+    const data = await res.json();
+    return data[0].generated_text.replace(prompt, '').trim();
+}
+
+async function sendMessage() {
+    const prompt = userInput.value.trim();
+    if (!prompt) return;
+    
+    addMessage(prompt, 'user');
+    userInput.value = '';
+    sendBtn.disabled = true;
+
+    try {
+        const reply = await tryGroq(prompt);
+        addMessage(reply, 'ai', 'Groq Llama 3.3');
+        status.textContent = 'Engine: Ready';
+    } catch (e1) {
+        try {
+            const reply = await tryGemini(prompt);
+            addMessage(reply, 'ai', 'Gemini 1.5 Flash');
+            status.textContent = 'Engine: Ready';
+        } catch (e2) {
+            try {
+                const reply = await tryHF(prompt);
+                addMessage(reply, 'ai', 'HuggingFace Mistral');
+                status.textContent = 'Engine: Ready';
+            } catch (e3) {
+                addMessage('Sorry, all 3 engines failed. Check your API keys.', 'ai', 'Error');
+                status.textContent = 'Engine: Error';
+            }
+        }
+    }
+    sendBtn.disabled = false;
+    userInput.focus();
+}
+
+addMessage('Welcome! Triple Engine Active. Groq → Gemini → HuggingFace fallback ready.', 'ai', 'System');
+</script>
+</body>
+</html>
