@@ -3,92 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Successful - AIHubPro</title>
+    <title>AIHubPro - Triple Engine AI</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            background: #000; 
-            color: #FFD700; 
-            font-family: Arial, sans-serif; 
-            text-align: center; 
-            padding: 50px 20px; 
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: #000; color: #FFD700; font-family: 'Segoe UI', Arial, sans-serif; 
+            display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;
         }
-        .container {
-            max-width: 600px;
-            animation: fadeIn 0.5s;
+     .container { max-width: 900px; width: 100%; }
+     .header { text-align: center; margin-bottom: 20px; }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 0 15px #FFD700; }
+     .status { 
+            font-size: 0.9rem; color: #00ff00; margin-bottom: 15px; 
+            padding: 8px; background: #111; border-radius: 5px; display: inline-block;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+     .status.error { color: #ff4444; }
+        #chat { 
+            height: 500px; overflow-y: auto; border: 2px solid #FFD700; 
+            border-radius: 15px; padding: 20px; margin-bottom: 20px; 
+            background: #0a0a0a; box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+        #chat::-webkit-scrollbar { width: 8px; }
+        #chat::-webkit-scrollbar-track { background: #111; }
+        #chat::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 4px; }
+     .msg { 
+            margin: 15px 0; padding: 12px 18px; border-radius: 12px; 
+            animation: slideIn 0.3s; word-wrap: break-word;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .tick { 
-            font-size: 100px; 
-            margin-bottom: 20px;
-            animation: bounce 0.6s;
+     .user { background: #333; color: #fff; text-align: right; margin-left: 20%; }
+     .ai { background: #1a1a1a; color: #FFD700; border-left: 4px solid #FFD700; margin-right: 20%; }
+     .engine { 
+            font-size: 0.75rem; color: #00ff00; opacity: 0.8; 
+            margin-top: 8px; font-style: italic;
         }
-        @keyframes bounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-        h1 { font-size: 48px; margin-bottom: 15px; text-shadow: 0 0 15px #FFD700; }
-        h2 { font-size: 24px; margin-bottom: 20px; color: #00ff00; }
-        p { font-size: 18px; margin-bottom: 30px; line-height: 1.6; }
-        .btn {
-            display: inline-block;
-            color: #000; 
-            background: #FFD700;
-            font-size: 20px; 
-            text-decoration: none; 
-            border: 2px solid #FFD700; 
-            padding: 15px 40px; 
-            border-radius: 50px;
-            font-weight: bold;
+        #input-area { display: flex; gap: 12px; }
+        #userInput { 
+            flex: 1; padding: 15px; background: #111; border: 2px solid #FFD700; 
+            color: #FFD700; border-radius: 10px; font-size: 1rem; outline: none;
             transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
-        .btn:hover { 
-            background: #fff; 
-            color: #000;
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+        #userInput:focus { border-color: #fff; box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+        button { 
+            padding: 15px 30px; background: #FFD700; color: #000; border: none; 
+            border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1rem;
+            transition: all 0.3s;
         }
-        .features {
-            margin-top: 40px;
-            text-align: left;
-            display: inline-block;
-        }
-        .features div {
-            margin: 10px 0;
-            font-size: 16px;
-        }
-        .features div:before {
-            content: "✓ ";
-            color: #00ff00;
-            font-weight: bold;
-            margin-right: 10px;
+        button:hover:not(:disabled) { background: #fff; transform: scale(1.05); }
+        button:disabled { opacity: 0.4; cursor: not-allowed; }
+     .typing { display: inline-block; }
+     .typing span { animation: blink 1.4s infinite; animation-fill-mode: both; }
+     .typing span:nth-child(2) { animation-delay: 0.2s; }
+     .typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes blink {
+            0%, 80%, 100% { opacity: 0; }
+            40% { opacity: 1; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="tick">✅</div>
-        <h1>Payment Successful!</h1>
-        <h2>Welcome to AIHubPro PRO</h2>
-        <p>Ab aapka subscription active ho gaya hai. All premium features unlocked.</p>
-        
-        <div class="features">
-            <div>Triple Engine AI - Groq + Gemini + HuggingFace</div>
-            <div>Unlimited AI Chats</div>
-            <div>Priority Support</div>
-            <div>No Rate Limits</div>
+        <div class="header">
+            <h1>⚡ AIHubPro Triple Engine</h1>
+            <div class="status" id="status">Engine: Ready</div>
         </div>
-        
-        <br><br>
-        <a href="/chat.html" class="btn">Start AI Chat →</a>
+        <div id="chat"></div>
+        <div id="input-area">
+            <input type="text" id="userInput" placeholder="Ask me anything..." autocomplete="off" />
+            <button id="sendBtn" onclick="sendMessage()">Send</button>
+        </div>
     </div>
+
+<script>
+// ===== APNI TEENO API KEYS YAHAN DAAL DE =====
+const GROQ_KEY = 'gsk_PASTE_YOUR_GROQ_KEY_HERE';
+const GEMINI_KEY = 'AIza_PASTE_YOUR_GEMINI_KEY_HERE';
+const HF_KEY = 'hf_PASTE_YOUR_HF_KEY_HERE';
+// =============================================
+
+const chat = document.getElementById('chat');
+const status = document.getElementById('status');
+const userInput = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendBtn');
+
+userInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' &&!e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+
+function setStatus(text, isError = false) {
+    status.textContent = text;
+    status.className = isError? 'status error' : 'status';
+}
+
+function addMessage(text, sender, engine = '') {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `msg ${sender}`;
+    msgDiv.innerHTML = text + (engine? `<div class="engine">⚡ ${engine}</div>` : '');
+    chat.appendChild(msgDiv);
+    chat.scrollTop = chat.scrollHeight;
+    return msgDiv;
+}
+
+function addTypingIndicator() {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'msg ai';
+    msgDiv.innerHTML = '<div class="typing"><span>.</span><span>.</span><span>.</span></div>';
+    chat.appendChild(msgDiv);
+    chat.scrollTop = chat.scrollHeight;
+    return msgDiv;
+}
+
+async function tryGroq(prompt) {
+    setStatus('Engine: Groq Llama 3.3 70B...');
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            model: 'llama-3.3-70b-versatile',
+            messages: [{ role: 'user', content: prompt }],
+            temperature: 0.7, 
+            max_tokens: 1000
+        })
+    });
+    if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(`Groq: ${err.error?.message || res.statusText}`);
+    }
+    const data = await res.json();
+    return data.choices[0].message.content;
+}
+
+async function tryGemini(prompt) {
+    setStatus('Engine: Gemini 1.5 Flash...');
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.7, maxOutputTokens: 1000 }
+        })
+    });
+    if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(`Gemini: ${err.error?.message || res.statusText}`);
+    }
+    const data = await res.json();
+    if (!data.candidates ||!data.candidates[0]) {
+        throw new Error('Gemini: No response generated');
+    }
+    return data.candidates[0].content.parts[0].text;
+}
+
+async function tryHF(prompt) {
+    setStatus('Engine: HuggingFace Mistral...');
+    const res = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${HF_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            inputs: prompt, 
+            parameters: { max_new_tokens: 800, temperature: 0.7, return_full_text: false } 
+        })
+    });
+    if (!res.ok) {
+        throw new Error(`HuggingFace: ${res.statusText}`);
+    }
+    const data = await res.json();
+    if (Array.isArray(data) && data[0]?.generated_text) {
+        return data[0].generated_text.trim();
+    }
+    throw new Error('HuggingFace: Invalid response');
+}
+
+async function sendMessage() {
+    const prompt = userInput.value.trim();
+    if (!prompt) return;
+    
+    if (GROQ_KEY.includes('PASTE_YOUR') || GEMINI_KEY.includes('PASTE_YOUR') || HF_KEY.includes('PASTE_YOUR')) {
+        setStatus('Error: Please add your API keys in the code', true);
+        addMessage('⚠️ Please update your API keys in the code first!', 'ai', 'System');
+        return;
+    }
+    
+    addMessage(prompt, 'user');
+    userInput.value = '';
+    sendBtn.disabled = true;
+    userInput.disabled = true;
+    
+    const typingMsg = addTypingIndicator();
+    
+    try {
+        const reply = await tryGroq(prompt);
+        typingMsg.remove();
+        addMessage(reply, 'ai', 'Groq Llama 3.3 70B');
+        setStatus('Engine: Ready');
+    } catch (e1) {
+        console.log('Groq failed:', e1.message);
+        try {
+            const reply = await tryGemini(prompt);
+            typingMsg.remove();
+            addMessage(reply, 'ai', 'Gemini 1.5 Flash');
+            setStatus('Engine: Ready');
+        } catch (e2) {
+            console.log('Gemini failed:', e2.message);
+            try {
+                const reply = await tryHF(prompt);
+                typingMsg.remove();
+                addMessage(reply, 'ai', 'HuggingFace Mistral 7B');
+                setStatus('Engine: Ready');
+            } catch (e3) {
+                console.log('HF failed:', e3.message);
+                typingMsg.remove();
+                addMessage(`❌ All engines failed. Please check:\n1. API keys are correct\n2. Internet connection\n3. API quotas not exhausted\n\nErrors:\n• ${e1.message}\n• ${e2.message}\n• ${e3.message}`, 'ai', 'Error');
+                setStatus('Engine: All Failed', true);
+            }
+        }
+    }
+    
+    sendBtn.disabled = false;
+    userInput.disabled = false;
+    userInput.focus();
+}
+
+addMessage('👋 Welcome to AIHubPro! I use 3 AI engines for best results:\n\n1️⃣ Groq Llama 3.3 70B (Fastest)\n2️⃣ Gemini 1.5 Flash (Smart)\n3️⃣ HuggingFace Mistral (Backup)\n\nAsk me anything!', 'ai', 'System');
+userInput.focus();
+</script>
 </body>
 </html>
