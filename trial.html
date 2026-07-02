@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AIHubPro - Trial Active</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body { background: #000; color: #FFD700; font-family: Arial; text-align: center; padding: 20px; margin: 0; }
+        .timer { position: fixed; top: 10px; right: 10px; background: red; color: white; padding: 10px 20px; border-radius: 8px; font-size: 20px; font-weight: bold; z-index: 999; }
+        h1 { font-size: 32px; margin-top: 80px; }
+        .tools { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 600px; margin: 30px auto; }
+        .tool { background: #1a1a1a; padding: 20px; border-radius: 10px; border: 2px solid #FFD700; cursor: pointer; }
+        .tool:hover { background: #FFD700; color: #000; }
+        a { color: #FFD700; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="timer" id="trialTimer">Trial: <span id="time">05:00</span></div>
+    
+    <h1>🚀 AIHubPro Trial Active</h1>
+    <h2>All AI Tools Unlocked For 5 Minutes</h2>
+    <p>Trial khatam hone pe auto wapas home page chale jaoge</p>
+    
+    <div class="tools">
+        <div class="tool" onclick="alert('GPT-4 Trial Mode')">🤖 GPT-4</div>
+        <div class="tool" onclick="alert('Claude Trial Mode')">🧠 Claude</div>
+        <div class="tool" onclick="alert('Gemini Trial Mode')">💎 Gemini Pro</div>
+        <div class="tool" onclick="alert('Midjourney Trial Mode')">🎨 Midjourney</div>
+    </div>
+    
+    <br><a href="/">← Back to Home</a>
+    
+    <script src="brains.js"></script>
+</body>
+</html>
