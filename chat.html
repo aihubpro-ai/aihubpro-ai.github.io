@@ -7,100 +7,170 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            background: #000; color: #FFD700; font-family: Arial, sans-serif; 
-            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            background: #000; 
+            color: #FFD700; 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px; 
         }
-      .container { max-width: 800px; width: 90%; text-align: center; padding: 20px; }
-        h1 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 0 10px #FFD700; }
-      .status { font-size: 0.9rem; color: #00ff00; margin-bottom: 20px; }
-        #chat { height: 400px; overflow-y: auto; border: 2px solid #FFD700; 
-                border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: left; }
-      .msg { margin: 10px 0; padding: 10px; border-radius: 5px; }
-      .user { background: #333; color: #fff; text-align: right; }
-      .ai { background: #1a1a1a; color: #FFD700; border-left: 3px solid #FFD700; }
-      .engine { font-size: 0.7rem; color: #00ff00; opacity: 0.7; }
-        #input-area { display: flex; gap: 10px; }
-        #userInput { flex: 1; padding: 12px; background: #111; border: 2px solid #FFD700; 
-                     color: #FFD700; border-radius: 5px; font-size: 1rem; }
-        button { padding: 12px 25px; background: #FFD700; color: #000; border: none; 
-                 border-radius: 5px; font-weight: bold; cursor: pointer; }
-        button:hover { background: #fff; }
-        button:disabled { opacity: 0.5; cursor: not-allowed; }
+       .container { max-width: 900px; width: 100%; }
+       .header { text-align: center; margin-bottom: 20px; }
+        h1 { 
+            font-size: 2.5rem; 
+            margin-bottom: 10px; 
+            text-shadow: 0 0 15px #FFD700; 
+        }
+       .status { 
+            font-size: 0.9rem; 
+            color: #00ff00; 
+            margin-bottom: 15px; 
+            padding: 8px 16px; 
+            background: #111; 
+            border-radius: 5px; 
+            display: inline-block; 
+        }
+       .status.error { color: #ff4444; }
+        #chat { 
+            height: 500px; 
+            overflow-y: auto; 
+            border: 2px solid #FFD700; 
+            border-radius: 15px; 
+            padding: 20px; 
+            margin-bottom: 20px; 
+            background: #0a0a0a; 
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); 
+        }
+        #chat::-webkit-scrollbar { width: 8px; }
+        #chat::-webkit-scrollbar-track { background: #111; }
+        #chat::-webkit-scrollbar-thumb { background: #FFD700; border-radius: 4px; }
+       .msg { 
+            margin: 15px 0; 
+            padding: 12px 18px; 
+            border-radius: 12px; 
+            animation: slideIn 0.3s; 
+            word-wrap: break-word; 
+            line-height: 1.5;
+        }
+        @keyframes slideIn { 
+            from { opacity: 0; transform: translateY(10px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+       .user { 
+            background: #333; 
+            color: #fff; 
+            text-align: right; 
+            margin-left: 20%; 
+        }
+       .ai { 
+            background: #1a1a1a; 
+            color: #FFD700; 
+            border-left: 4px solid #FFD700; 
+            margin-right: 20%; 
+        }
+       .engine { 
+            font-size: 0.75rem; 
+            color: #00ff00; 
+            opacity: 0.8; 
+            margin-top: 8px; 
+            font-style: italic; 
+        }
+        #input-area { display: flex; gap: 12px; }
+        #userInput { 
+            flex: 1; 
+            padding: 15px; 
+            background: #111; 
+            border: 2px solid #FFD700; 
+            color: #FFD700; 
+            border-radius: 10px; 
+            font-size: 1rem; 
+            outline: none; 
+        }
+        #userInput:focus { 
+            border-color: #fff; 
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); 
+        }
+        button { 
+            padding: 15px 30px; 
+            background: #FFD700; 
+            color: #000; 
+            border: none; 
+            border-radius: 10px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 1rem; 
+            transition: all 0.2s;
+        }
+        button:hover:not(:disabled) { 
+            background: #fff; 
+            transform: scale(1.05); 
+        }
+        button:disabled { 
+            opacity: 0.4; 
+            cursor: not-allowed; 
+        }
+       .typing { display: inline-block; }
+       .typing span { 
+            animation: blink 1.4s infinite; 
+            font-size: 1.5rem;
+        }
+       .typing span:nth-child(2) { animation-delay: 0.2s; }
+       .typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes blink { 
+            0%, 80%, 100% { opacity: 0; } 
+            40% { opacity: 1; } 
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>⚡ AIHubPro Triple Engine</h1>
-        <div class="status" id="status">Engine: Ready</div>
+        <div class="header">
+            <h1>⚡ AIHubPro Triple Engine</h1>
+            <div class="status" id="status">Engine: Ready</div>
+        </div>
         <div id="chat"></div>
         <div id="input-area">
-            <input type="text" id="userInput" placeholder="Ask anything..." />
+            <input type="text" id="userInput" placeholder="Ask me anything..." autocomplete="off" />
             <button id="sendBtn" onclick="sendMessage()">Send</button>
         </div>
     </div>
 
 <script>
-// ===== YAHAN APNI TEENO KEY DAAL DE =====
-const GROQ_KEY = 'gsk_YAHAAN_GROQ_KEY_DAAL';
-const GEMINI_KEY = 'AIza_YAHAAN_GEMINI_KEY_DAAL';
-const HF_KEY = 'hf_YAHAAN_HF_KEY_DAAL';
-// ==========================================
-
 const chat = document.getElementById('chat');
 const status = document.getElementById('status');
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendBtn');
 
 userInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') sendMessage();
+    if (e.key === 'Enter' && !e.shiftKey) { 
+        e.preventDefault(); 
+        sendMessage(); 
+    }
 });
+
+function setStatus(text, isError = false) {
+    status.textContent = text;
+    status.className = isError ? 'status error' : 'status';
+}
 
 function addMessage(text, sender, engine = '') {
     const msgDiv = document.createElement('div');
     msgDiv.className = `msg ${sender}`;
-    msgDiv.innerHTML = text + (engine? `<div class="engine">via ${engine}</div>` : '');
+    msgDiv.innerHTML = text + (engine ? `<div class="engine">⚡ ${engine}</div>` : '');
     chat.appendChild(msgDiv);
     chat.scrollTop = chat.scrollHeight;
+    return msgDiv;
 }
 
-async function tryGroq(prompt) {
-    status.textContent = 'Engine: Groq Llama 3.3 70B...';
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${GROQ_KEY}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            model: 'llama-3.3-70b-versatile',
-            messages: [{ role: 'user', content: prompt }],
-            temperature: 0.7, max_tokens: 800
-        })
-    });
-    if (!res.ok) throw new Error('Groq failed');
-    const data = await res.json();
-    return data.choices[0].message.content;
-}
-
-async function tryGemini(prompt) {
-    status.textContent = 'Engine: Gemini 1.5 Flash...';
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-    });
-    if (!res.ok) throw new Error('Gemini failed');
-    const data = await res.json();
-    return data.candidates[0].content.parts[0].text;
-}
-
-async function tryHF(prompt) {
-    status.textContent = 'Engine: HuggingFace...';
-    const res = await fetch('https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3', {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${HF_KEY}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ inputs: prompt, parameters: { max_new_tokens: 500 } })
-    });
-    if (!res.ok) throw new Error('HF failed');
-    const data = await res.json();
-    return data[0].generated_text.replace(prompt, '').trim();
+function addTypingIndicator() {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'msg ai';
+    msgDiv.innerHTML = '<div class="typing"><span>.</span><span>.</span><span>.</span></div>';
+    chat.appendChild(msgDiv);
+    chat.scrollTop = chat.scrollHeight;
+    return msgDiv;
 }
 
 async function sendMessage() {
@@ -110,32 +180,41 @@ async function sendMessage() {
     addMessage(prompt, 'user');
     userInput.value = '';
     sendBtn.disabled = true;
-
+    userInput.disabled = true;
+    
+    const typingMsg = addTypingIndicator();
+    setStatus('Engine: Thinking...');
+    
     try {
-        const reply = await tryGroq(prompt);
-        addMessage(reply, 'ai', 'Groq Llama 3.3');
-        status.textContent = 'Engine: Ready';
-    } catch (e1) {
-        try {
-            const reply = await tryGemini(prompt);
-            addMessage(reply, 'ai', 'Gemini 1.5 Flash');
-            status.textContent = 'Engine: Ready';
-        } catch (e2) {
-            try {
-                const reply = await tryHF(prompt);
-                addMessage(reply, 'ai', 'HuggingFace Mistral');
-                status.textContent = 'Engine: Ready';
-            } catch (e3) {
-                addMessage('Sorry, all 3 engines failed. Check your API keys.', 'ai', 'Error');
-                status.textContent = 'Engine: Error';
-            }
+        const res = await fetch('/.netlify/functions/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt })
+        });
+        
+        const data = await res.json();
+        typingMsg.remove();
+        
+        if (res.ok) {
+            addMessage(data.reply, 'ai', data.engine);
+            setStatus('Engine: Ready');
+        } else {
+            addMessage(`❌ Error: ${data.error || 'Unknown error'}`, 'ai', 'Error');
+            setStatus('Engine: Failed', true);
         }
+    } catch (e) {
+        typingMsg.remove();
+        addMessage(`❌ Network Error: ${e.message}`, 'ai', 'Error');
+        setStatus('Engine: Failed', true);
     }
+    
     sendBtn.disabled = false;
+    userInput.disabled = false;
     userInput.focus();
 }
 
-addMessage('Welcome! Triple Engine Active. Groq → Gemini → HuggingFace fallback ready.', 'ai', 'System');
+addMessage('👋 Welcome! Keys ab 100% safe hain. Ask me anything!', 'ai', 'System');
+userInput.focus();
 </script>
 </body>
 </html>
