@@ -1,5 +1,4 @@
-
-             <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,7 +28,7 @@
         .tools-note { text-align: center; margin-top: 30px; color: #666; font-size: 14px; line-height: 1.8; }
         .checkbox { margin: 30px auto; text-align: left; max-width: 500px; font-size: 14px; color: #999; }
         .badge { color: #00ff88; margin-top: 40px; font-weight: bold; font-size: 18px; }
-        #trialTimer { position: fixed; top: 10px; right: 10px; background: red; padding: 10px 15px; border-radius: 5px; display: none; z-index: 9999; }
+        #trialTimer { position: fixed; top: 10px; right: 10px; background: red; padding: 10px 15px; border-radius: 5px; display: none; z-index: 9999; font-weight: bold; }
         #buyPopup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9998; }
         .popup-content { background: #1a2332; max-width: 500px; margin: 100px auto; padding: 30px; border-radius: 12px; border: 2px solid #FFD700; }
         .footer { background: #000; color: #fff; padding: 60px 20px; text-align: center; }
@@ -51,7 +50,7 @@
         <button class="btn-main" onclick="startTrial()">Start Free Trial</button>
     </div>
 
-    <div class="pricing">
+    <div class="pricing" id="pricing">
         <div class="plans">
             <div class="plan">
                 <h3>FREE</h3>
@@ -182,7 +181,7 @@
             }, 1000);
         }
 
-        // DOUBLE ENGINE PAYMENT FUNCTION
+        // DOUBLE ENGINE PAYMENT FUNCTION - 0% DOWNTIME
         async function buyPlan(plan) {
             if (!document.getElementById('agreeHike').checked) {
                 alert('Please agree to Terms & Conditions first');
