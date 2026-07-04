@@ -47,7 +47,7 @@ function startTrial() {
 // ===== 3. BUY PLAN - UPGRADED WITH FALLBACK =====
 async function buyPlan(plan) {
   // Checkbox check karo
-  if (!document.getElementById('agreeHike') || !document.getElementById('agreeHike').checked) {
+  if (!document.getElementById('agreeHike') ||!document.getElementById('agreeHike').checked) {
     alert('Please tick the checkbox and agree to Terms first');
     return;
   }
@@ -55,16 +55,16 @@ async function buyPlan(plan) {
   // STEP 1: Netlify function se Razorpay key aur order manga
   try {
     const res = await fetch('/.netlify/functions/get-key');
-    
+
     // Agar Netlify response OK nahi hai to error throw karo
     if (!res.ok) {
       throw new Error('Netlify function failed');
     }
-    
+
     const { key } = await res.json();
 
-    var amount = plan === 'PRO' ? 66600 : 99900; // paise mein
-    var planName = plan === 'PRO' ? 'AIHubPro PRO' : 'AIHubPro PREMIUM';
+    var amount = plan === 'PRO'? 66600 : 99900; // paise mein
+    var planName = plan === 'PRO'? 'AIHubPro PRO' : 'AIHubPro PREMIUM';
 
     var options = {
       "key": key,
@@ -92,10 +92,10 @@ async function buyPlan(plan) {
     rzp1.open();
 
   } catch (error) {
-    // STEP 2: NETLIFY FAIL → DIRECT PAYMENT LINK FALLBACK
+    // STEP 2: NETLIFY FAIL → DIRECT PAYMENT LINK FALLBACK - FIXED
     console.log('Netlify Error:', error);
     alert('Server busy. Redirecting to secure Razorpay payment page...');
-    window.location.href = PAYMENT_LINKS; // PRO ya PREMIUM ka link khulega
+    window.location.href = PAYMENT_LINKS[plan]; // <-- YE LINE FIX KI HAI
   }
 }
 
