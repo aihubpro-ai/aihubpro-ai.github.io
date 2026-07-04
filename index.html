@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+             <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,7 +12,7 @@
         .hero h1 { color: #FFD700; font-size: 48px; margin: 20px 0 10px 0; }
         .hero p { color: #fff; font-size: 24px; margin: 0; }
         .btn-main { margin-top: 30px; padding: 15px 40px; background: #FFD700; color: #000; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; }
-        .btn-main:hover { background: #ffed4e; }
+        .btn-main:hover { background: #ffe44e; }
         .pricing { padding: 60px 20px; background: #0a0a0a; }
         .plans { max-width: 1200px; margin: 0 auto; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
         .plan { flex: 1; min-width: 300px; background: #1a1a1a; border: 2px solid #333; border-radius: 12px; padding: 30px; }
@@ -19,24 +20,24 @@
         .plan h3 { color: #fff; font-size: 28px; margin-bottom: 20px; }
         .plan p { color: #999; margin: 15px 0; }
         .price { color: #FFD700; font-size: 36px; margin: 30px 0; font-weight: bold; }
-        .btn { width: 100%; padding: 15px; background: #333; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-top: 10px; }
+        .btn { width: 100%; padding: 15px; background: #333; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
         .btn:hover { background: #00ff88; color: #000; }
         .btn-pro { background: #FFD700; color: #000; font-weight: bold; }
-        .btn-pro:hover { background: #ffed4e; }
+        .btn-pro:hover { background: #ffe44e; }
         .premium { max-width: 800px; margin: 30px auto 0; background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); border: 2px solid #FFD700; border-radius: 12px; padding: 30px; }
         .premium h3 { color: #FFD700; font-size: 32px; }
         .tools-note { text-align: center; margin-top: 30px; color: #666; font-size: 14px; line-height: 1.8; }
         .checkbox { margin: 30px auto; text-align: left; max-width: 500px; font-size: 14px; color: #999; }
         .badge { color: #00ff88; margin-top: 40px; font-weight: bold; font-size: 18px; }
-        #trialTimer { position: fixed; top: 10px; right: 10px; background: red; padding: 10px 15px; border-radius: 5px; font-weight: bold; z-index: 9999; }
-        #buyPopup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; }
+        #trialTimer { position: fixed; top: 10px; right: 10px; background: red; padding: 10px 15px; border-radius: 5px; display: none; z-index: 9999; }
+        #buyPopup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9998; }
         .popup-content { background: #1a2332; max-width: 500px; margin: 100px auto; padding: 30px; border-radius: 12px; border: 2px solid #FFD700; }
         .footer { background: #000; color: #fff; padding: 60px 20px; text-align: center; }
         .footer-box { text-align: left; background: #1a1a1a; padding: 30px; border-radius: 8px; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; }
         .footer h3 { color: #FFD700; font-size: 24px; margin-bottom: 10px; }
         .footer h4 { color: #FFD700; margin-bottom: 15px; }
         .footer p { color: #999; line-height: 1.8; font-size: 14px; }
-        .footer a { color: #00d4ff; text-decoration: none; }
+        .footer a { color: #00ddff; text-decoration: none; }
         .footer a:hover { text-decoration: underline; }
     </style>
 </head>
@@ -79,13 +80,13 @@
 
         <div class="tools-note">
             <p>*Basic Tools: AI Chat, PDF Summarizer, YouTube Summarizer</p>
-            <p>**Premium Tools: Image Generator, Video Creator, Code Assistant, Data Analyzer, SEO Writer, Voice Cloner + All Basic Tools</p>
+            <p>**Premium Tools: Image Generator, Video Creator, Code Assistant, Data Analyzer, SEO Writer, Voice Cloner</p>
             <p style="margin-top: 15px; color: #888;">Prices in INR. Billed monthly. Cancel anytime.</p>
         </div>
 
         <div class="checkbox">
             <input type="checkbox" id="agreeHike" required>
-            <label for="agreeHike">I agree to recurring billing and the <a href="/terms.html">Terms of Service</a>. Prices may change with 30 days notice.</label>
+            <label for="agreeHike">I agree to recurring billing and the <a href="/terms.html">Terms of Service</a>. Price hikes notified 30 days prior.</label>
         </div>
 
         <button class="btn btn-pro" onclick="buyPlan('PRO')" style="max-width: 400px;">Buy PRO ₹666</button>
@@ -96,7 +97,7 @@
 
     <div id="buyPopup">
         <div class="popup-content">
-            <h2>⏰ Trial Ended</h2>
+            <h2>🎁 Trial Ended</h2>
             <p>Your 5-minute free trial is over. Upgrade now to continue using AIHubPro.</p>
             <button class="btn btn-pro" onclick="buyPlan('PRO')">Buy PRO ₹666</button>
             <button class="btn btn-pro" onclick="buyPlan('PREMIUM')" style="margin-top: 10px;">Buy PREMIUM ₹999</button>
@@ -111,18 +112,18 @@
         <div style="margin-bottom: 40px;">
             <h4 style="color: #fff;">Quick Links</h4>
             <p style="color: #999; line-height: 2;">
-                <a href="/">Home</a> • <a href="#pricing">Pricing</a> • <a href="/login.html">Login</a> • <a href="/about.html">About</a> • <a href="/contact.html">Contact</a>
+                <a href="/">Home</a> • <a href="#pricing">Pricing</a> • <a href="/login.html">Login</a> • <a href="/about.html">About</a> • <a href="/terms.html">Terms</a>
             </p>
         </div>
 
         <div class="footer-box">
             <h4>Disclaimer</h4>
-            <p>AIHubPro is an independent AI education and digital platform. We are not affiliated with, endorsed by, sponsored by, or officially connected to OpenAI, Google, Anthropic, Meta, Microsoft, or any other AI company mentioned. All trademarks are property of their respective owners.</p>
+            <p>AIHubPro is an independent AI education and digital platform. We are not affiliated with, endorsed by, or sponsored by OpenAI, Google, Meta, Anthropic, or any AI model provider.</p>
         </div>
 
         <div class="footer-box">
             <h4>Governing Law & Jurisdiction</h4>
-            <p>These Terms shall be governed by and construed in accordance with the laws of India. Any dispute, claim, or legal proceeding shall be subject to the exclusive jurisdiction of the courts in Ambala, Haryana, India.</p>
+            <p>These Terms shall be governed by and construed in accordance with the laws of India. Any dispute, claim, or proceeding shall be subject to the exclusive jurisdiction of the courts located in Ambala, Haryana, India.</p>
         </div>
 
         <p style="color: #666; font-size: 14px; margin-bottom: 30px;">Copyright © 2026 AIHubPro. All Rights Reserved.</p>
@@ -134,7 +135,7 @@
 
         <div style="margin-bottom: 30px;">
             <h4 style="color: #fff;">Our Mission</h4>
-            <p style="color: #999; max-width: 600px; margin: 0 auto;">Empowering creators, freelancers, students, entrepreneurs, and businesses with cutting-edge AI tools and education to unlock their full potential in the digital age.</p>
+            <p style="color: #999; max-width: 600px; margin: 0 auto;">Empowering creators, freelancers, students, entrepreneurs, and dreamers with next-gen AI tools — without boundaries, without limits.</p>
         </div>
 
         <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #333;">
@@ -142,6 +143,96 @@
         </div>
     </div>
 
+    <script>
+        // DOUBLE ENGINE PAYMENT LINKS - ENGINE 2 FALLBACK
+        const PAYMENT_LINKS = {
+            'PRO': 'https://rzp.io/rzp/pE0rfxQx',
+            'PREMIUM': 'https://rzp.io/rzp/NQBaTPN'
+        };
+
+        // TRIAL TIMER LOGIC
+        let trialActive = false;
+        let trialInterval;
+
+        function startTrial() {
+            if(trialActive) return;
+            trialActive = true;
+            localStorage.setItem('trialStart', Date.now());
+            document.getElementById('trialTimer').style.display = 'block';
+            runTimer(300);
+        }
+
+        function runTimer(seconds) {
+            let timeLeft = seconds;
+            const timerEl = document.getElementById('time');
+            clearInterval(trialInterval);
+            
+            trialInterval = setInterval(() => {
+                if(timeLeft <= 0) {
+                    clearInterval(trialInterval);
+                    document.getElementById('trialTimer').style.display = 'none';
+                    document.getElementById('buyPopup').style.display = 'block';
+                    trialActive = false;
+                    return;
+                }
+                timeLeft--;
+                let min = Math.floor(timeLeft / 60);
+                let sec = timeLeft % 60;
+                timerEl.innerHTML = `${min}:${sec.toString().padStart(2,'0')}`;
+            }, 1000);
+        }
+
+        // DOUBLE ENGINE PAYMENT FUNCTION
+        async function buyPlan(plan) {
+            if (!document.getElementById('agreeHike').checked) {
+                alert('Please agree to Terms & Conditions first');
+                return;
+            }
+
+            try {
+                // ENGINE 1: TRY NETLIFY + RAZORPAY SDK
+                const res = await fetch('https://aihubpro-ai.netlify.app/.netlify/functions/get-key');
+                if (!res.ok) throw new Error('Netlify down');
+                
+                const key = await res.json();
+                const amount = plan === 'PRO' ? 66600 : 99900;
+                
+                var options = {
+                    "key": key,
+                    "amount": amount,
+                    "currency": "INR",
+                    "name": "Vasu Enterprises",
+                    "description": "AIHubPro " + plan + " Plan",
+                    "handler": function (response){
+                        alert('Payment Success! ID: ' + response.razorpay_payment_id);
+                        window.location.href = '/success.html';
+                    },
+                    "theme": { "color": "#FFD700" }
+                };
+                var rzp = new Razorpay(options);
+                rzp.open();
+                
+            } catch (e) {
+                // ENGINE 2: FALLBACK TO PAYMENT LINK - 0% DOWNTIME
+                console.log('SDK Failed, using Payment Link:', e);
+                alert('Server busy. Opening secure payment link...');
+                window.open(PAYMENT_LINKS, '_blank');
+            }
+        }
+
+        // CHECK IF TRIAL ALREADY RUNNING ON PAGE LOAD
+        window.onload = function() {
+            const trialStart = localStorage.getItem('trialStart');
+            if(trialStart) {
+                let elapsed = Math.floor((Date.now() - trialStart) / 1000);
+                if(elapsed < 300) {
+                    trialActive = true;
+                    document.getElementById('trialTimer').style.display = 'block';
+                    runTimer(300 - elapsed);
+                }
+            }
+        }
+    </script>
     <script src="brains.js"></script>
 </body>
 </html>
