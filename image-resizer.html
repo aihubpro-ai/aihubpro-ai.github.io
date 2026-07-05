@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Image Resizer Online | Resize Photos for Instagram Facebook Twitter</title>
+    <meta name="description" content="Free online image resizer. Resize photos by width, height, or custom size. Lock aspect ratio. Social media presets for Instagram, Facebook, Twitter, YouTube. Download instantly.">
+    <meta name="keywords" content="image resizer, resize photo online, instagram size, facebook cover size, twitter header size, resize image pixels, aspect ratio lock">
+    <link rel="canonical" href="https://aihubpro.in/image-resizer.html">
+    
+    <!-- Google AdSense - COMPULSORY -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #0d6efd; margin-bottom: 10px; font-size: 28px; }
+.subtitle { text-align: center; color: #666; margin-bottom: 25px; }
+       
+       /* ADSENSE PLACEHOLDER - COMPULSORY */
+.ad-placeholder { 
+           background: #f8f9fa; border: 2px dashed #dee2e6; padding: 20px; 
+           text-align: center; margin: 20px 0; border-radius: 8px; min-height: 90px;
+           display: flex; align-items: center; justify-content: center; color: #6c757d;
+       }
+.ad-placeholder::before { content: "Advertisement"; font-size: 12px; }
+       
+.upload-zone { border: 3px dashed #0d6efd; padding: 50px 20px; text-align: center; border-radius: 12px; background: #f0f7ff; cursor: pointer; transition: all 0.3s; }
+.upload-zone:hover { background: #e7f3ff; border-color: #0a58ca; }
+.upload-zone.drag-over { background: #d1e7ff; border-color: #0d6efd; border-style: solid; }
+.upload-zone svg { width: 60px; height: 60px; color: #0d6efd; margin-bottom: 15px; }
+.upload-zone h3 { color: #0d6efd; margin-bottom: 10px; font-size: 20px; }
+.upload-zone p { color: #666; font-size: 14px; }
+  #fileInput { display: none; }
+       
+.editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; display: none; }
+.editor-grid.active { display: grid; }
+.section { padding: 25px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafbfc; }
+.section h3 { color: #0d6efd; margin-bottom: 20px; font-size: 18px; border-bottom: 2px solid #0d6efd; padding-bottom: 8px; }
+       
+.preview-container { text-align: center; background: #f8f9fa; padding: 20px; border-radius: 8px; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+.preview-container img { max-width: 100%; max-height: 500px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.preview-placeholder { color: #999; font-size: 14px; }
+       
+.input-group { margin-bottom: 20px; }
+.input-group label { font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #333; display: block; }
+.input-group input,.input-group select { 
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; font-family: 'Inter'; transition: all 0.3s;
+        }
+.input-group input:focus,.input-group select:focus { 
+            outline: none; border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13,110,253,0.1);
+        }
+.input-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+       
+.checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.checkbox-group input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
+.checkbox-group label { font-weight: 600; font-size: 14px; color: #333; cursor: pointer; margin: 0; }
+       
+.presets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 15px; }
+.preset-btn { padding: 12px 8px; border: 2px solid #e0e0e0; background: white; border-radius: 8px; cursor: pointer; transition: all 0.3s; text-align: center; }
+.preset-btn:hover { border-color: #0d6efd; background: #f0f7ff; }
+.preset-btn.active { border-color: #28a745; background: #f0fff4; }
+.preset-name { font-weight: 600; font-size: 13px; color: #333; margin-bottom: 4px; }
+.preset-size { font-size: 11px; color: #666; }
+       
+.dimension-info { background: #e7f3ff; border: 2px solid #0d6efd; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: center; }
+.dimension-info p { margin: 5px 0; font-size: 14px; }
+.dimension-info strong { color: #0d6efd; font-size: 16px; }
+       
+.btn { padding: 14px 28px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; margin: 5px; transition: all 0.3s; width: 100%; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.btn-primary { background: #0d6efd; color: white; }
+.btn-success { background: #28a745; color: white; }
+.btn-secondary { background: #6c757d; color: white; }
+.btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+       
+.future-section { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 12px; margin-top: 30px; }
+.future-section h3 { color: #856404; margin-bottom: 15px; }
+.future-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+.future-item { background: white; padding: 20px; border-radius: 8px; text-align: center; }
+.future-badge { display: inline-block; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
+       
+.legal-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
+       
+        @media print {.no-print,.ad-placeholder { display: none!important; } body { background: white; padding: 0; }}
+        @media (max-width: 768px) {.editor-grid { grid-template-columns: 1fr; }.btn-row { grid-template-columns: 1fr; }.input-row { grid-template-columns: 1fr; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Resizer</h1>
+        <p class="subtitle">Resize Images by Pixels - Social Media Presets - Lock Aspect Ratio</p>
+
+        <!-- ADSENSE TOP BANNER - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- UPLOAD ZONE -->
+        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <h3>Click to Upload Image</h3>
+            <p>Or drag & drop image here</p>
+            <p style="font-size: 12px; margin-top: 10px; color: #999;">JPG, PNG, WEBP • Max 10MB</p>
+            <input type="file" id="fileInput" accept="image/*">
+        </div>
+
+        <!-- EDITOR GRID -->
+        <div class="editor-grid" id="editorGrid">
+            <!-- LEFT: PREVIEW -->
+            <div class="section">
+                <h3>🖼️ Preview</h3>
+                <div class="preview-container" id="previewContainer">
+                    <div class="preview-placeholder">Upload an image to preview</div>
+                </div>
+                <div class="dimension-info" id="dimensionInfo" style="display:none;">
+                    <p>Original: <strong id="originalDimensions">0 x 0 px</strong></p>
+                    <p>New: <strong id="newDimensions">0 x 0 px</strong></p>
+                </div>
+            </div>
+
+            <!-- RIGHT: CONTROLS -->
+            <div class="section">
+                <h3>⚙️ Resize Settings</h3>
+                
+                <div class="input-group">
+                    <label>Width (px)</label>
+                    <input type="number" id="widthInput" placeholder="1920" min="1" max="10000" oninput="updateHeight()">
+                </div>
+
+                <div class="input-group">
+                    <label>Height (px)</label>
+                    <input type="number" id="heightInput" placeholder="1080" min="1" max="10000" oninput="updateWidth()">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="lockRatio" checked onchange="toggleLockRatio()">
+                    <label for="lockRatio">🔒 Lock Aspect Ratio</label>
+                </div>
+
+                <div class="input-group">
+                    <label>Custom Size (W x H)</label>
+                    <div class="input-row">
+                        <input type="number" id="customWidth" placeholder="Width" min="1">
+                        <input type="number" id="customHeight" placeholder="Height" min="1">
+                        <button class="btn btn-secondary" style="width:auto; padding: 12px 20px;" onclick="applyCustomSize()">Apply</button>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>📱 Social Media Presets</label>
+                    <div class="presets-grid">
+                        <div class="preset-btn" onclick="applyPreset(1080, 1080, 'Instagram Post')">
+                            <div class="preset-name">Instagram Post</div>
+                            <div class="preset-size">1080×1080</div>
+                        </div>
+                        <div class="preset-btn" onclick="applyPreset(1080, 1920, 'Instagram Story')">
+                            <div class="preset-name">IG Story</div>
+                            <div class="preset-size">1080×192
