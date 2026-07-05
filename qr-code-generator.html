@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free QR Code Generator Online | UPI, WiFi, URL, Contact QR</title>
+    <meta name="description" content="Free online QR code generator. Create QR for URL, Text, WiFi, Email, Phone, UPI, Contact. Add logo, change colors. Download PNG or SVG. Dynamic QR coming soon.">
+    <meta name="keywords" content="qr code generator, free qr code, upi qr code, wifi qr code, qr with logo, download qr png svg, dynamic qr code">
+    <link rel="canonical" href="https://aihubpro.in/qr-code-generator.html">
+    
+    <!-- Google AdSense - COMPULSORY -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #0d6efd; margin-bottom: 10px; font-size: 28px; }
+.subtitle { text-align: center; color: #666; margin-bottom: 25px; }
+       
+       /* ADSENSE PLACEHOLDER - COMPULSORY */
+.ad-placeholder { 
+           background: #f8f9fa; border: 2px dashed #dee2e6; padding: 20px; 
+           text-align: center; margin: 20px 0; border-radius: 8px; min-height: 90px;
+           display: flex; align-items: center; justify-content: center; color: #6c757d;
+       }
+.ad-placeholder::before { content: "Advertisement"; font-size: 12px; }
+       
+.editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px; }
+.section { padding: 25px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafbfc; }
+.section h3 { color: #0d6efd; margin-bottom: 20px; font-size: 18px; border-bottom: 2px solid #0d6efd; padding-bottom: 8px; }
+       
+.qr-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+.qr-tab { padding: 10px 5px; background: #f8f9fa; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 13px; transition: all 0.3s; text-align: center; }
+.qr-tab.active { background: #0d6efd; color: white; border-color: #0d6efd; }
+.qr-tab:hover { background: #e0e0e0; }
+.qr-tab.active:hover { background: #0a58ca; }
+       
+.input-group { margin-bottom: 15px; display: none; }
+.input-group.active { display: block; }
+.input-group label { font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #333; display: block; }
+.input-group input,.input-group textarea { 
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; font-family: 'Inter';
+        }
+.input-group input:focus,.input-group textarea:focus { 
+            outline: none; border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13,110,253,0.1);
+        }
+.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+       
+.color-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+.color-input { display: flex; align-items: center; gap: 10px; }
+.color-input label { font-weight: 600; font-size: 14px; margin: 0; }
+.color-input input[type="color"] { width: 50px; height: 40px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; }
+       
+.logo-upload { border: 2px dashed #0d6efd; padding: 20px; text-align: center; border-radius: 8px; background: #f0f7ff; cursor: pointer; margin: 15px 0; }
+.logo-upload:hover { background: #e7f3ff; }
+.logo-upload input { display: none; }
+.logo-preview { max-width: 60px; max-height: 60px; margin: 10px auto; display: none; border-radius: 4px; }
+       
+.preview-box { background: white; padding: 30px; border-radius: 12px; text-align: center; min-height: 350px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+#qrCanvas { max-width: 100%; }
+.preview-placeholder { color: #999; font-size: 14px; }
+       
+.btn { padding: 14px 28px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; margin: 5px; transition: all 0.3s; width: 100%; }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.btn-primary { background: #0d6efd; color: white; }
+.btn-success { background: #28a745; color: white; }
+.btn-secondary { background: #6c757d; color: white; }
+.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+       
+.future-section { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 12px; margin-top: 30px; }
+.future-section h3 { color: #856404; margin-bottom: 15px; }
+.future-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+.future-item { background: white; padding: 20px; border-radius: 8px; text-align: center; }
+.future-badge { display: inline-block; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
+       
+.legal-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
+       
+        @media print {.no-print,.ad-placeholder { display: none!important; } body { background: white; padding: 0; }}
+        @media (max-width: 768px) {.editor-grid { grid-template-columns: 1fr; }.qr-tabs { grid-template-columns: repeat(2, 1fr); }.btn-row { grid-template-columns: 1fr; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code Generator</h1>
+        <p class="subtitle">Create QR Codes for URL, UPI, WiFi, Contact with Logo & Colors</p>
+
+        <!-- ADSENSE TOP BANNER - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <div class="editor-grid">
+            <!-- LEFT: INPUTS -->
+            <div class="section">
+                <h3>📝 QR Code Type</h3>
+                
+                <div class="qr-tabs">
+                    <div class="qr-tab active" onclick="switchTab('url')">URL</div>
+                    <div class="qr-tab" onclick="switchTab('text')">Text</div>
+                    <div class="qr-tab" onclick="switchTab('wifi')">WiFi</div>
+                    <div class="qr-tab" onclick="switchTab('email')">Email</div>
+                    <div class="qr-tab" onclick="switchTab('phone')">Phone</div>
+                    <div class="qr-tab" onclick="switchTab('upi')">UPI</div>
+                    <div class="qr-tab" onclick="switchTab('contact')">Contact</div>
+                </div>
+
+                <!-- URL Input -->
+                <div class="input-group active" id="urlInput">
+                    <label>Website URL</label>
+                    <input type="url" id="urlValue" placeholder="https://example.com" oninput="generateQR()">
+                </div>
+
+                <!-- Text Input -->
+                <div class="input-group" id="textInput">
+                    <label>Text Content</label>
+                    <textarea id="textValue" rows="4" placeholder="Enter any text" oninput="generateQR()"></textarea>
+                </div>
+
+                <!-- WiFi Input -->
+                <div class="input-group" id="wifiInput">
+                    <label>WiFi Network Name (SSID)</label>
+                    <input type="text" id="wifiSSID" placeholder="MyWiFi" oninput="generateQR()">
+                    <label style="margin-top:10px;">Password</label>
+                    <input type="text" id="wifiPassword" placeholder="password123" oninput="generateQR()">
+                    <label style="margin-top:10px;">Encryption</label>
+                    <select id="wifiEncryption" onchange="generateQR()" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:6px;">
+                        <option value="WPA">WPA/WPA2</option>
+                        <option value="WEP">WEP</option>
+                        <option value="nopass">No Password</option>
+                    </select>
+                </div>
+
+                <!-- Email Input -->
+                <div class="input-group" id="emailInput">
+                    <label>Email Address</label>
+                    <input type="email" id="emailValue" placeholder="contact@example.com" oninput="generateQR()">
+                    <label style="margin-top:10px;">Subject (Optional)</label>
+                    <input type="text" id="emailSubject" placeholder="Hello" oninput="generateQR()">
+                </div>
+
+                <!-- Phone Input -->
+                <div class="input-group" id="phoneInput">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phoneValue" placeholder="+919876543210" oninput="generateQR()">
+                </div>
+
+                <!-- UPI Input -->
+                <div class="input-group" id="upiInput">
+                    <label>UPI ID</label>
+                    <input type="text" id="upiValue" placeholder="username@upi" oninput="generateQR()">
+                    <label style="margin-top:10px;">Payee Name</label>
+                    <input type="text" id="upiName" placeholder="Your Name" oninput="generateQR()">
+                    <label style="margin-top:10px;">Amount (Optional)</label>
+                    <input type="number" id="upiAmount" placeholder="100" oninput="generateQR()">
+                </div>
+
+                <!-- Contact Input -->
+                <div class="input-group" id="contactInput">
+                    <label>Full Name</label>
+                    <input type="text" id="contactName" placeholder="John Doe" oninput="generateQR()">
+                    <label style="margin-top:10px;">Phone</label>
+                    <input type="tel" id="contactPhone" placeholder="+919876543210" oninput="generateQR()">
+                    <label style="margin-top:10px;">Email</label>
+                    <input type="email" id="contactEmail" placeholder="john@example.com" oninput="generateQR()">
+                    <label style="margin-top:10px;">Company</label>
+                    <input type="text" id="contactOrg" placeholder="Company Name" oninput="generateQR()">
+                </div>
+
+                <h3 style="margin-top:25px;">🎨 Customization</h3>
+                
+                <div class="color-row">
+                    <div class="color-input">
+                        <label>Foreground:</label>
+                        <input type="color" id="fgColor" value="#000000" oninput="generateQR()">
+                    </div>
+                    <div class="color-input">
+                        <label>Background:</label>
+                        <input type="color" id="bgColor" value="#ffffff" oninput="generateQR()">
+                    </div>
+                </div>
+
+                <div class="logo-upload" onclick="document.getElementById('logoInput').click()">
+                    <strong>📷 Add Logo to Center</strong>
+                    <p style="font-size:12px;color:#666;margin-top:5px;">Click to upload PNG/JPG</p>
+                    <img id="logoPreview" class="logo-preview">
+                    <input type="file" id="logoInput" accept="image/*" onchange="handleLogo(event)">
+                </div>
+                <button class="btn btn-secondary" onclick="removeLogo()" id="removeLogoBtn" style="display:none;">Remove Logo</button>
+            </div>
+
+            <!-- RIGHT: PREVIEW -->
+            <div class="section">
+                <h3>👁️ Preview & Download</h3>
+                <div class="preview-box">
+                    <canvas id="qrCanvas"></canvas>
+                    <div class="preview-placeholder" id="qrPlaceholder">Enter data to generate QR Code</div>
+                </div>
+
+                <div class="btn-row" id="downloadSection" style="display:none;">
+                    <button class="btn btn-success" onclick="downloadPNG()">📥 Download PNG</button>
+                    <button class="btn btn-primary" onclick="downloadSVG()">📥 Download SVG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADSENSE MIDDLE RECTANGLE - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- FUTURE FEATURES -->
+        <div class="future-section no-print">
+            <h3>🚀 Coming Soon - Advanced Features</h3>
+            <div class="future-features">
+                <div class="future-item">
+                    <span class="future-badge">DYNAMIC QR</span>
+                    <h4>Dynamic QR Codes</h4>
+                    <p style="font-size: 13px; color: #666; margin-top: 8px;">Edit QR destination after printing</p>
+                </div>
+                <div class="future-item">
+                    <span class="future-badge">ANALYTICS</span>
+                    <h4>Scan Analytics</h4>
+                    <p style="font-size: 13px; color: #666; margin-top: 8px;">Track scans, location, device data</p>
+                </div>
+                <div class="future-item">
+                    <span class="future-badge">BULK QR</span>
+                    <h4>Bulk QR Generator</h4>
+                    <p style="font-size: 13px; color: #666; margin-top: 8px;">Generate 100+ QR codes from CSV</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADSENSE BOTTOM BANNER - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- Legal Footer -->
+        <div class="legal-footer">
+            <p>All QR codes are generated locally in your browser. We do not store your data.</p>
+            <p>Generated by <strong>AI Hub Pro Tools</strong> | Free QR Code Generator</p>
+            <p>All disputes subject to exclusive jurisdiction of Courts at <strong>Yamunanagar, Haryana, India</strong> only.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'url';
+        let logoImage = null;
+        let qrData = '';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.qr-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.input-group').forEach(g => g.classList.remove('active'));
+            document.getElementById(tab + 'Input').classList.add('active');
+            generateQR();
+        }
+
+        function generateQR() {
+            qrData = getQRData();
+            if (!qrData) {
+                document.getElementById('qrPlaceholder').style.display = 'block';
+                document.getElementById('qrCanvas').style.display = 'none';
+                document.getElementById('downloadSection').style.display = 'none';
+                return;
+            }
+
+            document.getElementById('qrPlaceholder').style.display = 'none';
+            document.getElementById('qrCanvas').style.display = 'block';
+            document.getElementById('downloadSection').style.display = 'grid';
+
+            const canvas = document.getElementById('qrCanvas');
+            const fgColor = document.getElementById('fgColor').value;
+            const bgColor = document.getElementById('bgColor').value;
+
+            QRCode.toCanvas(canvas, qrData, {
+                width: 300,
+                margin: 2,
+                color: { dark: fgColor, light: bgColor },
+                errorCorrectionLevel: 'H'
+            }, function(error) {
+                if (error) console.error(error);
+                if (logoImage) {
+                    addLogoToQR(canvas);
+                }
+            });
+        }
+
+        function getQRData() {
+            switch(currentTab) {
+                case 'url':
+                    return document.getElementById('urlValue').value;
+                case 'text':
+                    return document.getElementById('textValue').value;
+                case 'wifi':
+                    const ssid = document.getElementById('wifiSSID').value;
+                    const pass = document.getElementById('wifiPassword').value;
+                    const enc = document.getElementById('wifiEncryption').value;
+                    if (!ssid) return '';
+                    return `WIFI:T:${enc};S:${ssid};P:${pass};;`;
+                case 'email':
+                    const email = document.getElementById('emailValue').value;
+                    const subject = document.getElementById('emailSubject').value;
+                    if (!email) return '';
+                    return subject? `mailto:${email}?subject=${encodeURIComponent(subject)}` : `mailto:${email}`;
+                case 'phone':
+                    const phone = document.getElementById('phoneValue').value;
+                    return phone? `tel:${phone}` : '';
+                case 'upi':
+                    const upiId = document.getElementById('upiValue').value;
+                    const upiName = document.getElementById('upiName').value;
+                    const upiAmount = document.getElementById('upiAmount').value;
+                    if (!upiId ||!upiName) return '';
+                    let upiStr = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(upiName)}`;
+                    if (upiAmount) upiStr += `&am=${upiAmount}`;
+                    return upiStr;
+                case 'contact':
+                    const name = document.getElementById('contactName').value;
+                    const cPhone = document.getElementById('contactPhone').value;
+                    const cEmail = document.getElementById('contactEmail').value;
+                    const cOrg = document.getElementById('contactOrg').value;
+                    if (!name) return '';
+                    return `BEGIN:VCARD\nVERSION:3.0\nFN:${name}\nTEL:${cPhone}\nEMAIL:${cEmail}\nORG:${cOrg}\nEND:VCARD`;
+                default:
+                    return '';
+            }
+        }
+
+        function handleLogo(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    logoImage = img;
+                    document.getElementById('logoPreview').src = e.target.result;
+                    document.getElementById('logoPreview').style.display = 'block';
+                    document.getElementById('removeLogoBtn').style.display = 'block';
+                    generateQR();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function addLogoToQR(canvas) {
+            if (!logoImage) return;
+            const ctx = canvas.getContext('2d');
+            const size = canvas.width * 0.25;
+            const x = (canvas.width - size) / 2;
+            const y = (canvas.height - size) / 2;
+            
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(x - 5, y - 5, size + 10, size + 10);
+            ctx.drawImage(logoImage, x, y, size, size);
+        }
+
+        function removeLogo() {
+            logoImage = null;
+            document.getElementById('logoInput').value = '';
+            document.getElementById('logoPreview').style.display = 'none';
+            document.getElementById('removeLogoBtn').style.display = 'none';
+            generateQR();
+        }
+
+        function downloadPNG() {
+            const canvas = document.getElementById('qrCanvas');
+            const url = canvas.toDataURL('image/png');
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `qrcode-${currentTab}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        function downloadSVG() {
+            QRCode.toString(qrData, {
+                type: 'svg',
+                width: 300,
+                margin: 2,
+                color: { dark: document.getElementById('fgColor').value, light: document.getElementById('bgColor').value },
+                errorCorrectionLevel: 'H'
+            }, function(err, svg) {
+                if (err) throw err;
+                const blob = new Blob([svg], { type: 'image/svg+xml' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `qrcode-${currentTab}.svg`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        // Generate on load
+        window.onload = function() {
+            generateQR();
+        };
+    </script>
+</body>
+</html>
