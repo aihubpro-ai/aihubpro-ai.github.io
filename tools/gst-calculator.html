@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GST Calculator - Free Online CGST SGST IGST Calculator India</title>
+    <meta name="description" content="Free GST Calculator India. Calculate GST with CGST, SGST, IGST. 0%, 5%, 12%, 18%, 28% slabs. Instant result. No signup.">
+    <meta name="keywords" content="GST calculator, CGST calculator, SGST calculator, GST rate finder, GST India">
+    <style>/* Same CSS as index.html */</style>
+</head>
+<body>
+    <div class="header"><div class="logo">🚀 AihubPro</div></div>
+
+    <div class="container">
+        <h1>GST Calculator - Free Online Tool</h1>
+        <p>Calculate GST for any amount with CGST, SGST, IGST breakdown</p>
+
+        <!-- TOOL UI -->
+        <div style="background:var(--card); padding:32px; border-radius:16px; margin:24px 0;">
+            <input type="number" id="amount" placeholder="Enter Amount" style="width:100%; padding:12px; margin-bottom:16px;">
+            <select id="gstRate" style="width:100%; padding:12px; margin-bottom:16px;">
+                <option value="0">0% GST</option>
+                <option value="5">5% GST</option>
+                <option value="12">12% GST</option>
+                <option value="18" selected>18% GST</option>
+                <option value="28">28% GST</option>
+            </select>
+            <button onclick="calculateGST()" style="width:100%; padding:16px; background:var(--accent); border:none; border-radius:8px; color:white; font-size:18px; font-weight:700; cursor:pointer;">Calculate GST</button>
+
+            <div id="result" style="margin-top:24px; display:none;">
+                <h3>Result:</h3>
+                <p>Base Amount: ₹<span id="baseAmt"></span></p>
+                <p>CGST: ₹<span id="cgst"></span></p>
+                <p>SGST: ₹<span id="sgst"></span></p>
+                <p>Total GST: ₹<span id="totalGst"></span></p>
+                <p><b>Total Amount: ₹<span id="totalAmt"></span></b></p>
+            </div>
+        </div>
+
+        <!-- ADSENSE -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXX" data-ad-slot="123"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+        <!-- SEO CONTENT: HOW TO USE -->
+        <div style="margin:40px 0;">
+            <h2>📖 How to Use GST Calculator</h2>
+            <ol style="line-height:2;">
+                <li>Enter your base amount (without GST)</li>
+                <li>Select GST rate: 0%, 5%, 12%, 18%, or 28%</li>
+                <li>Click "Calculate GST" button</li>
+                <li>Get instant CGST, SGST, IGST breakdown</li>
+            </ol>
+        </div>
+
+        <!-- FAQ -->
+        <div style="margin:40px 0;">
+            <h2>❓ Frequently Asked Questions</h2>
+            <h3>What is GST?</h3>
+            <p>GST (Goods and Services Tax) is an indirect tax in India. It has 4 components: CGST, SGST, IGST, UTGST.</p>
+
+            <h3>How to calculate 18% GST?</h3>
+            <p>Formula: GST Amount = (Original Amount × 18) / 100. Example: ₹1000 × 18% = ₹180 GST.</p>
+
+            <h3>What is difference between CGST and SGST?</h3>
+            <p>CGST goes to Central Govt, SGST goes to State Govt. For intrastate, GST is split 50-50.</p>
+        </div>
+
+        <!-- EXAMPLES -->
+        <div style="margin:40px 0;">
+            <h2>📝 Examples</h2>
+            <p><b>Example 1:</b> Product price ₹1000, GST 18%<br>
+            CGST: ₹90, SGST: ₹90, Total: ₹1180</p>
+
+            <p><b>Example 2:</b> Service ₹5000, GST 18%<br>
+            CGST: ₹450, SGST: ₹450, Total: ₹5900</p>
+        </div>
+
+        <!-- RELATED TOOLS -->
+        <div style="margin:40px 0;">
+            <h2>🔗 Related Tools</h2>
+            <div class="tools-grid">
+                <div class="tool-card" onclick="location.href='/tools/invoice-generator'">
+                    <div class="tool-name">Invoice Generator</div>
+                </div>
+                <div class="tool-card" onclick="location.href='/tools/emi-calculator'">
+                    <div class="tool-name">EMI Calculator</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateGST() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const rate = parseFloat(document.getElementById('gstRate').value);
+            if (!amount) return alert('Enter amount');
+
+            const gstAmt = (amount * rate) / 100;
+            const cgst = gstAmt / 2;
+            const sgst = gstAmt / 2;
+            const total = amount + gstAmt;
+
+            document.getElementById('baseAmt').textContent = amount.toFixed(2);
+            document.getElementById('cgst').textContent = cgst.toFixed(2);
+            document.getElementById('sgst').textContent = sgst.toFixed(2);
+            document.getElementById('totalGst').textContent = gstAmt.toFixed(2);
+            document.getElementById('totalAmt').textContent = total.toFixed(2);
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
