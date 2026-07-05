@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Quotation Generator India | GST Quotation Maker with PDF & WhatsApp</title>
+    <meta name="description" content="Create professional GST quotations online. Add company logo, client details, products, discount, terms, digital signature. Download PDF, Print, Share on WhatsApp. Free tool.">
+    <meta name="keywords" content="quotation generator, quotation maker india, gst quotation, quotation pdf download, whatsapp quotation, free quotation tool">
+    <link rel="canonical" href="https://aihubpro.in/quotation-generator.html">
+    
+    <!-- Google AdSense - COMPULSORY -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries: jsPDF + html2canvas + Signature Pad -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 20px; }
+     .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #0d6efd; margin-bottom: 10px; font-size: 28px; }
+     .subtitle { text-align: center; color: #666; margin-bottom: 25px; }
+       
+       /* ADSENSE PLACEHOLDER - COMPULSORY */
+     .ad-placeholder { 
+           background: #f8f9fa; border: 2px dashed #dee2e6; padding: 20px; 
+           text-align: center; margin: 20px 0; border-radius: 8px; min-height: 90px;
+           display: flex; align-items: center; justify-content: center; color: #6c757d;
+       }
+     .ad-placeholder::before { content: "Advertisement"; font-size: 12px; }
+       
+     .section { margin-bottom: 25px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafbfc; }
+     .section h3 { color: #0d6efd; margin-bottom: 15px; font-size: 18px; border-bottom: 2px solid #0d6efd; padding-bottom: 8px; }
+     .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+     .input-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+     .input-group { display: flex; flex-direction: column; }
+     .input-group label { font-weight: 600; margin-bottom: 5px; font-size: 14px; color: #333; }
+     .input-group input,.input-group textarea,.input-group select { 
+            padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: 'Inter'; transition: border 0.3s;
+        }
+     .input-group input:focus,.input-group textarea:focus,.input-group select:focus { 
+            outline: none; border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13,110,253,0.1);
+        }
+     .input-group textarea { resize: vertical; min-height: 70px; }
+     .logo-upload { border: 2px dashed #0d6efd; padding: 25px; text-align: center; border-radius: 8px; cursor: pointer; background: white; transition: all 0.3s; }
+     .logo-upload:hover { background: #f0f7ff; border-color: #0a58ca; }
+     .logo-preview { max-width: 180px; max-height: 100px; margin: 10px auto; display: none; object-fit: contain; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; background: white; }
+        table th { background: #0d6efd; color: white; padding: 12px 8px; text-align: left; font-size: 13px; font-weight: 600; }
+        table td { padding: 8px; border-bottom: 1px solid #eee; }
+        table input { width: 100%; border: 1px solid #e0e0e0; padding: 8px; font-size: 14px; border-radius: 4px; }
+     .btn { padding: 12px 24px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; margin: 5px; transition: all 0.3s; }
+     .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+     .btn-primary { background: #0d6efd; color: white; }
+     .btn-success { background: #28a745; color: white; }
+     .btn-whatsapp { background: #25D366; color: white; }
+     .btn-secondary { background: #6c757d; color: white; }
+     .btn-danger { background: #dc3545; color: white; padding: 6px 12px; font-size: 13px; }
+     .btn-warning { background: #ffc107; color: #000; }
+     .btn-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 25px; }
+     .totals { text-align: right; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #0d6efd; }
+     .totals p { margin: 10px 0; font-size: 15px; display: flex; justify-content: space-between; }
+     .totals.grand-total { font-size: 22px; font-weight: 700; color: #0d6efd; border-top: 2px solid #dee2e6; padding-top: 15px; margin-top: 15px; }
+     .signature-pad-wrap { border: 2px solid #ddd; border-radius: 8px; margin-top: 10px; background: white; position: relative; }
+      #signaturePad { width: 100%; height: 150px; cursor: crosshair; }
+     .signature-actions { display: flex; gap: 10px; margin-top: 8px; }
+     .legal-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
+     .future-badge { display: inline-block; background: #ffc107; color: #000; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-left: 8px; }
+        @media print {.no-print,.ad-placeholder { display: none!important; } body { background: white; padding: 0; }.container { box-shadow: none; }}
+        @media (max-width: 768px) {.input-row,.input-row-3 { grid-template-columns: 1fr; }.btn-row { flex-direction: column; }.btn { width: 100%; }}
+    </style>
+</head>
+<body>
+    <div class="container" id="quotationContent">
+        <h1>Quotation Generator</h1>
+        <p class="subtitle">Create Professional GST Quotations - Free with PDF & WhatsApp Share</p>
+
+        <!-- ADSENSE TOP BANNER - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- 1. COMPANY LOGO & DETAILS -->
+        <div class="section">
+            <h3>1. Your Company Details</h3>
+            <div class="logo-upload" onclick="document.getElementById('logoInput').click()">
+                <input type="file" id="logoInput" accept="image/*" style="display:none;" onchange="loadLogo(event)">
+                <img id="logoPreview" class="logo-preview" alt="Company Logo">
+                <p id="logoText">📁 Click to Upload Company Logo (PNG/JPG)</p>
+            </div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Company Name *</label>
+                    <input type="text" id="companyName" placeholder="ABC Private Limited" required>
+                </div>
+                <div class="input-group">
+                    <label>GSTIN</label>
+                    <input type="text" id="companyGSTIN" placeholder="22AAAAA0000A1Z5" maxlength="15">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Complete Address *</label>
+                <textarea id="companyAddress" placeholder="Building No, Street, City, State - PIN Code" required></textarea>
+            </div>
+            <div class="input-row-3">
+                <div class="input-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" id="companyPhone" placeholder="+91 98765 43210" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="companyEmail" placeholder="info@company.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Website</label>
+                    <input type="url" id="companyWebsite" placeholder="https://company.com">
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. CLIENT DETAILS -->
+        <div class="section">
+            <h3>2. Client Details</h3>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Client / Company Name *</label>
+                    <input type="text" id="clientName" placeholder="XYZ Corporation Pvt Ltd" required>
+                </div>
+                <div class="input-group">
+                    <label>Client GSTIN</label>
+                    <input type="text" id="clientGSTIN" placeholder="Optional" maxlength="15">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Client Address</label>
+                <textarea id="clientAddress" placeholder="Client complete address with PIN"></textarea>
+            </div>
+            <div class="input-row-3">
+                <div class="input-group">
+                    <label>Quotation Number *</label>
+                    <input type="text" id="quotationNumber" value="QUO-2026-001" required>
+                </div>
+                <div class="input-group">
+                    <label>Quotation Date *</label>
+                    <input type="date" id="quotationDate" required>
+                </div>
+                <div class="input-group">
+                    <label>Valid Till *</label>
+                    <input type="date" id="validTill" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADSENSE MIDDLE RECTANGLE - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- 3. PRODUCT LIST -->
+        <div class="section">
+            <h3>3. Product / Service Details</h3>
+            <table id="productTable">
+                <thead>
+                    <tr>
+                        <th style="width:5%">#</th>
+                        <th style="width:40%">Item Description *</th>
+                        <th style="width:10%">HSN/SAC</th>
+                        <th style="width:12%">Qty *</th>
+                        <th style="width:15%">Rate (₹) *</th>
+                        <th style="width:15%">Amount (₹)</th>
+                        <th style="width:3%"></th>
+                    </tr>
+                </thead>
+                <tbody id="productBody">
+                    <tr>
+                        <td class="sl-no">1</td>
+                        <td><input type="text" placeholder="Product/Service name" class="item-name" required></td>
+                        <td><input type="text" placeholder="HSN" class="item-hsn"></td>
+                        <td><input type="number" placeholder="1" class="item-qty" value="1" min="1" oninput="calculateRow(this)" required></td>
+                        <td><input type="number" placeholder="0" class="item-rate" min="0" step="0.01" oninput="calculateRow(this)" required></td>
+                        <td><input type="number" placeholder="0" class="item-amount" readonly></td>
+                        <td><button class="btn-danger" onclick="removeRow(this)">×</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-secondary" onclick="addRow()">+ Add More Items</button>
+        </div>
+
+        <!-- 4. GST & DISCOUNT -->
+        <div class="section">
+            <h3>4. GST & Discount Details</h3>
+            <div class="input-row-3">
+                <div class="input-group">
+                    <label>GST Rate</label>
+                    <select id="gstRate" onchange="calculateTotal()">
+                        <option value="0">0% - Exempted/Nil</option>
+                        <option value="5">5%</option>
+                        <option value="12">12%</option>
+                        <option value="18" selected>18%</option>
+                        <option value="28">28%</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Discount (%)</label>
+                    <input type="number" id="discount" value="0" min="0" max="100" step="0.01" oninput="calculateTotal()">
+                </div>
+                <div class="input-group">
+                    <label>GST Type</label>
+                    <select id="gstType" onchange="calculateTotal()">
+                        <option value="cgst_sgst">CGST + SGST - Intra-State</option>
+                        <option value="igst">IGST - Inter-State</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. TOTALS -->
+        <div class="totals" id="totalsBox">
+            <p><span>Subtotal:</span> <span>₹<span id="subtotal">0.00</span></span></p>
+            <p><span>Discount:</span> <span>-₹<span id="discountAmt">0.00</span></span></p>
+            <p><span>Taxable Amount:</span> <span>₹<span id="taxableAmt">0.00</span></span></p>
+            <p id="cgstLine" style="display:none;"><span>CGST:</span> <span>₹<span id="cgstAmt">0.00</span></span></p>
+            <p id="sgstLine" style="display:none;"><span>SGST:</span> <span>₹<span id="sgstAmt">0.00</span></span></p>
+            <p id="igstLine" style="display:none;"><span>IGST:</span> <span>₹<span id="igstAmt">0.00</span></span></p>
+            <p class="grand-total"><span>Grand Total:</span> <span>₹<span id="grandTotal">0.00</span></span></p>
+        </div>
+
+        <!-- 6. TERMS & SIGNATURE -->
+        <div class="section">
+            <h3>5. Terms & Conditions</h3>
+            <textarea id="terms" rows="5">1. Payment Terms: 50% advance payment, 50% before delivery.
+2. Validity: This quotation is valid till the date mentioned above.
+3. Delivery: 7-10 working days after receipt of advance payment and purchase order.
+4. Taxes: GST as applicable will be charged extra.
+5. Jurisdiction: All disputes subject to exclusive jurisdiction of Courts at Yamunanagar, Haryana, India only.</textarea>
+            
+            <div class="input-group" style="margin-top:20px;">
+                <label>Authorized Signatory Name *</label>
+                <input type="text" id="signature" placeholder="Enter your name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Digital Signature <span class="future-badge">Draw Below</span></label>
+                <div class="signature-pad-wrap">
+                    <canvas id="signaturePad"></canvas>
+                </div>
+                <div class="signature-actions">
+                    <button class="btn btn-secondary" onclick="clearSignature()" style="padding:8px 16px; font-size:13px;">Clear Signature</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. ACTION BUTTONS -->
+        <div class="btn-row no-print">
+            <button class="btn btn-primary" onclick="generatePreview()">👁️ Preview Quotation</button>
+            <button class="btn btn-success" onclick="downloadPDF()">📥 Download PDF</button>
+            <button class="btn btn-secondary" onclick="window.print()">🖨️ Print</button>
+            <button class="btn btn-whatsapp" onclick="shareWhatsApp()">📱 Share on WhatsApp</button>
+        </div>
+
+        <!-- 8. FUTURE FEATURES - DISABLED -->
+        <div class="section no-print" style="background: #fff3cd; border-color: #ffc107;">
+            <h3>6. Future Features <span class="future-badge">Coming Soon</span></h3>
+            <div class="btn-row">
+                <button class="btn btn-warning" disabled onclick="alert('Coming Soon!')">🔄 Convert to Invoice</button>
+                <button class="btn btn-warning" disabled onclick="alert('Coming Soon!')">🔗 Generate Approval Link</button>
+                <button class="btn btn-warning" disabled onclick="alert('Coming Soon!')">✍️ Add Digital Signature</button>
+            </div>
+            <p style="text-align:center; margin-top:10px; font-size:13px; color:#666;">These features will be available in next update</p>
+        </div>
+
+        <!-- ADSENSE BOTTOM BANNER - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- Legal Footer -->
+        <div class="legal-footer">
+            <p>Generated by <strong>AI Hub Pro Tools</strong> | Free Quotation Generator</p>
+            <p>All disputes subject to exclusive jurisdiction of Courts at <strong>Yamunanagar, Haryana, India</strong> only.</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize
+        document.getElementById('quotationDate').valueAsDate = new Date();
+        let validDate = new Date();
+        validDate.setDate(validDate.getDate() + 15);
+        document.getElementById('validTill').valueAsDate = validDate;
+
+        // Initialize Signature Pad
+        const canvas = document.getElementById('signaturePad');
+        const signaturePad = new SignaturePad(canvas, {
+            backgroundColor: 'rgb(255, 255, 255)',
+            penColor: 'rgb(0, 0, 0)'
+        });
+
+        function resizeCanvas() {
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+            signaturePad.clear();
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        function clearSignature() {
+            signaturePad.clear();
+        }
+
+        // Load Logo
+        function loadLogo(event) {
+            const file = event.target.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('logoPreview').src = e.target.result;
+                    document.getElementById('logoPreview').style.display = 'block';
+                    document.getElementById('logoText').style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Add Product Row
+        function addRow() {
+            const tbody = document.getElementById('productBody');
+            const rowCount = tbody.rows.length + 1;
+            const row = tbody.insertRow();
+            row.innerHTML = `
+                <td class="sl-no">${rowCount}</td>
+                <td><input type="text" placeholder="Product/Service name" class="item-name" required></td>
+                <td><input type="text" placeholder="HSN" class="item-hsn"></td>
+                <td><input type="number" placeholder="1" class="item-qty" value="1" min="1" oninput="calculateRow(this)" required></td>
+                <td><input type="number" placeholder="0" class="item-rate" min="0" step="0.01" oninput="calculateRow(this)" required></td>
+                <td><input type="number" placeholder="0" class="item-amount" readonly></td>
+                <td><button class="btn-danger" onclick="removeRow(this)">×</button></td>
+            `;
+            updateSerialNumbers();
+        }
+
+        // Remove Row
+        function removeRow(btn) {
+            if(document.getElementById('productBody').rows.length > 1) {
+                btn.closest('tr').remove();
+                updateSerialNumbers();
+                calculateTotal();
+            } else {
+                alert('At least one item is required in quotation');
+            }
+        }
+
+        // Update Serial Numbers
+        function updateSerialNumbers() {
+            const rows = document.querySelectorAll('#productBody tr');
+            rows.forEach((row, index) => {
+                row.querySelector('.sl-no').textContent = index + 1;
+            });
+        }
+
+        // Calculate Row Amount
+        function calculateRow(input) {
+            const row = input.closest('tr');
+            const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+            const rate = parseFloat(row.querySelector('.item-rate').value) || 0;
+            row.querySelector('.item-amount').value = (qty * rate).toFixed(2);
+            calculateTotal();
+        }
+
+        // Calculate Total
+        function calculateTotal() {
+            let subtotal = 0;
+            document.querySelectorAll('.item-amount').forEach(input => {
+                subtotal += parseFloat(input.value) || 0;
+            });
+
+            const discountPercent = parseFloat(document.getElementById('discount').value) || 0;
+            const discountAmt = (subtotal * discountPercent) / 100;
+            const taxableAmt = subtotal - discountAmt;
+
+            const gstRate = parseFloat(document.getElementById('gstRate').value) || 0;
+            const gstAmt = (taxableAmt * gstRate) / 100;
+            const gstType = document.getElementById('gstType').value;
+
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('discountAmt').textContent = discountAmt.toFixed(2);
+            document.getElementById('taxableAmt').textContent = taxableAmt.toFixed(2);
+
+            if(gstType === 'cgst_sgst') {
+                document.getElementById('cgstLine').style.display = 'flex';
+                document.getElementById('sgstLine').style.display = 'flex';
+                document.getElementById('igstLine').style.display = 'none';
+                document.getElementById('cgstAmt').textContent = (gstAmt/2).toFixed(2);
+                document.getElementById('sgstAmt').textContent = (gstAmt/2).toFixed(2);
+            } else {
+                document.getElementById('cgstLine').style.display = 'none';
+                document.getElementById('sgstLine').style.display = 'none';
+                document.getElementById('igstLine').style.display = 'flex';
+                document.getElementById('igstAmt').textContent = gstAmt.toFixed(2);
+            }
+
+            const grandTotal = taxableAmt + gstAmt;
+            document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+        }
+
+        // Generate Preview
+        function generatePreview() {
+            if(!document.getElementById('companyName').value ||!document.getElementById('clientName').value ||!document.getElementById('quotationNumber').value) {
+                alert('Please fill all required fields: Company Name, Client Name, Quotation Number');
+                return false;
+            }
+            calculateTotal();
+            alert('Quotation is ready! You can now Download PDF, Print or Share on WhatsApp');
+            return true;
+        }
+
+        // Download PDF
+        async function downloadPDF() {
+            if(!generatePreview()) return;
+            
+            const { jsPDF } = window.jspdf;
+            const element = document.getElementById('quotationContent');
+            
+            // Hide buttons temporarily for PDF
+            const btnRow = document.querySelector('.btn-row');
+            btnRow.style.display = 'none';
+            
+            const canvas = await html2canvas(element, { 
+                scale: 2, 
+                useCORS: true, 
+                logging: false,
+                windowWidth: element.scrollWidth,
+                windowHeight: element.scrollHeight
+            });
+            
+            btnRow.style.display = 'flex';
+            
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            
+            let heightLeft = pdfHeight;
+            let position = 0;
+            
+            pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+            heightLeft -= pdf.internal.pageSize.getHeight();
+            
+            while (heightLeft >= 0) {
+                position = heightLeft - pdfHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+                heightLeft -= pdf.internal.pageSize.getHeight();
+            }
+            
+            const quoNum = document.getElementById('quotationNumber').value || 'Quotation';
+            pdf.save(`${quoNum}.pdf`);
+        }
+
+        // WhatsApp Share
+        function shareWhatsApp() {
+            const company = document.getElementById('companyName').value;
+            const client = document.getElementById('clientName').value;
+            const total = document.getElementById('grandTotal').textContent;
+            const quoNum = document.getElementById('quotationNumber').value;
+            const validTill = document.getElementById('validTill').value;
+            
+            if(!company ||!client ||!quoNum) {
+                alert('Please fill Company Name, Client Name and Quotation Number first');
+                return;
+            }
+
+            const message = `*QUOTATION*%0A%0A*From:* ${company}%0A*To:* ${client}%0A*Quotation No:* ${quoNum}%0A*Valid Till:* ${validTill}%0A*Total Amount:* ₹${total}%0A%0A_Please find the detailed quotation PDF attached._%0A%0A_Generated by AI Hub Pro Tools_`;
+            window.open(`https://wa.me/?text=${message}`, '_blank');
+        }
+
+        // Initial calculation
+        calculateTotal();
+    </script>
+</body>
+</html>
