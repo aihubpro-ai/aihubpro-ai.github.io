@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Merge PDF Online | Combine Multiple PDF Files | Rearrange Pages</title>
+    <meta name="description" content="Free online PDF merger. Upload multiple PDFs, drag & drop to rearrange pages, merge into one PDF. Download instantly. Password protect & OCR coming soon.">
+    <meta name="keywords" content="merge pdf, combine pdf, join pdf files, pdf merger online, rearrange pdf pages, pdf combiner free">
+    <link rel="canonical" href="https://aihubpro.in/merge-pdf.html">
+    
+    <!-- Google AdSense - COMPULSORY -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries: PDF-lib + Sortable.js -->
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 20px; }
+  .container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #0d6efd; margin-bottom: 10px; font-size: 28px; }
+  .subtitle { text-align: center; color: #666; margin-bottom: 25px; }
+       
+       /* ADSENSE PLACEHOLDER - COMPULSORY */
+  .ad-placeholder { 
+           background: #f8f9fa; border: 2px dashed #dee2e6; padding: 20px; 
+           text-align: center; margin: 20px 0; border-radius: 8px; min-height: 90px;
+           display: flex; align-items: center; justify-content: center; color: #6c757d;
+       }
+  .ad-placeholder::before { content: "Advertisement"; font-size: 12px; }
+       
+  .upload-zone { border: 3px dashed #0d6efd; padding: 50px 20px; text-align: center; border-radius: 12px; background: #f0f7ff; cursor: pointer; transition: all 0.3s; }
+  .upload-zone:hover { background: #e7f3ff; border-color: #0a58ca; }
+  .upload-zone.drag-over { background: #d1e7ff; border-color: #0d6efd; border-style: solid; }
+  .upload-zone svg { width: 60px; height: 60px; color: #0d6efd; margin-bottom: 15px; }
+  .upload-zone h3 { color: #0d6efd; margin-bottom: 10px; font-size: 20px; }
+  .upload-zone p { color: #666; font-size: 14px; }
+  #fileInput { display: none; }
+       
+  .files-list { margin-top: 30px; }
+  .files-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #0d6efd; }
+  .files-header h3 { color: #0d6efd; font-size: 18px; }
+  .files-count { background: #0d6efd; color: white; padding: 5px 12px; border-radius: 20px; font-size: 14px; font-weight: 600; }
+       
+  .file-item { background: white; border: 1px solid #e0e0; padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; cursor: move; transition: all 0.3s; }
+  .file-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: #0d6efd; }
+  .file-item.sortable-ghost { opacity: 0.4; background: #e7f3ff; }
+  .file-icon { width: 40px; height: 40px; background: #dc3545; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 12px; }
+  .file-info { flex: 1; }
+  .file-name { font-weight: 600; font-size: 14px; color: #333; margin-bottom: 3px; }
+  .file-size { font-size: 12px; color: #666; }
+  .file-pages { font-size: 12px; color: #0d6efd; font-weight: 600; }
+  .file-remove { background: #dc3545; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.3s; }
+  .file-remove:hover { background: #c82333; }
+  .drag-handle { cursor: move; color: #999; font-size: 20px; }
+       
+  .progress-container { margin: 25px 0; display: none; }
+  .progress-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: #333; }
+  .progress-bar { width: 100%; height: 12px; background: #e0e0e0; border-radius: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #0d6efd, #28a745); width: 0%; transition: width 0.3s; border-radius: 10px; }
+       
+  .btn { padding: 14px 28px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; margin: 5px; transition: all 0.3s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .btn-primary { background: #0d6efd; color: white; }
+  .btn-success { background: #28a745; color: white; }
+  .btn-secondary { background: #6c757d; color: white; }
+  .btn-warning { background: #ffc107; color: #000; }
+  .btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
+  .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+       
+  .future-section { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 12px; margin-top: 30px; }
+  .future-section h3 { color: #856404; margin-bottom: 15px; }
+  .future-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+  .future-item { background: white; padding: 20px; border-radius: 8px; text-align: center; }
+  .future-badge { display: inline-block; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
+       
+  .legal-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
+       
+        @media print {.no-print,.ad-placeholder { display: none!important; } body { background: white; padding: 0; }}
+        @media (max-width: 768px) {.btn-row { grid-template-columns: 1fr; }.file-item { flex-wrap: wrap; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Merge PDF Files</h1>
+        <p class="subtitle">Combine Multiple PDFs into One - Drag & Drop to Rearrange Pages</p>
+
+        <!-- ADSENSE TOP BANNER - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- UPLOAD ZONE -->
+        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+            </svg>
+            <h3>Click to Upload PDFs</h3>
+            <p>Or drag & drop files here</p>
+            <p style="font-size: 12px; margin-top: 10px; color: #999;">Supports multiple PDF files • Max 50MB per file</p>
+            <input type="file" id="fileInput" accept=".pdf" multiple>
+        </div>
+
+        <!-- FILES LIST -->
+        <div class="files-list" id="filesList" style="display:none;">
+            <div class="files-header">
+                <h3>Uploaded Files</h3>
+                <span class="files-count"><span id="filesCount">0</span> Files</span>
+            </div>
+            <div id="filesContainer"></div>
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-label">
+                <span>Merging PDFs...</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="btn-row no-print" id="actionButtons" style="display:none;">
+            <button class="btn btn-primary" id="mergeBtn" onclick="mergePDFs()">🔗 Merge PDFs</button>
+            <button class="btn btn-secondary" onclick="clearFiles()">🗑️ Clear All</button>
+        </div>
+
+        <!-- DOWNLOAD BUTTON -->
+        <div class="btn-row no-print" id="downloadSection" style="display:none;">
+            <button class="btn btn-success" id="downloadBtn">📥 Download Merged PDF</button>
+            <button class="btn btn-secondary" onclick="resetAll()">🔄 Merge More Files</button>
+        </div>
+
+        <!-- ADSENSE MIDDLE RECTANGLE - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- FUTURE FEATURES -->
