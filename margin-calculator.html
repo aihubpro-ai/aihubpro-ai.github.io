@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Profit Margin Calculator | Margin %, Markup %, GST Calculator India</title>
+    <meta name="description" content="Free profit margin calculator with GST, discount, markup %. Calculate profit, margin %, selling price. Download PDF report, copy result, business analysis graph.">
+    <meta name="keywords" content="profit margin calculator, markup calculator, profit percentage, selling price calculator, gst profit calculator, business margin">
+    <link rel="canonical" href="https://aihubpro.in/profit-margin-calculator.html">
+    
+    <!-- Google AdSense - COMPULSORY -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Libraries: Chart.js + jsPDF -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 20px; }
+     .container { max-width: 1100px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #0d6efd; margin-bottom: 10px; font-size: 28px; }
+     .subtitle { text-align: center; color: #666; margin-bottom: 25px; }
+       
+       /* ADSENSE PLACEHOLDER - COMPULSORY */
+     .ad-placeholder { 
+           background: #f8f9fa; border: 2px dashed #dee2e6; padding: 20px; 
+           text-align: center; margin: 20px 0; border-radius: 8px; min-height: 90px;
+           display: flex; align-items: center; justify-content: center; color: #6c757d;
+       }
+     .ad-placeholder::before { content: "Advertisement"; font-size: 12px; }
+       
+     .calculator-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
+     .section { padding: 25px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafbfc; }
+     .section h3 { color: #0d6efd; margin-bottom: 20px; font-size: 18px; border-bottom: 2px solid #0d6efd; padding-bottom: 8px; }
+     .input-group { margin-bottom: 18px; }
+     .input-group label { font-weight: 600; margin-bottom: 6px; font-size: 14px; color: #333; display: block; }
+     .input-group input,.input-group select { 
+            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; font-family: 'Inter'; transition: all 0.3s;
+        }
+     .input-group input:focus,.input-group select:focus { 
+            outline: none; border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13,110,253,0.1);
+        }
+     .currency-select { display: flex; gap: 10px; }
+     .currency-select select { flex: 0 0 100px; }
+     .btn { padding: 14px 28px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; margin: 5px; transition: all 0.3s; width: 100%; }
+     .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+     .btn-primary { background: #0d6efd; color: white; }
+     .btn-success { background: #28a745; color: white; }
+     .btn-secondary { background: #6c757d; color: white; }
+     .btn-warning { background: #ffc107; color: #000; }
+     .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+       
+     .result-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 25px; border-radius: 12px; margin-top: 20px; }
+     .result-box h4 { font-size: 16px; margin-bottom: 15px; opacity: 0.9; }
+     .result-item { display: flex; justify-content: space-between; margin: 12px 0; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.2); }
+     .result-item:last-child { border-bottom: none; font-size: 20px; font-weight: 700; margin-top: 15px; padding-top: 15px; border-top: 2px solid rgba(255,255,255,0.3); }
+     .result-value { font-weight: 700; }
+     .profit-positive { color: #4ade80; }
+     .profit-negative { color: #f87171; }
+       
+     .chart-container { margin-top: 20px; padding: 20px; background: white; border-radius: 8px; }
+     .analysis-box { background: #e7f3ff; border-left: 4px solid #0d6efd; padding: 15px; border-radius: 6px; margin-top: 15px; font-size: 14px; }
+     .analysis-box h5 { color: #0d6efd; margin-bottom: 8px; }
+       
+     .legal-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
+     .future-badge { display: inline-block; background: #ffc107; color: #000; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-left: 8px; }
+       
+        @media print {.no-print,.ad-placeholder { display: none!important; } body { background: white; padding: 0; }.container { box-shadow: none; }}
+        @media (max-width: 768px) {.calculator-grid { grid-template-columns: 1fr; }.btn-row { grid-template-columns: 1fr; }}
+    </style>
+</head>
+<body>
+    <div class="container" id="calculatorContent">
+        <h1>Profit Margin Calculator</h1>
+        <p class="subtitle">Calculate Profit, Margin %, Markup % with GST & Discount - Free Tool</p>
+
+        <!-- ADSENSE TOP BANNER - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <div class="calculator-grid">
+            <!-- LEFT: INPUT SECTION -->
+            <div class="section">
+                <h3>📊 Input Details</h3>
+                
+                <div class="input-group">
+                    <label>Currency Selection *</label>
+                    <div class="currency-select">
+                        <select id="currency" onchange="updateCurrency()">
+                            <option value="₹" selected>₹ INR</option>
+                            <option value="$">$ USD</option>
+                            <option value="€">€ EUR</option>
+                            <option value="£">£ GBP</option>
+                            <option value="¥">¥ JPY</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Cost Price (CP) *</label>
+                    <input type="number" id="costPrice" placeholder="Enter cost price" min="0" step="0.01" oninput="calculateProfit()" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Selling Price (SP) *</label>
+                    <input type="number" id="sellingPrice" placeholder="Enter selling price" min="0" step="0.01" oninput="calculateProfit()" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Quantity (Optional)</label>
+                    <input type="number" id="quantity" placeholder="1" value="1" min="1" oninput="calculateProfit()">
+                </div>
+
+                <div class="input-group">
+                    <label>GST Rate (%)</label>
+                    <select id="gstRate" onchange="calculateProfit()">
+                        <option value="0">0% - Exempted</option>
+                        <option value="5">5%</option>
+                        <option value="12">12%</option>
+                        <option value="18" selected>18%</option>
+                        <option value="28">28%</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Discount (%)</label>
+                    <input type="number" id="discount" placeholder="0" value="0" min="0" max="100" step="0.01" oninput="calculateProfit()">
+                </div>
+
+                <div class="input-group">
+                    <label>GST Type</label>
+                    <select id="gstType" onchange="calculateProfit()">
+                        <option value="exclusive">Add GST - Exclusive</option>
+                        <option value="inclusive">Remove GST - Inclusive</option>
+                    </select>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn btn-primary" onclick="calculateProfit()">📊 Calculate</button>
+                    <button class="btn btn-secondary" onclick="resetCalculator()">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- RIGHT: RESULT SECTION -->
+            <div class="section">
+                <h3>📈 Results & Analysis</h3>
+                
+                <div class="result-box">
+                    <h4>Profit Analysis</h4>
+                    <div class="result-item">
+                        <span>Cost Price (CP):</span>
+                        <span class="result-value"><span class="currency-symbol">₹</span><span id="resultCP">0.00</span></span>
+                    </div>
+                    <div class="result-item">
+                        <span>Selling Price (SP):</span>
+                        <span class="result-value"><span class="currency-symbol">₹</span><span id="resultSP">0.00</span></span>
+                    </div>
+                    <div class="result-item">
+                        <span>Profit / Loss:</span>
+                        <span class="result-value profit-positive"><span class="currency-symbol">₹</span><span id="resultProfit">0.00</span></span>
+                    </div>
+                    <div class="result-item">
+                        <span>Profit Margin %:</span>
+                        <span class="result-value"><span id="resultMargin">0.00</span>%</span>
+                    </div>
+                    <div class="result-item">
+                        <span>Markup %:</span>
+                        <span class="result-value"><span id="resultMarkup">0.00</span>%</span>
+                    </div>
+                    <div class="result-item">
+                        <span>GST Amount:</span>
+                        <span class="result-value"><span class="currency-symbol">₹</span><span id="resultGST">0.00</span></span>
+                    </div>
+                    <div class="result-item">
+                        <span>Final Price:</span>
+                        <span class="result-value"><span class="currency-symbol">₹</span><span id="resultFinal">0.00</span></span>
+                    </div>
+                </div>
+
+                <div class="analysis-box">
+                    <h5>💡 Business Analysis</h5>
+                    <p id="analysisText">Enter values to see business insights and recommendations.</p>
+                </div>
+
+                <div class="btn-row">
+                    <button class="btn btn-success" onclick="downloadPDF()">📥 Download PDF Report</button>
+                    <button class="btn btn-secondary" onclick="copyResult()">📋 Copy Result</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADSENSE MIDDLE RECTANGLE - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- GRAPH SECTION -->
+        <div class="section">
+            <h3>📊 Profit Visualization <span class="future-badge">Graph</span></h3>
+            <div class="chart-container">
+                <canvas id="profitChart"></canvas>
+            </div>
+        </div>
+
+        <!-- MONTHLY PROFIT ANALYSIS - FUTURE -->
+        <div class="section no-print" style="background: #fff3cd; border-color: #ffc107;">
+            <h3>📅 Monthly Profit Analysis <span class="future-badge">Coming Soon</span></h3>
+            <p style="color: #666; margin-bottom: 15px;">Track your monthly profit trends and business growth with advanced analytics.</p>
+            <button class="btn btn-warning" disabled>📊 View Monthly Report</button>
+            <button class="btn btn-warning" disabled>📈 Business Growth Analysis</button>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="btn-row no-print">
+            <button class="btn btn-primary" onclick="window.print()">🖨️ Print Report</button>
+            <button class="btn btn-success" onclick="shareWhatsApp()">📱 Share on WhatsApp</button>
+        </div>
+
+        <!-- ADSENSE BOTTOM BANNER - COMPULSORY -->
+        <div class="ad-placeholder no-print">
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+
+        <!-- Legal Footer -->
+        <div class="legal-footer">
+            <p>Generated by <strong>AI Hub Pro Tools</strong> | Free Profit Margin Calculator</p>
+            <p>All disputes subject to exclusive jurisdiction of Courts at <strong>Yamunanagar, Haryana, India</strong> only.</p>
+        </div>
+    </div>
+
+    <script>
+        let profitChart = null;
+        let currentCurrency = '₹';
+
+        // Update Currency Symbol
+        function updateCurrency() {
+            currentCurrency = document.getElementById('currency').value;
+            document.querySelectorAll('.currency-symbol').forEach(el => {
+                el.textContent = currentCurrency;
+            });
+            calculateProfit();
+        }
+
+        // Calculate Profit
+        function calculateProfit() {
+            const cp = parseFloat(document.getElementById('costPrice').value) || 0;
+            const sp = parseFloat(document.getElementById('sellingPrice').value) || 0;
+            const qty = parseFloat(document.getElementById('quantity').value) || 1;
+            const gstRate = parseFloat(document.getElementById('gstRate').value) || 0;
+            const discount = parseFloat(document.getElementById('discount').value) || 0;
+            const gstType = document.getElementById('gstType').value;
+
+            if(cp === 0 || sp === 0) return;
+
+            // Apply quantity
+            const totalCP = cp * qty;
+            const totalSP = sp * qty;
+
+            // Apply discount
+            const discountAmt = (totalSP * discount) / 100;
+            const spAfterDiscount = totalSP - discountAmt;
+
+            // Calculate GST
+            let gstAmt, finalSP, baseSP;
+            if(gstType === 'exclusive') {
+                gstAmt = (spAfterDiscount * gstRate) / 100;
+                finalSP = spAfterDiscount + gstAmt;
+                baseSP = spAfterDiscount;
+            } else {
+                baseSP = (spAfterDiscount * 100) / (100 + gstRate);
+                gstAmt = spAfterDiscount - baseSP;
+                finalSP = spAfterDiscount;
+            }
+
+            // Calculate Profit
+            const profit = baseSP - totalCP;
+            const marginPercent = (profit / baseSP) * 100;
+            const markupPercent = (profit / totalCP) * 100;
+
+            // Update Results
+            document.getElementById('resultCP').textContent = totalCP.toFixed(2);
+            document.getElementById('resultSP').textContent = baseSP.toFixed(2);
+            document.getElementById('resultProfit').textContent = profit.toFixed(2);
+            document.getElementById('resultMargin').textContent = marginPercent.toFixed(2);
+            document.getElementById('resultMarkup').textContent = markupPercent.toFixed(2);
+            document.getElementById('resultGST').textContent = gstAmt.toFixed(2);
+            document.getElementById('resultFinal').textContent = finalSP.toFixed(2);
+
+            // Color coding
+            const profitEl = document.getElementById('resultProfit').parentElement.parentElement;
+            if(profit >= 0) {
+                profitEl.classList.remove('profit-negative');
+                profitEl.classList.add('profit-positive');
+            } else {
+                profitEl.classList.remove('profit-positive');
+                profitEl.classList.add('profit-negative');
+            }
+
+            // Business Analysis
+            updateAnalysis(marginPercent, markupPercent, profit);
+
+            // Update Graph
+            updateChart(totalCP, baseSP, profit, gstAmt);
+        }
+
+        // Business Analysis
+        function updateAnalysis(margin, markup, profit) {
+            let analysis = '';
+            if(margin < 0) {
+                analysis = '⚠️ <strong>Loss Making:</strong> Your selling price is less than cost. Increase price or reduce costs immediately.';
+            } else if(margin < 10) {
+                analysis = '📉 <strong>Low Margin:</strong> Profit margin is below 10%. Consider increasing price or reducing costs for better profitability.';
+            } else if(margin < 20) {
+                analysis = '📊 <strong>Average Margin:</strong> Your margin is 10-20%. This is acceptable for competitive markets.';
+            } else if(margin < 40) {
+                analysis = '📈 <strong>Good Margin:</strong> Profit margin is 20-40%. You have healthy profitability.';
+            } else {
+                analysis = '🚀 <strong>Excellent Margin:</strong> Above 40% margin! You have premium pricing power.';
+            }
+            
+            if(markup > 100) {
+                analysis += '<br><br>💡 <strong>High Markup:</strong> Your markup is above 100%. Ensure market can accept this pricing.';
+            }
+            
+            document.getElementById('analysisText').innerHTML = analysis;
+        }
+
+        // Update Chart
+        function updateChart(cp, sp, profit, gst) {
+            const ctx = document.getElementById('profitChart');
+            
+            if(profitChart) {
+                profitChart.destroy();
+            }
+
+            profitChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cost Price', 'Selling Price', 'Profit', 'GST'],
+                    datasets: [{
+                        label: 'Amount (' + currentCurrency + ')',
+                        data: [cp, sp, profit, gst],
+                        backgroundColor: [
+                            'rgba(239, 68, 0.7)',
+                            'rgba(59, 130, 246, 0.7)',
+                            profit >= 0 ? 'rgba(34, 197, 94, 0.7)' : 'rgba(239, 68, 0.7)',
+                            'rgba(168, 85, 247, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(239, 68, 68)',
+                            'rgb(59, 130, 246)',
+                            profit >= 0 ? 'rgb(34, 197, 94)' : 'rgb(239, 68, 68)',
+                            'rgb(168, 85, 247)'
+                        ],
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Profit Breakdown Analysis' }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        // Copy Result
+        function copyResult() {
+            const cp = document.getElementById('resultCP').textContent;
+            const sp = document.getElementById('resultSP').textContent;
+            const profit = document.getElementById('resultProfit').textContent;
+            const margin = document.getElementById('resultMargin').textContent;
+            const markup = document.getElementById('resultMarkup').textContent;
+            const final = document.getElementById('resultFinal').textContent;
+
+            const text = `Profit Margin Calculator Result:
+            
+Cost Price: ${currentCurrency}${cp}
+Selling Price: ${currentCurrency}${sp}
+Profit: ${currentCurrency}${profit}
+Profit Margin: ${margin}%
+Markup: ${markup}%
+Final Price: ${currentCurrency}${final}
+
+Generated by AI Hub Pro Tools`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Result copied to clipboard!');
+            });
+        }
+
+        // Download PDF
+        async function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const element = document.getElementById('calculatorContent');
+            
+            const btnRow = document.querySelector('.btn-row');
+            btnRow.style.display = 'none';
+            
+            const canvas = await html2canvas(element, { 
+                scale: 2, 
+                useCORS: true, 
+                logging: false,
+                windowWidth: element.scrollWidth
+            });
+            
+            btnRow.style.display = 'grid';
+            
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.save(`Profit-Margin-Report-${new Date().getTime()}.pdf`);
+        }
+
+        // WhatsApp Share
+        function shareWhatsApp() {
+            const cp = document.getElementById('resultCP').textContent;
+            const sp = document.getElementById('resultSP').textContent;
+            const profit = document.getElementById('resultProfit').textContent;
+            const margin = document.getElementById('resultMargin').textContent;
+            
+            const message = `*PROFIT MARGIN REPORT*%0A%0A💰 *Cost Price:* ${currentCurrency}${cp}%0A💵 *Selling Price:* ${currentCurrency}${sp}%0A📈 *Profit:* ${currentCurrency}${profit}%0A📊 *Margin:* ${margin}%%0A%0A_Generated by AI Hub Pro Tools_%0Ahttps://aihubpro.in`;
+            window.open(`https://wa.me/?text=${message}`, '_blank');
+        }
+
+        // Reset Calculator
+        function resetCalculator() {
+            document.getElementById('costPrice').value = '';
+            document.getElementById('sellingPrice').value = '';
+            document.getElementById('quantity').value = '1';
+            document.getElementById('discount').value = '0';
+            document.getElementById('gstRate').value = '18';
+            calculateProfit();
+        }
+
+        // Initial calculation
+        calculateProfit();
+    </script>
+</body>
+</html>
