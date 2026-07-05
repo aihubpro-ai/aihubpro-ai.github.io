@@ -3,235 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIHubPro 2026 - All-in-One AI Hub</title>
+    <title>AihubPro - 18 Free AI Tools + ChatGPT Alternative | GST, EMI, PDF, Image Tools</title>
+    <meta name="description" content="India's #1 Free AI Platform: ChatGPT, GST Calculator, Invoice Generator, EMI Calculator, PDF Merger, Image Compressor, QR Generator + 18 Tools. 100% Free.">
+    <meta name="keywords" content="AI Chat, GST Calculator, EMI Calculator, PDF Tools, Invoice Generator, Free Tools India">
+
+    <!-- SEO + ADSENSE -->
+    <meta property="og:title" content="AihubPro - 18 Free AI Tools">
+    <meta property="og:description" content="ChatGPT + 18 Business Tools Free">
+    <link rel="canonical" href="https://aihubpro-ai.github.io/">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXX" crossorigin="anonymous"></script>
+
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
     <style>
-        body { background: #000; color: white; font-family: Arial, sans-serif; text-align: center; padding: 0; margin: 0; }
-        .hero { padding: 60px 20px; background: #000; }
-        .hero h1 { color: #FFD700; font-size: 48px; margin: 20px 0 10px 0; }
-        .hero p { color: #fff; font-size: 24px; margin: 0; }
-        .btn-main { margin-top: 30px; padding: 15px 40px; background: #FFD700; color: #000; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; }
-        .btn-main:hover { background: #ffe44e; }
-        .pricing { padding: 60px 20px; background: #0a0a0a; }
-        .plans { max-width: 1200px; margin: 0 auto; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .plan { flex: 1; min-width: 300px; background: #1a1a1a; border: 2px solid #333; border-radius: 12px; padding: 30px; }
-        .plan-pro { border: 2px solid #FFD700; }
-        .plan h3 { color: #fff; font-size: 28px; margin-bottom: 20px; }
-        .plan p { color: #999; margin: 15px 0; }
-        .price { color: #FFD700; font-size: 36px; margin: 30px 0; font-weight: bold; }
-        .btn { width: 100%; padding: 15px; background: #333; color: #fff; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; }
-        .btn:hover { background: #00ff88; color: #000; }
-        .btn-pro { background: #FFD700; color: #000; font-weight: bold; }
-        .btn-pro:hover { background: #ffe44e; }
-        .premium { max-width: 800px; margin: 30px auto 0; background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%); border: 2px solid #FFD700; border-radius: 12px; padding: 30px; }
-        .premium h3 { color: #FFD700; font-size: 32px; }
-        .tools-note { text-align: center; margin-top: 30px; color: #666; font-size: 14px; line-height: 1.8; }
-        .checkbox { margin: 30px auto; text-align: left; max-width: 500px; font-size: 14px; color: #999; }
-        .badge { color: #00ff88; margin-top: 40px; font-weight: bold; font-size: 18px; }
-        #trialTimer { position: fixed; top: 10px; right: 10px; background: red; padding: 10px 15px; border-radius: 5px; display: none; z-index: 9999; font-weight: bold; }
-        #buyPopup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9998; }
-        .popup-content { background: #1a2332; max-width: 500px; margin: 100px auto; padding: 30px; border-radius: 12px; border: 2px solid #FFD700; }
-        .footer { background: #000; color: #fff; padding: 60px 20px; text-align: center; }
-        .footer-box { text-align: left; background: #1a1a1a; padding: 30px; border-radius: 8px; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .footer h3 { color: #FFD700; font-size: 24px; margin-bottom: 10px; }
-        .footer h4 { color: #FFD700; margin-bottom: 15px; }
-        .footer p { color: #999; line-height: 1.8; font-size: 14px; }
-        .footer a { color: #00ddff; text-decoration: none; }
-        .footer a:hover { text-decoration: underline; }
+        :root { --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --accent:#3b82f6; --success:#10b981; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:system-ui; background:var(--bg); color:var(--text); }
+
+        /* HEADER */
+       .header { background:var(--card); padding:16px 24px; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; display:flex; justify-content:space-between; align-items:center; }
+       .logo { font-size:24px; font-weight:800; background:linear-gradient(90deg,#3b82f6,#8b5cf6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+       .nav { display:flex; gap:20px; }
+       .nav a { color:var(--text); text-decoration:none; font-weight:500; }
+       .trial-timer { background:#dc2626; padding:6px 16px; border-radius:20px; font-size:14px; font-weight:600; }
+
+        /* HERO */
+       .hero { text-align:center; padding:60px 20px; background:linear-gradient(180deg,#1e293b 0%,#0f172a 100%); }
+       .hero h1 { font-size:48px; margin-bottom:16px; background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+       .hero p { font-size:20px; color:#94a3b8; margin-bottom:32px; }
+       .cta-btn { padding:16px 32px; background:var(--accent); border:none; border-radius:12px; color:white; font-size:18px; font-weight:700; cursor:pointer; margin:0 8px; }
+
+        /* TOOLS GRID */
+       .container { max-width:1200px; margin:0 auto; padding:40px 20px; }
+       .section-title { font-size:32px; margin-bottom:8px; }
+       .section-desc { color:#94a3b8; margin-bottom:32px; }
+       .tools-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; margin-bottom:60px; }
+       .tool-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; cursor:pointer; transition:0.3s; }
+       .tool-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 10px 30px rgba(59,130,246,0.3); }
+       .tool-icon { font-size:40px; margin-bottom:12px; }
+       .tool-name { font-size:20px; font-weight:700; margin-bottom:8px; }
+       .tool-desc { color:#94a3b8; font-size:14px; margin-bottom:12px; }
+       .tool-badge { display:inline-block; padding:4px 12px; background:var(--success); border-radius:20px; font-size:12px; font-weight:600; }
+
+        /* CHAT WIDGET */
+       .chat-widget { position:fixed; bottom:20px; right:20px; width:380px; height:600px; background:var(--card); border:1px solid var(--border); border-radius:16px; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.5); z-index:1000; }
+       .chat-header { padding:16px; border-bottom:1px solid var(--border); font-weight:700; }
+       .chat-box { flex:1; overflow-y:auto; padding:16px; }
+       .message { margin-bottom:12px; padding:12px; border-radius:12px; max-width:80%; }
+       .user-msg { background:var(--accent); margin-left:auto; }
+       .ai-msg { background:var(--bg); border:1px solid var(--border); }
+       .chat-input { padding:16px; border-top:1px solid var(--border); display:flex; gap:8px; }
+       .chat-input input { flex:1; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); }
+       .chat-input button { padding:12px 20px; background:var(--accent); border:none; border-radius:8px; color:white; cursor:pointer; }
+
+        /* BLOCKED OVERLAY */
+       .blocked-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; display:none; align-items:center; justify-content:center; flex-direction:column; text-align:center; padding:20px; }
+       .blocked-overlay h2 { font-size:36px; margin-bottom:16px; }
+       .blocked-overlay button { background:var(--accent); color:white; border:none; padding:16px 32px; border-radius:8px; font-size:18px; font-weight:700; cursor:pointer; margin:8px; }
+
+        /* FOOTER */
+       .footer { background:var(--card); border-top:1px solid var(--border); padding:40px 20px; margin-top:60px; }
+       .footer-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:40px; }
+       .footer-col h4 { margin-bottom:16px; }
+       .footer-col a { display:block; color:#94a3b8; text-decoration:none; margin-bottom:8px; font-size:14px; }
+
+        @media(max-width:768px) {
+           .hero h1 { font-size:32px; }
+           .tools-grid { grid-template-columns:1fr; }
+           .chat-widget { width:100%; height:100%; bottom:0; right:0; border-radius:0; }
+        }
     </style>
 </head>
 <body>
-    <div id="trialTimer">Trial: <span id="time">05:00</span></div>
+    <!-- BLOCKED OVERLAY -->
+    <div class="blocked-overlay" id="blockedOverlay">
+        <h2>🔒 24 Ghante Ka Block</h2>
+        <p style="font-size:18px; margin-bottom:24px;">Free trial khatam. Agla free: <span id="nextFreeTime"></span></p>
+        <button onclick="buyPlan('666')">₹666/Month - Unlock All Tools ⚡</button>
+        <button onclick="buyPlan('999')">₹999/Month - Pro + Priority 🚀</button>
+    </div>
 
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">🚀 AihubPro</div>
+        <div class="nav">
+            <a href="#tools">Tools</a>
+            <a href="#pricing">Pricing</a>
+            <a href="/blog">Blog</a>
+        </div>
+        <div class="trial-timer" id="trialTimer" style="display:none;">Trial: <span id="timer">5:00</span></div>
+    </div>
+
+    <!-- HERO -->
     <div class="hero">
-        <img src="/1782476328310.jpg" alt="AIHubPro Logo" style="max-width: 400px;">
-        <h1>AIHubPro</h1>
-        <p>One Subscription. Every Top AI Model + Powerful AI Tools.</p>
-        <button class="btn-main" onclick="startTrial()">Start Free Trial</button>
+        <h1>World's Best AI + 18 Free Tools</h1>
+        <p>ChatGPT Alternative + GST Calculator + PDF Tools + EMI Calculator - Sab Kuch Free</p>
+        <button class="cta-btn" onclick="document.getElementById('tools').scrollIntoView()">Explore Free Tools ↓</button>
+        <button class="cta-btn" style="background:#10b981" onclick="openChat()">Start AI Chat 🤖</button>
     </div>
 
-    <div class="pricing" id="pricing">
-        <div class="plans">
-            <div class="plan">
-                <h3>FREE</h3>
-                <p>5 Minute Trial</p>
-                <p>Limited Access</p>
-                <div class="price">₹0</div>
-                <button class="btn" onclick="startTrial()">Start Free Trial</button>
+    <!-- ADSENSE -->
+    <div class="container" style="text-align:center;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXX" data-ad-slot="1234567890" data-ad-format="auto"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <!-- TOOLS SECTION -->
+    <div class="container" id="tools">
+        <!-- BUSINESS TOOLS -->
+        <h2 class="section-title">💼 Business Tools</h2>
+        <p class="section-desc">GST, Invoice, Quotation - Business ke liye sab kuch</p>
+        <div class="tools-grid">
+            <div class="tool-card" onclick="openTool('gst-calculator')">
+                <div class="tool-icon">📊</div>
+                <div class="tool-name">GST Calculator</div>
+                <div class="tool-desc">Calculate GST with CGST, SGST, IGST breakdown. 0%, 5%, 12%, 18%, 28% slabs.</div>
+                <span class="tool-badge">100% Free</span>
             </div>
-
-            <div class="plan plan-pro">
-                <h3>PRO</h3>
-                <p>Priority Speed</p>
-                <p>All AI Models</p>
-                <p>+ Basic AI Tools*</p>
-                <div class="price">₹666/month</div>
+            <div class="tool-card" onclick="openTool('invoice-generator')">
+                <div class="tool-icon">📄</div>
+                <div class="tool-name">Invoice Generator</div>
+                <div class="tool-desc">Create professional GST invoices. Download PDF. No signup needed.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('quotation-generator')">
+                <div class="tool-icon">📝</div>
+                <div class="tool-name">Quotation Generator</div>
+                <div class="tool-desc">Make quotations in 30 seconds. Client-ready PDF download.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('profit-calculator')">
+                <div class="tool-icon">💰</div>
+                <div class="tool-name">Profit Margin Calculator</div>
+                <div class="tool-desc">Calculate profit, margin %, markup. Business decision made easy.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('gst-finder')">
+                <div class="tool-icon">🔍</div>
+                <div class="tool-name">GST Rate Finder</div>
+                <div class="tool-desc">Find GST rate for any product/service. HSN code search.</div>
+                <span class="tool-badge">100% Free</span>
             </div>
         </div>
 
-        <div class="premium">
-            <h3>PREMIUM</h3>
-            <p>Fastest Speed + Beta Features + Priority Support</p>
-            <p>API Access + Team Seats + Commercial Use</p>
-            <p>+ Premium AI Tools Suite**</p>
-            <div class="price" style="font-size: 40px;">₹999/month</div>
+        <!-- FINANCE TOOLS -->
+        <h2 class="section-title">💰 Finance Tools</h2>
+        <p class="section-desc">EMI, SIP, Loan - Personal finance made simple</p>
+        <div class="tools-grid">
+            <div class="tool-card" onclick="openTool('emi-calculator')">
+                <div class="tool-icon">🏦</div>
+                <div class="tool-name">EMI Calculator</div>
+                <div class="tool-desc">Home/Car/Personal loan EMI. Interest breakdown chart.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('sip-calculator')">
+                <div class="tool-icon">📈</div>
+                <div class="tool-name">SIP Calculator</div>
+                <div class="tool-desc">Mutual Fund SIP returns. Wealth calculator with graph.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('loan-calculator')">
+                <div class="tool-icon">💳</div>
+                <div class="tool-name">Loan Calculator</div>
+                <div class="tool-desc">Compare loans. Best interest rate finder.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('gst-advanced')">
+                <div class="tool-icon">🧮</div>
+                <div class="tool-name">GST Calculator Advanced</div>
+                <div class="tool-desc">Reverse GST, Inclusive/Exclusive, Multiple items.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
         </div>
 
-        <div class="tools-note">
-            <p>*Basic Tools: AI Chat, PDF Summarizer, YouTube Summarizer</p>
-            <p>**Premium Tools: Image Generator, Video Creator, Code Assistant, Data Analyzer, SEO Writer, Voice Cloner</p>
-            <p style="margin-top: 15px; color: #888;">Prices in INR. Billed monthly. Cancel anytime.</p>
+        <!-- PDF TOOLS -->
+        <h2 class="section-title">📄 PDF Tools</h2>
+        <p class="section-desc">Merge, Split, Compress - All PDF tools free</p>
+        <div class="tools-grid">
+            <div class="tool-card" onclick="openTool('merge-pdf')">
+                <div class="tool-icon">🔗</div>
+                <div class="tool-name">Merge PDF</div>
+                <div class="tool-desc">Combine multiple PDFs into one. Unlimited pages.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('split-pdf')">
+                <div class="tool-icon">✂️</div>
+                <div class="tool-name">Split PDF</div>
+                <div class="tool-desc">Extract pages from PDF. Split by range.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('compress-pdf')">
+                <div class="tool-icon">🗜️</div>
+                <div class="tool-name">Compress PDF</div>
+                <div class="tool-desc">Reduce PDF size 80%. Quality intact.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
         </div>
 
-        <div class="checkbox">
-            <input type="checkbox" id="agreeHike" required>
-            <label for="agreeHike">I agree to recurring billing and the <a href="/terms.html">Terms of Service</a>. Price hikes notified 30 days prior.</label>
+        <!-- IMAGE TOOLS -->
+        <h2 class="section-title">🖼️ Image Tools</h2>
+        <p class="section-desc">Compress, Resize, Convert - Image tools</p>
+        <div class="tools-grid">
+            <div class="tool-card" onclick="openTool('image-compressor')">
+                <div class="tool-icon">🗜️</div>
+                <div class="tool-name">Image Compressor</div>
+                <div class="tool-desc">Reduce image size 90%. JPG, PNG, WebP support.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('image-resizer')">
+                <div class="tool-icon">📐</div>
+                <div class="tool-name">Image Resizer</div>
+                <div class="tool-desc">Resize by pixels or %. Instagram, Facebook sizes.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('image-converter')">
+                <div class="tool-icon">🔄</div>
+                <div class="tool-name">JPG ↔ PNG Converter</div>
+                <div class="tool-desc">Convert JPG to PNG or PNG to JPG. Instant.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
         </div>
 
-        <button class="btn btn-pro" onclick="buyPlan('PRO')" style="max-width: 400px;">Buy PRO ₹666</button>
-        <button class="btn btn-pro" onclick="buyPlan('PREMIUM')" style="max-width: 400px; margin-top: 10px;">Buy PREMIUM ₹999</button>
-
-        <div class="badge">✅ GST Compliant | Secure Payments | Terms Protected</div>
+        <!-- DEVELOPER TOOLS -->
+        <h2 class="section-title">💻 Developer Tools</h2>
+        <p class="section-desc">QR, Password, JSON - Dev tools free</p>
+        <div class="tools-grid">
+            <div class="tool-card" onclick="openTool('qr-generator')">
+                <div class="tool-icon">📱</div>
+                <div class="tool-name">QR Code Generator</div>
+                <div class="tool-desc">Create QR for URL, Text, WiFi, UPI. Download PNG.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('password-generator')">
+                <div class="tool-icon">🔐</div>
+                <div class="tool-name">Password Generator</div>
+                <div class="tool-desc">Strong passwords. Custom length, symbols, numbers.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('json-formatter')">
+                <div class="tool-icon">{ }</div>
+                <div class="tool-name">JSON Formatter</div>
+                <div class="tool-desc">Beautify, Minify, Validate JSON. Tree view.</div>
+                <span class="tool-badge">100% Free</span>
+            </div>
+        </div>
     </div>
 
-    <div id="buyPopup">
-        <div class="popup-content">
-            <h2>🎁 Trial Ended</h2>
-            <p>Your 5-minute free trial is over. Upgrade now to continue using AIHubPro.</p>
-            <button class="btn btn-pro" onclick="buyPlan('PRO')">Buy PRO ₹666</button>
-            <button class="btn btn-pro" onclick="buyPlan('PREMIUM')" style="margin-top: 10px;">Buy PREMIUM ₹999</button>
+    <!-- CHAT WIDGET -->
+    <div class="chat-widget" id="chatWidget" style="display:none;">
+        <div class="chat-header">
+            🤖 AihubPro AI
+            <button style="float:right; background:none; border:none; color:white; cursor:pointer;" onclick="closeChat()">✕</button>
+        </div>
+        <div class="chat-box" id="chatBox">
+            <div class="message ai-msg">Hi! Main AihubPro AI hun. Kya help chahiye? 😊</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Message..." onkeypress="if(event.key==='Enter') sendChat()">
+            <button onclick="sendChat()">Send</button>
         </div>
     </div>
 
+    <!-- FOOTER -->
     <div class="footer">
-        <img src="/1782476328310.jpg" alt="AIHubPro Logo" style="max-width: 180px; margin-bottom: 20px;">
-        <p style="color: #999; margin-bottom: 5px;">AI • Digital • Growth</p>
-        <p style="color: #999; margin-bottom: 40px;">Learn • Download • Create • Earn • Grow</p>
-
-        <div style="margin-bottom: 40px;">
-            <h4 style="color: #fff;">Quick Links</h4>
-            <p style="color: #999; line-height: 2;">
-                <a href="/">Home</a> • <a href="#pricing">Pricing</a> • <a href="/login.html">Login</a> • <a href="/about.html">About</a> • <a href="/terms.html">Terms</a>
-            </p>
-        </div>
-
-        <div class="footer-box">
-            <h4>Disclaimer</h4>
-            <p>AIHubPro is an independent AI education and digital platform. We are not affiliated with, endorsed by, or sponsored by OpenAI, Google, Meta, Anthropic, or any AI model provider.</p>
-        </div>
-
-        <div class="footer-box">
-            <h4>Governing Law & Jurisdiction</h4>
-            <p>These Terms shall be governed by and construed in accordance with the laws of India. Any dispute, claim, or proceeding shall be subject to the exclusive jurisdiction of the courts located in Ambala, Haryana, India.</p>
-        </div>
-
-        <p style="color: #666; font-size: 14px; margin-bottom: 30px;">Copyright © 2026 AIHubPro. All Rights Reserved.</p>
-
-        <div style="margin-bottom: 30px;">
-            <h4 style="color: #fff;">Built With Pride</h4>
-            <p style="color: #999;">Proudly Built in India 🇮🇳</p>
-        </div>
-
-        <div style="margin-bottom: 30px;">
-            <h4 style="color: #fff;">Our Mission</h4>
-            <p style="color: #999; max-width: 600px; margin: 0 auto;">Empowering creators, freelancers, students, entrepreneurs, and dreamers with next-gen AI tools — without boundaries, without limits.</p>
-        </div>
-
-        <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #333;">
-            <p style="color: #FFD700; font-weight: bold; letter-spacing: 2px;">SMARTER • FASTER • STRONGER • FOREVER</p>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Business Tools</h4>
+                <a href="/tools/gst-calculator">GST Calculator</a>
+                <a href="/tools/invoice-generator">Invoice Generator</a>
+                <a href="/tools/quotation-generator">Quotation Generator</a>
+            </div>
+            <div class="footer-col">
+                <h4>Finance Tools</h4>
+                <a href="/tools/emi-calculator">EMI Calculator</a>
+                <a href="/tools/sip-calculator">SIP Calculator</a>
+                <a href="/tools/loan-calculator">Loan Calculator</a>
+            </div>
+            <div class="footer-col">
+                <h4>PDF Tools</h4>
+                <a href="/tools/merge-pdf">Merge PDF</a>
+                <a href="/tools/split-pdf">Split PDF</a>
+                <a href="/tools/compress-pdf">Compress PDF</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy Policy</a>
+            </div>
         </div>
     </div>
 
     <script>
-        // DOUBLE ENGINE PAYMENT LINKS - ENGINE 2 FALLBACK
-        const PAYMENT_LINKS = {
-            'PRO': 'https://rzp.io/rzp/pE0rfxQx',
-            'PREMIUM': 'https://rzp.io/rzp/NQBaTPN'
-        };
+        // 1. TRIAL + BLOCK SYSTEM
+        let trialStart = localStorage.getItem('aihubpro_trial_start');
+        let isPaid = localStorage.getItem('aihubpro_paid') === 'true';
+        let paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
 
-        // TRIAL TIMER LOGIC
-        let trialActive = false;
-        let trialInterval;
+        function checkAccess() {
+            const now = Date.now();
+            if (isPaid && paidExpiry && now < parseInt(paidExpiry)) return true;
 
-        function startTrial() {
-            if(trialActive) return;
-            trialActive = true;
-            localStorage.setItem('trialStart', Date.now());
-            document.getElementById('trialTimer').style.display = 'block';
-            runTimer(300);
+            if (!trialStart) {
+                trialStart = now.toString();
+                localStorage.setItem('aihubpro_trial_start', trialStart);
+                startTrialTimer(300);
+                return true;
+            }
+
+            const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
+            if (elapsed < 300) {
+                startTrialTimer(300 - elapsed);
+                return true;
+            }
+
+            const nextFree = parseInt(trialStart) + (24 * 60 * 60 * 1000);
+            if (now < nextFree) {
+                document.getElementById('nextFreeTime').textContent = new Date(nextFree).toLocaleString('hi-IN');
+                document.getElementById('blockedOverlay').style.display = 'flex';
+                return false;
+            }
+            localStorage.removeItem('aihubpro_trial_start');
+            location.reload();
+            return true;
         }
 
-        function runTimer(seconds) {
-            let timeLeft = seconds;
-            const timerEl = document.getElementById('time');
-            clearInterval(trialInterval);
-            
-            trialInterval = setInterval(() => {
-                if(timeLeft <= 0) {
-                    clearInterval(trialInterval);
-                    document.getElementById('trialTimer').style.display = 'none';
-                    document.getElementById('buyPopup').style.display = 'block';
-                    trialActive = false;
-                    return;
-                }
-                timeLeft--;
-                let min = Math.floor(timeLeft / 60);
-                let sec = timeLeft % 60;
-                timerEl.innerHTML = `${min}:${sec.toString().padStart(2,'0')}`;
+        function startTrialTimer(sec) {
+            document.getElementById('trialTimer').style.display = 'block';
+            let time = sec;
+            setInterval(() => {
+                time--;
+                const m = Math.floor(time / 60);
+                const s = time % 60;
+                document.getElementById('timer').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+                if (time <= 0) location.reload();
             }, 1000);
         }
 
-        // DOUBLE ENGINE PAYMENT FUNCTION - 0% DOWNTIME
-        async function buyPlan(plan) {
-            if (!document.getElementById('agreeHike').checked) {
-                alert('Please agree to Terms & Conditions first');
-                return;
-            }
+        // 2. PAYMENT
+        async function buyPlan(amount) {
+            const orderRes = await fetch('/api/create-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount, plan: `${amount}_monthly` })
+            });
+            const order = await orderRes.json();
 
-            try {
-                // ENGINE 1: TRY NETLIFY + RAZORPAY SDK
-                const res = await fetch('https://aihubpro-ai.netlify.app/.netlify/functions/get-key');
-                if (!res.ok) throw new Error('Netlify down');
-                
-                const key = await res.json();
-                const amount = plan === 'PRO' ? 66600 : 99900;
-                
-                var options = {
-                    "key": key,
-                    "amount": amount,
-                    "currency": "INR",
-                    "name": "Vasu Enterprises",
-                    "description": "AIHubPro " + plan + " Plan",
-                    "handler": function (response){
-                        alert('Payment Success! ID: ' + response.razorpay_payment_id);
-                        window.location.href = '/success.html';
-                    },
-                    "theme": { "color": "#FFD700" }
-                };
-                var rzp = new Razorpay(options);
-                rzp.open();
-                
-            } catch (e) {
-                // ENGINE 2: FALLBACK TO PAYMENT LINK - 0% DOWNTIME
-                console.log('SDK Failed, using Payment Link:', e);
-                alert('Server busy. Opening secure payment link...');
-                window.open(PAYMENT_LINKS, '_blank');
-            }
-        }
-
-        // CHECK IF TRIAL ALREADY RUNNING ON PAGE LOAD
-        window.onload = function() {
-            const trialStart = localStorage.getItem('trialStart');
-            if(trialStart) {
-                let elapsed = Math.floor((Date.now() - trialStart) / 1000);
-                if(elapsed < 300) {
-                    trialActive = true;
-                    document.getElementById('trialTimer').style.display = 'block';
-                    runTimer(300 - elapsed);
+            new Razorpay({
+                key: 'rzp_live_YOUR_KEY',
+                amount: order.amount,
+                currency: 'INR',
+                name: 'AihubPro',
+                description: `Pro Plan ₹${amount}/month`,
+                order_id: order.id,
+                handler: async (resp) => {
+                    const verifyRes = await fetch('/api/verify-payment', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({...resp, plan: amount })
+                    });
+                    const data = await verifyRes.json();
+                    if (data.success) {
+                        localStorage.setItem('aihubpro_paid', 'true');
+                        localStorage.setItem('aihubpro_paid_expiry', data.expiry);
+                        alert('🎉 Payment Success! Unlimited Access');
+                        location.reload();
+                    }
                 }
-            }
+            }).open();
         }
+
+        // 3. TOOL OPEN
+        function openTool(tool) {
+            if (!checkAccess()) return;
+            window.location.href = `/tools/${tool}.html`;
+        }
+
+        // 4. CHAT WIDGET
+        function openChat() {
+            if (!checkAccess()) return;
+            document.getElementById('chatWidget').style.display = 'flex';
+        }
+        function closeChat() {
+            document.getElementById('chatWidget').style.display = 'none';
+        }
+
+        async function sendChat() {
+            const input = document.getElementById('chatInput');
+            const msg = input.value.trim();
+            if (!msg ||!checkAccess()) return;
+
+            const box = document.getElementById('chatBox');
+            box.innerHTML += `<div class="message user-msg">${msg}</div>`;
+            input.value = '';
+
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: msg })
+            });
+            const data = await res.json();
+            box.innerHTML += `<div class="message ai-msg">${marked.parse(data.reply)}</div>`;
+            box.scrollTop = box.scrollHeight;
+        }
+
+        // 5. INIT
+        window.onload = () => {
+            checkAccess();
+            // Auto-update check - Roz naya tool
+            fetch('/api/daily-update').then(r => r.json()).then(d => {
+                if (d.newTools) console.log('New tools added:', d.newTools);
+            });
+        };
     </script>
-    <script src="brains.js"></script>
 </body>
 </html>
