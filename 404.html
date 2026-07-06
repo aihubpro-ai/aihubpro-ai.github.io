@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | AIHubPro</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- ===== AIHUBPRO COMPLETE SYSTEM ===== -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <script>
+    function checkAccess() {
+        const now = Date.now();
+        const trialStart = localStorage.getItem('aihubpro_trial_start');
+        const isPaid = localStorage.getItem('aihubpro_paid') === 'true';
+        const paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
+        if (isPaid && paidExpiry && now < parseInt(paidExpiry)) return true;
+        if (!trialStart) { localStorage.setItem('aihubpro_trial_start', now.toString()); return true; }
+        const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
+        if (elapsed < 300) return true;
+        const nextFree = parseInt(trialStart) + (24 * 60 * 60 * 1000);
+        if (now < nextFree) { alert('⏰ 5 Minute Free Trial Khatam!\n\nAgla Free Access: ' + new Date(nextFree).toLocaleString('hi-IN') + '\n\n⚖️ Jurisdiction: Yamunanagar Court Only'); window.location.href = '/'; return false; }
+        localStorage.removeItem('aihubpro_trial_start'); return true;
+    }
+    const AIHUB_ADS = { client: 'ca-pub-XXXXXXXXXXXXXXXX', getConfig: () => { if (!localStorage.getItem('aihubpro_ads_master')) { localStorage.setItem('aihubpro_ads_master', JSON.stringify({ show_666: true, show_999: false, show_free: false })); } return JSON.parse(localStorage.getItem('aihubpro_ads_master')); }, canShow: () => { const plan = localStorage.getItem('aihubpro_plan'); const paid = localStorage.getItem('aihubpro_paid') === 'true'; const cfg = AIHUB_ADS.getConfig(); if (!paid) return false; if (plan === '666' && cfg.show_666) return true; if (plan === '999' && cfg.show_999) return true; return false; }, load: () => { if (!AIHUB_ADS.canShow()) return; const adCode = `<ins class="adsbygoogle" style="display:block" data-ad-client="${AIHUB_ADS.client}" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>`; document.querySelectorAll('.aihub-ad-box').forEach(box => { box.innerHTML = adCode; box.style.display = 'block'; }); (adsbygoogle = window.adsbygoogle || []).push({}); } };
+    if (!checkAccess()) { document.body.innerHTML = '<h1 style="text-align:center;margin-top:50px;color:#ef4444;font-family:system-ui;">Access Blocked - Buy Plan<br><small style="font-size:16px;color:#94a3b8;">⚖️ Yamunanagar Court, Haryana</small></h1>'; } else { document.addEventListener('DOMContentLoaded', AIHUB_ADS.load); }
+    </script>
+    <!-- ===== SYSTEM END ===== -->
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0f172a; color: #f1f5f9; font-family: system-ui; padding: 20px; padding-bottom: 70px; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .container { max-width: 600px; width: 100%; text-align: center; }
+    .error-box { background: #1e293b; padding: 60px 40px; border-radius: 16px; border: 1px solid #334155; }
+    .error-code { font-size: 120px; font-weight: 900; background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 20px; animation: pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        h1 { color: #f1f5f9; font-size: 28px; margin-bottom: 15px; }
+        p { color: #94a3b8; font-size: 16px; margin-bottom: 30px; line-height: 1.6; }
+    .btn { display: inline-block; padding: 14px 35px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 16px; transition: all 0.3s; text-decoration: none; margin: 5px; }
+    .btn-primary { background: #3b82f6; color: white; }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4); }
+    .btn-secondary { background: #475569; color: white; }
+    .btn-secondary:hover { background: #64748b; }
+    .aihub-ad-box { display: none; text-align: center; margin: 30px auto; padding: 12px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; max-width: 728px; }
+    .footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #1e293b; padding: 10px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #334155; z-index: 100; }
+    .search-box { margin: 30px 0; }
+    .search-box input { width: 100%; max-width: 400px; padding: 12px 20px; border: 1px solid #475569; border-radius: 8px; background: #0f172a; color: #f1f5f9; font-size: 15px; }
+    .search-box input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+    .popular-links { margin-top: 30px; padding-top: 30px; border-top: 1px solid #334155; }
+    .popular-links h3 { color: #3b82f6; font-size: 16px; margin-bottom: 15px; }
+    .link-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; text-align: left; }
+    .link-grid a { color: #94a3b8; text-decoration: none; padding: 8px 12px; border-radius: 6px; background: #0f172a; border: 1px solid #334155; transition: all 0.2s; font-size: 14px; }
+    .link-grid a:hover { color: #3b82f6; border-color: #3b82f6; background: #1e293b; }
+        @media (max-width: 640px) {.error-code { font-size: 80px; } h1 { font-size: 24px; }.link-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-box">
+            <div class="error-code">404</div>
+            <h1>Page Not Found</h1>
+            <p>Oops! The page you're looking for doesn't exist or has been moved.</p>
+            <div class="aihub-ad-box"></div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search for tools..." onkeypress="if(event.key==='Enter') searchSite()">
+            </div>
+            <a href="/" class="btn btn-primary">Go to Homepage</a>
+            <button onclick="history.back()" class="btn btn-secondary">Go Back</button>
+            <div class="popular-links">
+                <h3>Popular Tools</h3>
+                <div class="link-grid">
+                    <a href="/merge-pdf.html">PDF Merger</a>
+                    <a href="/image-resizer.html">Image Resizer</a>
+                    <a href="/qr-code-generator.html">QR Generator</a>
+                    <a href="/emi-calculator.html">EMI Calculator</a>
+                    <a href="/gst-calculator-advanced.html">GST Calculator</a>
+                    <a href="/sip-calculator.html">SIP Calculator</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            ⚖️ Jurisdiction: Yamunanagar District Court, Haryana Only | IT Act 2000 Sec 79 Compliant | AIHubPro
+        </div>
+    </div>
+    <script>
+        function searchSite() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            if (!query) return;
+            const pages = { 'pdf': '/merge-pdf.html', 'merge': '/merge-pdf.html', 'compress': '/image-resizer.html', 'image': '/image-resizer.html', 'qr': '/qr-code-generator.html', 'emi': '/emi-calculator.html', 'loan': '/loan-calculator.html', 'gst': '/gst-calculator-advanced.html', 'sip': '/sip-calculator.html', 'calculator': '/emi-calculator.html' };
+            for (let key in pages) { if (query.includes(key)) { window.location.href = pages[key]; return; } }
+            window.location.href = '/';
+        }
+        document.addEventListener('DOMContentLoaded', () => { document.getElementById('searchInput').focus(); });
+    </script>
+</body>
+</html>
