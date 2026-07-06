@@ -1,91 +1,253 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free GST Calculator Advanced | Inclusive Exclusive Reverse GST | CGST SGST IGST</title>
-    <meta name="description" content="Advanced GST calculator for India. Calculate inclusive GST, exclusive GST, reverse GST. CGST, SGST, IGST breakdown. Multiple items, invoice preview, PDF export.">
-    <meta name="keywords" content="gst calculator advanced, inclusive gst calculator, exclusive gst calculator, reverse gst calculator, cgst sgst igst, gst invoice calculator, multiple gst items">
-    <link rel="canonical" href="https://aihubpro.in/gst-calculator-advanced.html">
+    <title>GST Calculator Advanced - AIHubPro | CGST SGST IGST Calculator</title>
+    <meta name="description" content="Advanced GST Calculator India. Calculate CGST, SGST, IGST. Exclusive/Inclusive GST. All rates 0%, 3%, 5%, 12%, 18%, 28%.">
     
-    <!-- Google AdSense - COMPULSORY -->
+    <!-- ===== AIHUBPRO COMPLETE SYSTEM ===== -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <script>
+    function checkAccess() {
+        const now = Date.now();
+        const trialStart = localStorage.getItem('aihubpro_trial_start');
+        const isPaid = localStorage.getItem('aihubpro_paid') === 'true';
+        const paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
+        if (isPaid && paidExpiry && now < parseInt(paidExpiry)) return true;
+        if (!trialStart) { localStorage.setItem('aihubpro_trial_start', now.toString()); return true; }
+        const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
+        if (elapsed < 300) return true;
+        const nextFree = parseInt(trialStart) + (24 * 60 * 60 * 1000);
+        if (now < nextFree) { alert('⏰ 5 Minute Free Trial Khatam!\n\nAgla Free Access: ' + new Date(nextFree).toLocaleString('hi-IN') + '\n\n⚖️ Jurisdiction: Yamunanagar Court Only'); window.location.href = '/'; return false; }
+        localStorage.removeItem('aihubpro_trial_start'); return true;
+    }
+    const AIHUB_ADS = { client: 'ca-pub-XXXXXXXXXXXXXXXX', getConfig: () => { if (!localStorage.getItem('aihubpro_ads_master')) { localStorage.setItem('aihubpro_ads_master', JSON.stringify({ show_666: true, show_999: false, show_free: false })); } return JSON.parse(localStorage.getItem('aihubpro_ads_master')); }, canShow: () => { const plan = localStorage.getItem('aihubpro_plan'); const paid = localStorage.getItem('aihubpro_paid') === 'true'; const cfg = AIHUB_ADS.getConfig(); if (!paid) return false; if (plan === '666' && cfg.show_666) return true; if (plan === '999' && cfg.show_999) return true; return false; }, load: () => { if (!AIHUB_ADS.canShow()) return; const adCode = `<ins class="adsbygoogle" style="display:block" data-ad-client="${AIHUB_ADS.client}" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>`; document.querySelectorAll('.aihub-ad-box').forEach(box => { box.innerHTML = adCode; box.style.display = 'block'; }); (adsbygoogle = window.adsbygoogle || []).push({}); } };
+    if (!checkAccess()) { document.body.innerHTML = '<h1 style="text-align:center;margin-top:50px;color:#ef4444;font-family:system-ui;">Access Blocked - Buy Plan<br><small style="font-size:16px;color:#94a3b8;">⚖️ Yamunanagar Court, Haryana</small></h1>'; } else { document.addEventListener('DOMContentLoaded', AIHUB_ADS.load); }
+    </script>
+    <!-- ===== SYSTEM END ===== -->
     
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Libraries: jsPDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 20px; }
-   .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #0d6efd; margin-bottom: 10px; font-size: 28px; }
-   .subtitle { text-align: center; color: #666; margin-bottom: 25px; }
-       
-       /* ADSENSE PLACEHOLDER - COMPULSORY */
-   .ad-placeholder { 
-           background: #f8f9fa; border: 2px dashed #dee2e6; padding: 20px; 
-           text-align: center; margin: 20px 0; border-radius: 8px; min-height: 90px;
-           display: flex; align-items: center; justify-content: center; color: #6c757d;
-       }
-   .ad-placeholder::before { content: "Advertisement"; font-size: 12px; }
-       
-   .gst-tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0; }
-   .gst-tab { padding: 12px 24px; background: #f8f9fa; border: none; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: 600; font-size: 15px; transition: all 0.3s; }
-   .gst-tab.active { background: #0d6efd; color: white; }
-   .gst-tab:hover { background: #e0e0e0; }
-   .gst-tab.active:hover { background: #0a58ca; }
-       
-   .calculator-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
-   .section { padding: 25px; border: 1px solid #e0e0e0; border-radius: 8px; background: #fafbfc; }
-   .section h3 { color: #0d6efd; margin-bottom: 20px; font-size: 18px; border-bottom: 2px solid #0d6efd; padding-bottom: 8px; }
-   .input-group { margin-bottom: 20px; }
-   .input-group label { font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #333; display: block; }
-   .input-group input,.input-group select { 
-            width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; font-family: 'Inter'; transition: all 0.3s;
+        body { background: #0f172a; color: #f1f5f9; font-family: system-ui, -apple-system, sans-serif; padding: 20px; padding-bottom: 70px; }
+       .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: #3b82f6; text-align: center; margin-bottom: 20px; font-size: 28px; }
+       .tool-box { background: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; }
+        input, select, button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #475569; background: #334155; color: white; font-size: 14px; }
+        button { background: #3b82f6; cursor: pointer; font-weight: bold; font-size: 16px; }
+        button:hover { background: #2563eb; }
+       .back-btn { background: #475569; width: auto; padding: 8px 16px; margin-bottom: 20px; font-size: 14px; }
+       .aihub-ad-box { display: none; text-align: center; margin: 20px auto; padding: 12px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; max-width: 728px; }
+       .footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #1e293b; padding: 10px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #334155; z-index: 100; }
+       .result { background: #0f172a; padding: 20px; border-radius: 8px; margin-top: 20px; border: 1px solid #334155; }
+       .result h3 { color: #10b981; margin-bottom: 15px; font-size: 18px; }
+       .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 15px; }
+       .result-card { background: #1e293b; padding: 15px; border-radius: 8px; text-align: center; border: 1px solid #334155; }
+       .result-card .label { font-size: 12px; color: #94a3b8; margin-bottom: 5px; }
+       .result-card .value { font-size: 20px; color: #3b82f6; font-weight: bold; }
+        label { display: block; color: #cbd5e1; font-size: 13px; margin-top: 12px; margin-bottom: 6px; font-weight: 500; }
+       .grand-total { grid-column: span 2; background: linear-gradient(135deg, #1e3a5f, #1e293b) !important; border: 2px solid #3b82f6 !important; }
+       .grand-total .value { font-size: 26px !important; color: #10b981 !important; }
+       .gst-breakup { background: #0f172a; padding: 15px; border-radius: 8px; margin-top: 15px; border: 1px dashed #475569; }
+       .gst-breakup h4 { color: #fbbf24; font-size: 14px; margin-bottom: 10px; }
+       .gst-breakup p { font-size: 13px; color: #cbd5e1; margin: 5px 0; }
+       .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #334155; }
+       .tab { padding: 10px 20px; background: #334155; border: none; border-radius: 8px 8px 0 0; color: #94a3b8; cursor: pointer; font-weight: 500; }
+       .tab.active { background: #3b82f6; color: white; }
+       .tab-content { display: none; }
+       .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button onclick="window.location.href='/'" class="back-btn">← Back to Home</button>
+        <h1>🧾 GST Calculator Advanced</h1>
+        
+        <div class="aihub-ad-box"></div>
+        
+        <div class="tool-box">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('simple')">Simple GST</button>
+                <button class="tab" onclick="switchTab('multiple')">Multiple Items</button>
+            </div>
+            
+            <!-- Simple GST Tab -->
+            <div id="simple-tab" class="tab-content active">
+                <label>Amount ₹:</label>
+                <input type="number" id="amount" placeholder="10000" value="10000" min="0">
+                
+                <label>GST Rate:</label>
+                <select id="gstRate">
+                    <option value="0">GST 0% - Exempted Goods</option>
+                    <option value="3">GST 3% - Gold & Jewelry</option>
+                    <option value="5">GST 5% - Essential Items</option>
+                    <option value="12">GST 12% - Standard Rate</option>
+                    <option value="18" selected>GST 18% - Most Goods & Services</option>
+                    <option value="28">GST 28% - Luxury Items</option>
+                </select>
+                
+                <label>GST Calculation Type:</label>
+                <select id="gstType">
+                    <option value="exclusive">Exclusive - Add GST to Amount</option>
+                    <option value="inclusive">Inclusive - Extract GST from Amount</option>
+                </select>
+                
+                <label>Transaction Type:</label>
+                <select id="transType">
+                    <option value="intrastate">Intra-State [CGST + SGST]</option>
+                    <option value="interstate">Inter-State </option>
+                </select>
+                
+                <div class="aihub-ad-box"></div>
+                
+                <button onclick="calcGST()">Calculate GST</button>
+                <div id="result" class="result"></div>
+            </div>
+            
+            <!-- Multiple Items Tab -->
+            <div id="multiple-tab" class="tab-content">
+                <div id="items-container">
+                    <div class="item-row">
+                        <input type="text" placeholder="Item Name" class="item-name">
+                        <input type="number" placeholder="Amount" class="item-amount" value="0">
+                        <select class="item-gst">
+                            <option value="0">0%</option>
+                            <option value="5">5%</option>
+                            <option value="12">12%</option>
+                            <option value="18" selected>18%</option>
+                            <option value="28">28%</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="addItem()" style="background:#10b981;">+ Add Item</button>
+                <button onclick="calcMultipleGST()">Calculate Total GST</button>
+                <div id="multiple-result" class="result"></div>
+            </div>
+        </div>
+        
+        <div class="aihub-ad-box"></div>
+        
+        <div class="footer">
+            ⚖️ Jurisdiction: Yamunanagar District Court, Haryana Only | IT Act 2000 Sec 79 Compliant | AIHubPro
+        </div>
+    </div>
+    
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tab + '-tab').classList.add('active');
         }
-   .input-group input:focus,.input-group select:focus { 
-            outline: none; border-color: #0d6efd; box-shadow: 0 0 0 3px rgba(13,110,253,0.1);
+        
+        function calcGST() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const rate = parseFloat(document.getElementById('gstRate').value);
+            const type = document.getElementById('gstType').value;
+            const trans = document.getElementById('transType').value;
+            
+            if (!amount || amount <= 0) { 
+                alert('Please enter valid amount'); 
+                return; 
+            }
+            
+            let gstAmount, netAmount, totalAmount;
+            
+            if (type === 'exclusive') {
+                gstAmount = (amount * rate) / 100;
+                netAmount = amount;
+                totalAmount = amount + gstAmount;
+            } else {
+                totalAmount = amount;
+                netAmount = (amount * 100) / (100 + rate);
+                gstAmount = amount - netAmount;
+            }
+            
+            let html = `<h3>📊 GST Calculation Result:</h3>`;
+            html += `<div class="result-grid">`;
+            html += `<div class="result-card"><div class="label">Net Amount [Base]</div><div class="value">₹${netAmount.toFixed(2)}</div></div>`;
+            
+            if (trans === 'intrastate') {
+                const cgst = gstAmount / 2;
+                const sgst = gstAmount / 2;
+                html += `<div class="result-card"><div class="label">CGST @ ${rate/2}%</div><div class="value">₹${cgst.toFixed(2)}</div></div>`;
+                html += `<div class="result-card"><div class="label">SGST @ ${rate/2}%</div><div class="value">₹${sgst.toFixed(2)}</div></div>`;
+            } else {
+                html += `<div class="result-card"><div class="label">IGST @ ${rate}%</div><div class="value">₹${gstAmount.toFixed(2)}</div></div>`;
+            }
+            
+            html += `<div class="result-card"><div class="label">Total GST</div><div class="value">₹${gstAmount.toFixed(2)}</div></div>`;
+            html += `<div class="result-card grand-total"><div class="label">Grand Total</div><div class="value">₹${totalAmount.toFixed(2)}</div></div>`;
+            html += `</div>`;
+            
+            html += `<div class="gst-breakup">`;
+            html += `<h4>💡 GST Breakup Details:</h4>`;
+            if (trans === 'intrastate') {
+                html += `<p>• CGST [Central GST]: ${rate/2}% = ₹${(gstAmount/2).toFixed(2)}</p>`;
+                html += `<p>• SGST [State GST]: ${rate/2}% = ₹${(gstAmount/2).toFixed(2)}</p>`;
+                html += `<p>• Total Tax: ${rate}% = ₹${gstAmount.toFixed(2)}</p>`;
+                html += `<p>• Applied for Same State transactions</p>`;
+            } else {
+                html += `<p>• IGST [Integrated GST]: ${rate}% = ₹${gstAmount.toFixed(2)}</p>`;
+                html += `<p>• Applied for Inter-State transactions</p>`;
+            }
+            html += `</div>`;
+            
+            document.getElementById('result').innerHTML = html;
         }
-   .input-with-symbol { position: relative; }
-   .input-symbol { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-weight: 600; color: #666; }
-   .input-with-symbol input { padding-left: 35px; }
-   .input-row { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; align-items: end; }
-       
-   .btn { padding: 14px 28px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; margin: 5px; transition: all 0.3s; width: 100%; }
-   .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-   .btn-primary { background: #0d6efd; color: white; }
-   .btn-success { background: #28a745; color: white; }
-   .btn-secondary { background: #6c757d; color: white; }
-   .btn-danger { background: #dc3545; color: white; padding: 8px 12px; font-size: 13px; }
-   .btn-warning { background: #ffc107; color: #000; }
-   .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-       
-   .result-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; }
-   .result-box h4 { font-size: 16px; margin-bottom: 20px; opacity: 0.9; text-align: center; }
-   .result-main { text-align: center; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 2px solid rgba(255,255,255,0.3); }
-   .result-main-label { font-size: 14px; opacity: 0.9; margin-bottom: 5px; }
-   .result-main-value { font-size: 38px; font-weight: 700; }
-   .result-details { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-   .result-item { background: rgba(255,255,255,0.15); padding: 15px; border-radius: 8px; text-align: center; }
-   .result-item-label { font-size: 12px; opacity: 0.9; margin-bottom: 5px; }
-   .result-item-value { font-size: 20px; font-weight: 700; }
-       
-   .items-table { width: 100%; border-collapse: collapse; margin: 15px 0; background: white; }
-   .items-table th { background: #0d6efd; color: white; padding: 12px 8px; text-align: left; font-size: 13px; font-weight: 600; }
-   .items-table td { padding: 10px 8px; border-bottom: 1px solid #eee; }
-   .items-table input { width: 100%; border: 1px solid #e0e0e0; padding: 8px; font-size: 14px; border-radius: 4px; }
-   .items-table tr:hover { background: #f8f9fa; }
-       
-   .future-section { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 12px; margin-top: 30px; }
-   .future-section h3 { color: #856404; margin-bottom: 15px; }
-   .future-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-   .future-item { background: white; padding: 20px; border-radius: 8px; text-align: center; }
-   .future-badge { display: inline-block; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
-       
-   .legal-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
-       
-        @media print {.no-print,.ad-placeholder { display: none!important; } body { background: white; padding: 0;
+        
+        function addItem() {
+            const container = document.getElementById('items-container');
+            const div = document.createElement('div');
+            div.className = 'item-row';
+            div.style = 'display:grid;grid-template-columns:2fr 1fr 1fr 50px;gap:10px;margin:10px 0;';
+            div.innerHTML = `
+                <input type="text" placeholder="Item Name" class="item-name">
+                <input type="number" placeholder="Amount" class="item-amount" value="0">
+                <select class="item-gst">
+                    <option value="0">0%</option>
+                    <option value="5">5%</option>
+                    <option value="12">12%</option>
+                    <option value="18" selected>18%</option>
+                    <option value="28">28%</option>
+                </select>
+                <button onclick="this.parentElement.remove()" style="background:#ef4444;padding:8px;">×</button>
+            `;
+            container.appendChild(div);
+        }
+        
+        function calcMultipleGST() {
+            const items = document.querySelectorAll('.item-row');
+            let totalBase = 0, totalGST = 0;
+            let html = '<h3>📊 Multiple Items GST Summary:</h3><div class="gst-breakup">';
+            
+            items.forEach((item, i) => {
+                const name = item.querySelector('.item-name').value || `Item ${i+1}`;
+                const amount = parseFloat(item.querySelector('.item-amount').value) || 0;
+                const rate = parseFloat(item.querySelector('.item-gst').value);
+                const gst = (amount * rate) / 100;
+                totalBase += amount;
+                totalGST += gst;
+                html += `<p>• ${name}: ₹${amount.toFixed(2)} + ${rate}% GST = ₹${gst.toFixed(2)}</p>`;
+            });
+            
+            html += `<hr style="margin:15px 0;border-color:#475569;">`;
+            html += `<p style="font-weight:bold;font-size:16px;color:#10b981;">Total Base: ₹${totalBase.toFixed(2)}</p>`;
+            html += `<p style="font-weight:bold;font-size:16px;color:#3b82f6;">Total GST: ₹${totalGST.toFixed(2)}</p>`;
+            html += `<p style="font-weight:bold;font-size:18px;color:#10b981;">Grand Total: ₹${(totalBase + totalGST).toFixed(2)}</p>`;
+            html += '</div>';
+            
+            document.getElementById('multiple-result').innerHTML = html;
+        }
+        
+        // Auto calculate on page load
+        window.onload = calcGST;
+        
+        // Auto calculate on input change
+        document.getElementById('amount').addEventListener('input', calcGST);
+        document.getElementById('gstRate').addEventListener('change', calcGST);
+        document.getElementById('gstType').addEventListener('change', calcGST);
+        document.getElementById('transType').addEventListener('change', calcGST);
+    </script>
+</body>
+</html>
