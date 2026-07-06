@@ -1,96 +1,108 @@
-<!DOCTYPE html>
+)<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free GST Rate Finder India | HSN Code Search | CGST SGST IGST Rates</title>
-    <meta name="description" content="Free GST Rate Finder for India. Search HSN codes, product names. Get GST %, CGST, SGST, IGST rates instantly. Copy, share on WhatsApp. 5000+ products database.">
-    <meta name="keywords" content="gst rate finder, hsn code search, gst rate check, cgst sgst igst, product gst rate, gst percentage india">
-    <link rel="canonical" href="https://aihubpro.in/gst-rate-finder.html">
+    <meta name="description" content="Free GST Rate Finder for India. Search HSN codes, product names. Get GST %, CGST, SGST, IGST rates. 5000+ products database.">
+    <meta name="keywords" content="gst rate finder, hsn code search, gst rate check, cgst sgst igst, product gst rate, india gst">
+    <link rel="canonical" href="https://aihubpro-ai.github.io/gst-rate-finder.html">
     
     <!-- Google AdSense - COMPULSORY -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
     
+    <!-- ===== AIHUBPRO COMPLETE SYSTEM ===== -->
+    <script>
+    function checkAccess() {
+        const now = Date.now();
+        const trialStart = localStorage.getItem('aihubpro_trial_start');
+        const isPaid = localStorage.getItem('aihubpro_paid') === 'true';
+        const paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
+        if (isPaid && paidExpiry && now < parseInt(paidExpiry)) return true;
+        if (!trialStart) { localStorage.setItem('aihubpro_trial_start', now.toString()); return true; }
+        const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
+        if (elapsed < 300) return true;
+        const nextFree = parseInt(trialStart) + (24 * 60 * 60 * 1000);
+        if (now < nextFree) { alert('⏰ 5 Minute Free Trial Khatam!\n\nAgla Free Access: ' + new Date(nextFree).toLocaleString('hi-IN') + '\n\n⚖️ Jurisdiction: Yamunanagar Court Only'); window.location.href = '/'; return false; }
+        localStorage.removeItem('aihubpro_trial_start'); return true;
+    }
+    const AIHUB_ADS = { client: 'ca-pub-XXXXXXXXXXXXXXXX', getConfig: () => { if (!localStorage.getItem('aihubpro_ads_master')) { localStorage.setItem('aihubpro_ads_master', JSON.stringify({ show_666: true, show_999: false, show_free: false })); } return JSON.parse(localStorage.getItem('aihubpro_ads_master')); }, canShow: () => { const plan = localStorage.getItem('aihubpro_plan'); const paid = localStorage.getItem('aihubpro_paid') === 'true'; const cfg = AIHUB_ADS.getConfig(); if (!paid) return false; if (plan === '666' && cfg.show_666) return true; if (plan === '999' && cfg.show_999) return true; return false; }, load: () => { if (!AIHUB_ADS.canShow()) return; const adCode = `<ins class="adsbygoogle" style="display:block" data-ad-client="${AIHUB_ADS.client}" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>`; document.querySelectorAll('.aihub-ad-box').forEach(box => { box.innerHTML = adCode; box.style.display = 'block'; }); (adsbygoogle = window.adsbygoogle || []).push({}); } };
+    if (!checkAccess()) { document.body.innerHTML = '<h1 style="text-align:center;margin-top:50px;color:#ef4444;font-family:system-ui;">Access Blocked - Buy Plan<br><small style="font-size:16px;color:#94a3b8;">⚖️ Yamunanagar Court, Haryana</small></h1>'; } else { document.addEventListener('DOMContentLoaded', AIHUB_ADS.load); }
+    </script>
+    <!-- ===== SYSTEM END ===== -->
+    
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 20px; }
-     .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #0d6efd; margin-bottom: 10px; font-size: 28px; }
-     .subtitle { text-align: center; color: #666; margin-bottom: 25px; }
-       
-       /* ADSENSE PLACEHOLDER - COMPULSORY */
-     .ad-placeholder { 
-           background: #f8f9fa; border: 2px dashed #dee2e6; padding: 20px; 
-           text-align: center; margin: 20px 0; border-radius: 8px; min-height: 90px;
-           display: flex; align-items: center; justify-content: center; color: #6c757d;
-       }
-     .ad-placeholder::before { content: "Advertisement"; font-size: 12px; }
-       
-     .search-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 12px; margin-bottom: 30px; }
-     .search-box { display: flex; gap: 10px; margin-bottom: 15px; }
-     .search-box input { flex: 1; padding: 15px; border: none; border-radius: 8px; font-size: 16px; font-family: 'Inter'; }
-     .search-box button { padding: 15px 30px; background: #28a745; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 16px; transition: all 0.3s; }
-     .search-box button:hover { background: #218838; transform: translateY(-2px); }
-       
-     .filter-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-     .filter-group label { color: white; font-weight: 600; margin-bottom: 5px; display: block; font-size: 14px; }
-     .filter-group select { width: 100%; padding: 10px; border: none; border-radius: 6px; font-size: 14px; font-family: 'Inter'; }
-       
-     .results-section { margin-top: 30px; }
-     .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-     .results-count { font-size: 16px; font-weight: 600; color: #333; }
-       
-     .gst-card { background: white; border: 1px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 15px; transition: all 0.3s; }
-     .gst-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.1); transform: translateY(-2px); }
-     .gst-card-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; }
-     .gst-card h3 { color: #0d6efd; font-size: 18px; margin-bottom: 5px; }
-     .hsn-badge { background: #0d6efd; color: white; padding: 5px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
-     .gst-rate-badge { background: #28a745; color: white; padding: 8px 16px; border-radius: 8px; font-size: 20px; font-weight: 700; }
-       
-     .gst-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 15px 0; padding: 15px; background: #f8f9fa; border-radius: 8px; }
-     .gst-detail-item { text-align: center; }
-     .gst-detail-label { font-size: 12px; color: #666; margin-bottom: 5px; }
-     .gst-detail-value { font-size: 18px; font-weight: 700; color: #0d6efd; }
-       
-     .gst-actions { display: flex; gap: 10px; margin-top: 15px; }
-     .btn { padding: 10px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 14px; transition: all 0.3s; }
-     .btn-copy { background: #6c757d; color: white; }
-     .btn-whatsapp { background: #25D366; color: white; }
-     .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-       
-     .no-results { text-align: center; padding: 60px 20px; color: #999; }
-     .no-results svg { width: 80px; height: 80px; margin-bottom: 20px; opacity: 0.3; }
-       
-     .future-section { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 12px; margin-top: 30px; }
-     .future-section h3 { color: #856404; margin-bottom: 15px; }
-     .future-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-     .future-item { background: white; padding: 15px; border-radius: 8px; text-align: center; }
-     .future-badge { display: inline-block; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 8px; }
-       
-     .legal-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
-       
-        @media print {.no-print,.ad-placeholder { display: none!important; } body { background: white; padding: 0; }}
-        @media (max-width: 768px) {.search-box { flex-direction: column; }.filter-row { grid-template-columns: 1fr; }.gst-details { grid-template-columns: 1fr 1fr; }}
+        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #f1f5f9; padding: 20px; padding-bottom: 70px; }
+        .container { max-width: 1200px; margin: 0 auto; background: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; }
+        h1 { text-align: center; color: #3b82f6; margin-bottom: 10px; font-size: 28px; }
+        .subtitle { text-align: center; color: #94a3b8; margin-bottom: 25px; }
+        
+        /* ADSENSE - AIHUBPRO SYSTEM */
+        .aihub-ad-box { display: none; text-align: center; margin: 20px auto; padding: 12px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; max-width: 728px; }
+        
+        .search-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 12px; margin-bottom: 30px; }
+        .search-box { display: flex; gap: 10px; margin-bottom: 15px; }
+        .search-box input { flex: 1; padding: 15px; border: none; border-radius: 8px; font-size: 16px; font-family: 'Inter'; background: #0f172a; color: #f1f5f9; }
+        .search-box button { padding: 15px 30px; background: #28a745; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .search-box button:hover { background: #218838; transform: translateY(-2px); }
+        
+        .filter-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .filter-group label { color: white; font-weight: 600; margin-bottom: 5px; display: block; font-size: 14px; }
+        .filter-group select { width: 100%; padding: 10px; border: none; border-radius: 6px; font-size: 14px; font-family: 'Inter'; background: #0f172a; color: #f1f5f9; }
+        
+        .results-section { margin-top: 30px; }
+        .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .results-count { font-size: 16px; font-weight: 600; color: #cbd5e1; }
+        
+        .gst-card { background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 20px; margin-bottom: 15px; transition: all 0.3s; }
+        .gst-card:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.3); transform: translateY(-2px); }
+        .gst-card-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; }
+        .gst-card h3 { color: #3b82f6; font-size: 18px; margin-bottom: 5px; }
+        .hsn-badge { background: #0d6efd; color: white; padding: 5px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .gst-rate-badge { background: #28a745; color: white; padding: 8px 16px; border-radius: 8px; font-size: 20px; font-weight: 700; }
+        
+        .gst-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 15px 0; }
+        .gst-detail-item { text-align: center; }
+        .gst-detail-label { font-size: 12px; color: #94a3b8; margin-bottom: 5px; }
+        .gst-detail-value { font-size: 18px; font-weight: 700; color: #3b82f6; }
+        
+        .gst-actions { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { padding: 10px 20px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 14px; transition: all 0.3s; }
+        .btn-copy { background: #6c757d; color: white; }
+        .btn-whatsapp { background: #25D366; color: white; }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        
+        .no-results { text-align: center; padding: 60px 20px; color: #64748b; }
+        .no-results svg { width: 80px; height: 80px; margin-bottom: 20px; opacity: 0.3; }
+        
+        .future-section { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 12px; margin-top: 30px; }
+        .future-section h3 { color: #856404; margin-bottom: 15px; }
+        .future-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .future-item { background: white; padding: 15px; border-radius: 8px; text-align: center; color: #1a1a2e; }
+        .future-badge { display: inline-block; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+        
+        .footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #1e293b; padding: 10px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #334155; z-index: 100; }
+        
+        @media print { .no-print, .aihub-ad-box { display: none!important; } body { background: white; padding: 0; } }
+        @media (max-width: 768px) { .search-box { flex-direction: column; }.filter-row { grid-template-columns: 1fr; }.gst-card-header { flex-direction: column; gap: 10px; } }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>GST Rate Finder</h1>
         <p class="subtitle">Search HSN Codes & Product GST Rates - 5000+ Items Database</p>
-
-        <!-- ADSENSE TOP BANNER - COMPULSORY -->
-        <div class="ad-placeholder no-print">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
+        
+        <!-- ADSENSE TOP BANNER -->
+        <div class="aihub-ad-box"></div>
+        
         <!-- SEARCH SECTION -->
         <div class="search-section">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="🔍 Search by Product Name or HSN Code (e.g., Mobile, 8517, Rice, 1006)" onkeyup="handleSearch()">
+                <input type="text" id="searchInput" placeholder="🔍 Search by Product Name or HSN Code (e.g., Mobile, 8517)" onkeyup="handleSearch()">
                 <button onclick="searchGST()">Search</button>
             </div>
             
@@ -108,6 +120,7 @@
                         <option value="Services">Services</option>
                     </select>
                 </div>
+                
                 <div class="filter-group">
                     <label>GST Rate Filter</label>
                     <select id="gstFilter" onchange="filterResults()">
@@ -119,6 +132,7 @@
                         <option value="28">28%</option>
                     </select>
                 </div>
+                
                 <div class="filter-group">
                     <label>Sort By</label>
                     <select id="sortFilter" onchange="filterResults()">
@@ -129,7 +143,10 @@
                 </div>
             </div>
         </div>
-
+        
+        <!-- ADSENSE MIDDLE -->
+        <div class="aihub-ad-box"></div>
+        
         <!-- RESULTS SECTION -->
         <div class="results-section">
             <div class="results-header">
@@ -137,13 +154,7 @@
             </div>
             <div id="resultsContainer"></div>
         </div>
-
-        <!-- ADSENSE MIDDLE RECTANGLE - COMPULSORY -->
-        <div class="ad-placeholder no-print">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
+        
         <!-- FUTURE FEATURES -->
         <div class="future-section no-print">
             <h3>🚀 Coming Soon - Advanced Features</h3>
@@ -165,59 +176,55 @@
                 </div>
             </div>
         </div>
-
-        <!-- ADSENSE BOTTOM BANNER - COMPULSORY -->
-        <div class="ad-placeholder no-print">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
+        
+        <!-- ADSENSE BOTTOM -->
+        <div class="aihub-ad-box"></div>
+        
         <!-- Legal Footer -->
-        <div class="legal-footer">
-            <p>Data Source: GST Council of India | Last Updated: July 2026</p>
-            <p>All disputes subject to exclusive jurisdiction of Courts at <strong>Yamunanagar, Haryana, India</strong> only.</p>
+        <div class="footer">
+            ⚖️ Jurisdiction: Yamunanagar District Court, Haryana Only | IT Act 2000 Sec 79 Compliant | AIHubPro
         </div>
     </div>
-
+    
     <script>
-        // GST DATABASE - 5000+ Products Sample (Production mein full database add karna)
+        // GST DATABASE - 5000+ Products Sample
         const gstDatabase = [
-            { id: 1, hsn: '8517', name: 'Mobile Phones', category: 'Electronics', gst: 18, description: 'Smartphones, Feature Phones' },
+            { id: 1, hsn: '8517', name: 'Mobile Phones', category: 'Electronics', gst: 18, description: 'Smartphones, Feature phones' },
             { id: 2, hsn: '8471', name: 'Laptops & Computers', category: 'Electronics', gst: 18, description: 'Laptops, Desktops, Tablets' },
             { id: 3, hsn: '1006', name: 'Rice', category: 'Food', gst: 5, description: 'All types of rice' },
             { id: 4, hsn: '1001', name: 'Wheat', category: 'Food', gst: 0, description: 'Wheat grain' },
             { id: 5, hsn: '2106', name: 'Packaged Food', category: 'Food', gst: 12, description: 'Ready to eat food items' },
             { id: 6, hsn: '2202', name: 'Aerated Drinks', category: 'Food', gst: 28, description: 'Cold drinks, Soda' },
-            { id: 7, hsn: '6204', name: 'Readymade Garments', category: 'Textile', gst: 12, description: 'Shirts, Pants, Dresses' },
-            { id: 8, hsn: '6403', name: 'Footwear', category: 'Textile', gst: 18, description: 'Shoes, Sandals above Rs.1000' },
+            { id: 7, hsn: '6204', name: 'Readymade Garments', category: 'Textile', gst: 12, description: 'Shirts, Pants, Suits' },
+            { id: 8, hsn: '6403', name: 'Footwear', category: 'Textile', gst: 18, description: 'Shoes, Sandals above Rs 1000' },
             { id: 9, hsn: '8703', name: 'Cars', category: 'Automobile', gst: 28, description: 'Motor cars, SUVs' },
             { id: 10, hsn: '8711', name: 'Motorcycles', category: 'Automobile', gst: 28, description: 'Bikes, Scooters' },
             { id: 11, hsn: '3004', name: 'Medicines', category: 'Healthcare', gst: 12, description: 'Allopathic medicines' },
             { id: 12, hsn: '3304', name: 'Cosmetics', category: 'Healthcare', gst: 18, description: 'Beauty products, Creams' },
             { id: 13, hsn: '2523', name: 'Cement', category: 'Construction', gst: 28, description: 'Portland cement' },
             { id: 14, hsn: '6901', name: 'Bricks', category: 'Construction', gst: 5, description: 'Building bricks' },
-            { id: 15, hsn: '9983', name: 'IT Services', category: 'Services', gst: 18, description: 'Software development, IT support' },
+            { id: 15, hsn: '9983', name: 'IT Services', category: 'Services', gst: 18, description: 'Software development' },
             { id: 16, hsn: '9963', name: 'Restaurant Services', category: 'Services', gst: 5, description: 'AC restaurants' },
             { id: 17, hsn: '4901', name: 'Books', category: 'Education', gst: 0, description: 'Printed books, Newspapers' },
             { id: 18, hsn: '2710', name: 'Petrol', category: 'Fuel', gst: 0, description: 'Motor spirit - Outside GST' },
-            { id: 19, hsn: '8518', name: 'Speakers & Headphones', category: 'Electronics', gst: 18, description: 'Audio equipment' },
+            { id: 19, hsn: '8518', name: 'Speakers & Headphones', category: 'Electronics', gst: 18, description: 'Audio devices' },
             { id: 20, hsn: '9403', name: 'Furniture', category: 'Home', gst: 18, description: 'Wooden/Metal furniture' }
         ];
-
+        
         let filteredData = [...gstDatabase];
-
+        
         // Initial Load
         window.onload = function() {
             displayResults(gstDatabase);
         };
-
+        
         // Search GST
         function handleSearch() {
             if(event.key === 'Enter') {
                 searchGST();
             }
         }
-
+        
         function searchGST() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
             
@@ -225,7 +232,7 @@
                 filteredData = [...gstDatabase];
             } else {
                 filteredData = gstDatabase.filter(item => 
-                    item.name.toLowerCase().includes(query) || 
+                    item.name.toLowerCase().includes(query) ||
                     item.hsn.includes(query) ||
                     item.description.toLowerCase().includes(query)
                 );
@@ -233,7 +240,7 @@
             
             filterResults();
         }
-
+        
         // Filter Results
         function filterResults() {
             const category = document.getElementById('categoryFilter').value;
@@ -263,7 +270,7 @@
             
             displayResults(results);
         }
-
+        
         // Display Results
         function displayResults(data) {
             const container = document.getElementById('resultsContainer');
@@ -292,7 +299,7 @@
                         <div class="gst-card-header">
                             <div>
                                 <h3>${item.name}</h3>
-                                <p style="color: #666; font-size: 14px; margin-top: 5px;">${item.description}</p>
+                                <p style="color: #94a3b8; font-size: 14px; margin-top: 5px;">${item.description}</p>
                             </div>
                             <div style="text-align: right;">
                                 <div class="hsn-badge">HSN: ${item.hsn}</div>
@@ -321,37 +328,35 @@
                         
                         <div class="gst-actions">
                             <button class="btn btn-copy" onclick="copyGST('${item.name}', '${item.hsn}', '${item.gst}')">📋 Copy Details</button>
-                            <button class="btn btn-whatsapp" onclick="shareWhatsApp('${item.name}', '${item.hsn}', '${item.gst}')">📱 Share on WhatsApp</button>
+                            <button class="btn btn-whatsapp" onclick="shareWhatsApp('${item.name}', '${item.hsn}', '${item.gst}')">📱 WhatsApp Share</button>
                         </div>
                     </div>
                 `;
             }).join('');
         }
-
+        
         // Copy GST Details
         function copyGST(name, hsn, gst) {
             const cgst = (gst / 2).toFixed(1);
             const text = `GST Rate Details:
-            
 Product: ${name}
 HSN Code: ${hsn}
 Total GST: ${gst}%
 CGST: ${cgst}%
 SGST: ${cgst}%
 IGST: ${gst}%
-
 Source: AI Hub Pro Tools
-All disputes subject to Yamunanagar, Haryana jurisdiction`;
-
+All disputes subject to exclusive jurisdiction of Courts at Yamunanagar, Haryana, India.`;
+            
             navigator.clipboard.writeText(text).then(() => {
                 alert('✅ GST details copied to clipboard!');
             });
         }
-
+        
         // WhatsApp Share
         function shareWhatsApp(name, hsn, gst) {
             const cgst = (gst / 2).toFixed(1);
-            const message = `*GST Rate Details*%0A%0A📦 *Product:* ${name}%0A🏷️ *HSN Code:* ${hsn}%0A💰 *Total GST:* ${gst}%%0A📊 *CGST:* ${cgst}%%0A📊 *SGST:* ${cgst}%%0A📊 *IGST:* ${gst}%%0A%0A_Checked on AI Hub Pro Tools_%0Ahttps://aihubpro.in`;
+            const message = `*GST Rate Details*%0A%0A🏷️ *Product:* ${name}%0A📌 *HSN Code:* ${hsn}%0A💰 *Total GST:* ${gst}%0A  - CGST: ${cgst}%0A  - SGST: ${cgst}%0A  - IGST: ${gst}%0A%0A_Source: AI Hub Pro Tools_`;
             window.open(`https://wa.me/?text=${message}`, '_blank');
         }
     </script>
