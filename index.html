@@ -21,7 +21,6 @@
         .nav a { color:var(--text); text-decoration:none; font-weight:500; font-size:14px; }
         .trial-timer { background:#dc2626; padding:6px 16px; border-radius:20px; font-size:14px; font-weight:600; margin-top:8px; display:inline-block; }
         
-        /* LANGUAGE SWITCHER */
         .lang-switcher { display:flex; gap:8px; }
         .lang-btn { padding:6px 12px; background:#334155; border:1px solid #475569; border-radius:6px; color:#e2e8f0; cursor:pointer; font-size:13px; font-weight:600; transition:all 0.3s; }
         .lang-btn.active { background:#3b82f6; border-color:#3b82f6; }
@@ -246,6 +245,18 @@
                 <div class="tool-desc" data-lang="tool_compress_desc">Reduce PDF size 80%. Quality intact.</div>
                 <span class="tool-badge" data-lang="free_badge">100% Free</span>
             </div>
+            <div class="tool-card" onclick="openTool('split-pdf')">
+                <div class="tool-icon">✂️</div>
+                <div class="tool-name" data-lang="tool_split_name">Split PDF</div>
+                <div class="tool-desc" data-lang="tool_split_desc">Extract pages from PDF. Split by range.</div>
+                <span class="tool-badge" data-lang="free_badge">100% Free</span>
+            </div>
+            <div class="tool-card" onclick="openTool('pdf-compressor')">
+                <div class="tool-icon">📉</div>
+                <div class="tool-name" data-lang="tool_pdf_comp_name">PDF Compressor Pro</div>
+                <div class="tool-desc" data-lang="tool_pdf_comp_desc">Advanced PDF compression with quality control.</div>
+                <span class="tool-badge" data-lang="free_badge">100% Free</span>
+            </div>
         </div>
     </div>
 
@@ -352,44 +363,38 @@
             tool_merge_desc: "कई PDF को एक में मिलाएं। अनलिमिटेड पेज।",
             tool_compress_name: "PDF कंप्रेस करें",
             tool_compress_desc: "PDF साइज 80% कम करें। क्वालिटी बरकरार।",
+            tool_split_name: "PDF स्प्लिट करें",
+            tool_split_desc: "PDF से पेज निकालें। रेंज से स्प्लिट करें।",
+            tool_pdf_comp_name: "PDF कंप्रेसर प्रो",
+            tool_pdf_comp_desc: "क्वालिटी कंट्रोल के साथ एडवांस PDF कंप्रेशन।",
             chat_welcome: "नमस्ते! मैं AIHubPro AI हूं। क्या मदद चाहिए? 😊<br><small>5 मिनट फ्री ट्रायल एक्टिव | न्यायालय: यमुनानगर कोर्ट, हरियाणा</small>",
             chat_placeholder: "संदेश...",
             send_btn: "भेजें",
-            footer_firm: "🏢 फर्म विवरण",
-            firm_name_label: "फर्म का नाम:",
-            owner_label: "मालिक:",
-            address_label: "पता:",
-            email_label: "ईमेल:",
-            gst_label: "GST नंबर:",
-            udyam_label: "उद्यम:",
-            footer_legal: "⚖️ कानूनी और न्यायालय",
-            court_text: "<b>न्यायालय:</b> सभी विवाद <b>यमुनानगर जिला न्यायालय, हरियाणा</b> के अधीन।",
-            itact_text: "<b>IT Act 2000 Sec 79:</b> अवैध प्रश्न IP + स्थान + समय के साथ 1 साल के लिए लॉग।",
-            police_text: "<b>पुलिस:</b> आवश्यकता पड़ने पर डेटा यमुनानगर साइबर क्राइम सेल के साथ साझा।",
-            ipc_text: "<b>IPC:</b> अवैध सामग्री के लिए धारा 505, 506 लागू।",
-            terms_link: "नियम और शर्तें",
-            privacy_link: "प्राइवेसी नीति",
-            refund_link: "रिफंड नीति - नो रिफंड",
-            footer_security: "🛡️ सुरक्षा और अनुपालन",
-            sec1: "✅ 256-बिट SSL एन्क्रिप्शन",
-            sec2: "✅ क्लाउडफ्लेयर DDoS सुरक्षा",
-            sec3: "✅ रोजाना ऑटो बैकअप 12:00 AM IST",
-            sec4: "✅ 99.9% अपटाइम गारंटी",
-            sec5: "✅ केवल भारत सर्वर - कोई डेटा विदेश नहीं",
-            sec6: "✅ IT Act 2000 धारा 79 अनुपालन",
-            sec7: "✅ PCI-DSS पेमेंट सुरक्षा",
-            footer_pricing: "💰 कीमत और सहायता",
-            price_free: "<b>फ्री:</b> रोजाना 5 मिनट",
-            price_666: "<b>स्टैंडर्ड:</b> ₹666/महीना - विज्ञापन के साथ",
-            price_999: "<b>प्रीमियम:</b> ₹999/महीना - No Ads",
-            support_hours: "<b>सहायता समय:</b> सुबह 10 - शाम 6 IST",
-            response_time: "<b>जवाब समय:</b> 24 घंटे अधिकतम",
-            whatsapp: "<b>व्हाट्सएप:</b> +91-XXXXXXXXXX",
-            grievance: "<b>शिकायत:</b> grievance@aihubpro.in",
+            ad_text: "विज्ञापन: बेस्ट होस्टिंग ₹99/महीना",
+            close_ad: "विज्ञापन बंद करें",
             feat1: "✅ अनलिमिटेड AI चैट संदेश",
             feat2: "✅ GST कैलकुलेटर - CGST/SGST/IGST",
             feat3: "✅ इनवॉइस जेनरेटर - PDF डाउनलोड",
             feat4: "✅ EMI कैलकुलेटर - होम/कार लोन",
             feat5: "✅ SIP कैलकुलेटर - म्यूचुअल फंड",
             feat6: "✅ PDF टूल्स - मर्ज/स्प्लिट/कंप्रेस",
-            feat7: "
+            feat7: "✅ इमेज कंप्रेसर - 90% कम करें",
+            feat8: "✅ QR कोड जेनरेटर",
+            feat9: "✅ पासवर्ड जेनरेटर",
+            feat10: "✅ JSON फॉर्मेटर",
+            feat11: "✅ लोन कैलकुलेटर",
+            feat12: "✅ कोटेशन जेनरेटर",
+            feat_ads1: "⚠️ <b>बैनर Ads दिखेंगे</b>",
+            feat_ads2: "⚠️ <b>वीडियो Ads 30 सेकंड</b>",
+            feat_ads3: "⚠️ <b>मसूरी/Pop-ups आएंगे</b>",
+            feat_validity: "✅ 30 दिन वैधता",
+            feat_support: "✅ ईमेल सपोर्ट 24hr",
+            feat_noads1: "✅ <b>NO ADS - 100% क्लीन</b>",
+            feat_noads2: "✅ <b>NO मसूरी/Pop-ups</b>",
+            feat_noads3: "✅ <b>Ad-Free एक्सपीरियंस</b>",
+            feat_priority: "✅ प्रायोरिटी व्हाट्सएप सपोर्ट",
+            feat_speed: "✅ सबसे तेज AI रिस्पॉन्स स्पीड",
+            footer_firm: "🏢 फर्म विवरण",
+            firm_name_label: "फर्म का नाम:",
+            owner_label: "मालिक:",
+            address_label: "पता:",
