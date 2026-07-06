@@ -1,0 +1,132 @@
+!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3b82f6">
+    <title>Invoice Generator - AIHubPro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/icon-192.png">
+    
+    <!-- ===== AIHUBPRO COMPLETE SYSTEM - NO MISTAKES ===== -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <script>
+    // 1. TRIAL + PAID CHECK - YAMUNANAGAR COURT JURISDICTION
+    function checkAccess() {
+        const now = Date.now();
+        const trialStart = localStorage.getItem('aihubpro_trial_start');
+        const isPaid = localStorage.getItem('aihubpro_paid') === 'true';
+        const paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
+        if (isPaid && paidExpiry && now < parseInt(paidExpiry)) return true;
+        if (!trialStart) { localStorage.setItem('aihubpro_trial_start', now.toString()); return true; }
+        const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
+        if (elapsed < 300) return true;
+        const nextFree = parseInt(trialStart) + (24 * 60 * 60 * 1000);
+        if (now < nextFree) { alert('⏰ 5 Minute Free Trial Khatam!\n\nAgla Free Access: ' + new Date(nextFree).toLocaleString('hi-IN') + '\n\nTurant access ke liye homepage pe plan khareedo.\n\n⚖️ Jurisdiction: Yamunanagar Court Only'); window.location.href = '/'; return false; }
+        localStorage.removeItem('aihubpro_trial_start'); return true;
+    }
+    // 2. ADS SYSTEM - 3 JAGAH
+    const AIHUB_ADS = { client: 'ca-pub-XXXXXXXXXXXXXXXX', getConfig: () => { if (!localStorage.getItem('aihubpro_ads_master')) { localStorage.setItem('aihubpro_ads_master', JSON.stringify({ show_666: true, show_999: false, show_free: false })); } return JSON.parse(localStorage.getItem('aihubpro_ads_master')); }, canShow: () => { const plan = localStorage.getItem('aihubpro_plan'); const paid = localStorage.getItem('aihubpro_paid') === 'true'; const cfg = AIHUB_ADS.getConfig(); if (!paid) return false; if (plan === '666' && cfg.show_666) return true; if (plan === '999' && cfg.show_999) return true; return false; }, load: () => { if (!AIHUB_ADS.canShow()) return; const adCode = `<ins class="adsbygoogle" style="display:block" data-ad-client="${AIHUB_ADS.client}" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>`; document.querySelectorAll('.aihub-ad-box').forEach(box => { box.innerHTML = adCode; box.style.display = 'block'; }); (adsbygoogle = window.adsbygoogle || []).push({}); } };
+    if (!checkAccess()) { document.body.innerHTML = '<h1 style="text-align:center;margin-top:50px;color:#ef4444;font-family:system-ui;">Access Blocked - Buy Plan<br><small style="font-size:16px;color:#94a3b8;">⚖️ Yamunanagar Court, Haryana</small></h1>'; } else { document.addEventListener('DOMContentLoaded', AIHUB_ADS.load); }
+    </script>
+    <!-- ===== SYSTEM END ===== -->
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button onclick="window.location.href='/'" class="back-btn">← Back</button>
+            <h1>🧾 Invoice Generator</h1>
+            <button id="darkModeToggle">🌙</button>
+        </div>
+
+        <!-- AD 1: TOP -->
+        <div class="aihub-ad-box"></div>
+
+        <div class="invoice-form">
+            <div class="section">
+                <h3>Company Details</h3>
+                <input type="text" id="companyName" placeholder="Company Name *">
+                <input type="text" id="companyAddress" placeholder="Address">
+                <input type="text" id="companyGST" placeholder="GST Number">
+                <input type="text" id="companyPhone" placeholder="Phone">
+                <input type="email" id="companyEmail" placeholder="Email">
+                <label>Company Logo:</label>
+                <input type="file" id="logoUpload" accept="image/*">
+                <img id="logoPreview" style="max-width:100px; display:none; margin-top:10px;">
+            </div>
+
+            <div class="section">
+                <h3>Customer Details</h3>
+                <input type="text" id="customerName" placeholder="Customer Name *">
+                <input type="text" id="customerAddress" placeholder="Customer Address">
+                <input type="text" id="customerGST" placeholder="Customer GST">
+                <input type="text" id="customerPhone" placeholder="Customer Phone">
+            </div>
+
+            <div class="section">
+                <h3>Invoice Details</h3>
+                <input type="text" id="invoiceNo" placeholder="Invoice Number" readonly>
+                <label>Invoice Date:</label>
+                <input type="date" id="invoiceDate">
+                <label>Due Date:</label>
+                <input type="date" id="dueDate">
+            </div>
+
+            <div class="section">
+                <h3>Products / Services</h3>
+                <div id="productsList"></div>
+                <button type="button" onclick="addProduct()">+ Add Product</button>
+            </div>
+
+            <!-- AD 2: MIDDLE -->
+            <div class="aihub-ad-box"></div>
+
+            <div class="section">
+                <h3>Tax & Charges</h3>
+                <label>GST Type:</label>
+                <select id="gstType">
+                    <option value="cgst_sgst">CGST + SGST [Intra-State]</option>
+                    <option value="igst">IGST [Inter-State]</option>
+                </select>
+                <input type="number" id="gstRate" placeholder="GST Rate %" value="18">
+                <input type="number" id="discount" placeholder="Overall Discount %">
+                <input type="number" id="shipping" placeholder="Shipping Charge ₹">
+            </div>
+
+            <div class="section">
+                <textarea id="notes" placeholder="Notes / Remarks"></textarea>
+                <textarea id="terms" placeholder="Terms & Conditions">1. Payment due within 30 days from invoice date.
+2. Late payment charges 2% per month.
+3. Goods once sold will not be taken back.
+4. Subject to Yamunanagar Jurisdiction only.</textarea>
+            </div>
+
+            <div class="actions">
+                <button type="button" onclick="calculateTotal()">📊 Calculate Total</button>
+                <button type="button" onclick="printInvoice()">🖨️ Print Invoice</button>
+                <button type="button" onclick="downloadPDF()">📥 Download PDF</button>
+                <button type="button" onclick="shareWhatsApp()">📱 WhatsApp Share</button>
+                <button type="button" onclick="shareEmail()">📧 Email Share</button>
+                <button type="button" onclick="saveDraft()">💾 Save Draft</button>
+            </div>
+        </div>
+
+        <div id="invoicePreview" class="invoice-preview"></div>
+
+        <!-- AD 3: BOTTOM -->
+        <div class="aihub-ad-box"></div>
+    </div>
+
+    <div class="footer">
+        ⚖️ Jurisdiction: Yamunanagar District Court, Haryana Only | IT Act 2000 Sec 79 Compliant | No Refund Policy
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW Error:', err));
+        }
+    </script>
+</body
