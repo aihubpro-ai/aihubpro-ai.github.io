@@ -7,41 +7,72 @@ export async function onRequestPost(context) {
 
   try {
     const body = await request.json();
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, email, plan } = body;
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, plan } = body;
+    const ip = request.headers.get('CF-Connecting-IP');
+    const userAgent = request.headers.get('User-Agent');
+    const cf = request.cf;
 
-    // 1. SIGNATURE VERIFY
+    // 1. RAZORPAY SIGNATURE VERIFY - Security ke liye zaruri
     const crypto = await import('node:crypto');
     const generated_signature = crypto.createHmac('sha256', env.RAZORPAY_KEY_SECRET)
       .update(razorpay_order_id + "|" + razorpay_payment_id)
       .digest('hex');
 
     if (generated_signature !== razorpay_signature) {
-      return Response.json({ error: 'Payment verification failed' }, { status: 400, headers });
+      return Response.json({ 
+        success: false, 
+        error: 'Payment verification failed - Invalid signature' 
+      }, { status: 400, headers });
     }
 
-    // 2. 30 DIN KA ACCESS DO
-    const expiryDate = new Date();
-    expiryDate.setDate(expiryDate.getDate() + 30);
+    // 2. 30 DIN KA ACCESS DO - IP SE SAVE KARO
+    const expiryTimestamp = Date.now() + (30 * 24 * 60 * 60 * 1000); // 30 days in ms
+    const expiryDate = new Date(expiryTimestamp);
 
-    await env.SUBSCRIPTIONS.put(email, JSON.stringify({
-      plan: plan,
-      payment_id: razorpay_payment_id,
-      order_id: razorpay_order_id,
-      start_date: new Date().toISOString(),
-      expiry_date: expiryDate.toISOString(),
-      status: 'active',
-      price_paid: plan === 'basic' ? 666 : 999,
-      terms: '9% price increase every April 1st with 1 month email notice. Court: Yamunanagar, Haryana only'
-    }), { expirationTtl: 2592000 }); // 30 days
+    // KV mein IP ke against expiry save karo - Frontend isi ko check karta hai
+    await env.SUBSCRIPTIONS.put(
+      `paid_${ip}`, 
+      expiryTimestamp.toString(), 
+      { expirationTtl: 2592000 } // 30 days auto-delete
+    );
+    
+    // Payment ka poora log rakho - 1 saal ke liye
+    await env.PAYMENT_LOGS.put(
+      `payment_${razorpay_payment_id}`, 
+      JSON.stringify({
+        ip: ip,
+        plan: plan,
+        amount: plan,
+        payment_id: razorpay_payment_id,
+        order_id: razorpay_order_id,
+        time_ist: new Date().toLocaleString('en-IN', {timeZone: 'Asia/Kolkata'}),
+        expiry_ist: expiryDate.toLocaleString('en-IN', {timeZone: 'Asia/Kolkata'}),
+        expiry_timestamp: expiryTimestamp,
+        location: cf?.city + ', ' + cf?.country,
+        user_agent: userAgent,
+        jurisdiction: 'Yamunanagar District Court, Haryana, India',
+        status: 'SUCCESS'
+      }), 
+      { expirationTtl: 31536000 } // 1 year
+    );
 
+    // 3. SUCCESS RESPONSE - Frontend ko expiry bhej do
     return Response.json({
       success: true,
       message: 'Payment verified. 30 days access activated.',
-      expiry: expiryDate.toLocaleDateString('hi-IN'),
-      plan: plan
+      expiry: expiryTimestamp,
+      plan: plan,
+      next_billing: expiryDate.toLocaleDateString('en-IN', {
+        day: '2-digit', month: 'short', year: 'numeric'
+      })
     }, { headers });
 
   } catch (error) {
-    return Response.json({ error: 'Verification failed' }, { status: 500, headers });
+    // Error log karo future debugging ke liye
+    console.error('Payment Verify Error:', error);
+    return Response.json({ 
+      success: false,
+      error: 'Verification failed: ' + error.message 
+    }, { status: 500, headers });
   }
 }
