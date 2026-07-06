@@ -1,322 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free JPG to PNG Converter | PNG to JPG Converter Online</title>
-    <meta name="description" content="Free online JPG to PNG and PNG to JPG converter. Convert images instantly with transparent background option. Preview before download. WEBP, AVIF, BMP, TIFF coming soon.">
-    <meta name="keywords" content="jpg to png, png to jpg, image converter, convert jpg to png, png to jpg converter, transparent background, image format converter">
-    <link rel="canonical" href="https://aihubpro.in/jpg-png-converter.html">
+    <title>JPG PNG Converter - AIHubPro | Image Format Converter Online</title>
+    <meta name="description" content="Free JPG to PNG, PNG to JPG, WebP converter. Convert images online. Keep transparency, adjust quality.">
     
-    <!-- Google AdSense - COMPULSORY -->
+    <!-- ===== AIHUBPRO COMPLETE SYSTEM ===== -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <script>
+    function checkAccess() {
+        const now = Date.now();
+        const trialStart = localStorage.getItem('aihubpro_trial_start');
+        const isPaid = localStorage.getItem('aihubpro_paid') === 'true';
+        const paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
+        if (isPaid && paidExpiry && now < parseInt(paidExpiry)) return true;
+        if (!trialStart) { localStorage.setItem('aihubpro_trial_start', now.toString()); return true; }
+        const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
+        if (elapsed < 300) return true;
+        const nextFree = parseInt(trialStart) + (24 * 60 * 1000);
+        if (now < nextFree) { alert('⏰ 5 Minute Free Trial Khatam!\n\nAgla Free Access: ' + new Date(nextFree).toLocaleString('hi-IN') + '\n\n⚖️ Jurisdiction: Yamunanagar Court Only'); window.location.href = '/'; return false; }
+        localStorage.removeItem('aihubpro_trial_start'); return true;
+    }
+    const AIHUB_ADS = { client: 'ca-pub-XXXXXXXXXXXXXXXX', getConfig: () => { if (!localStorage.getItem('aihubpro_ads_master')) { localStorage.setItem('aihubpro_ads_master', JSON.stringify({ show_666: true, show_999: false, show_free: false })); } return JSON.parse(localStorage.getItem('aihubpro_ads_master')); }, canShow: () => { const plan = localStorage.getItem('aihubpro_plan'); const paid = localStorage.getItem('aihubpro_paid') === 'true'; const cfg = AIHUB_ADS.getConfig(); if (!paid) return false; if (plan === '666' && cfg.show_666) return true; if (plan === '999' && cfg.show_999) return true; return false; }, load: () => { if (!AIHUB_ADS.canShow()) return; const adCode = `<ins class="adsbygoogle" style="display:block" data-ad-client="${AIHUB_ADS.client}" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>`; document.querySelectorAll('.aihub-ad-box').forEach(box => { box.innerHTML = adCode; box.style.display = 'block'; }); (adsbygoogle = window.adsbygoogle || []).push({}); } };
+    if (!checkAccess()) { document.body.innerHTML = '<h1 style="text-align:center;margin-top:50px;color:#ef4444;font-family:system-ui;">Access Blocked - Buy Plan<br><small style="font-size:16px;color:#94a3b8;">⚖️ Yamunanagar Court, Haryana</small></h1>'; } else { document.addEventListener('DOMContentLoaded', AIHUB_ADS.load); }
+    </script>
+    <!-- ===== SYSTEM END ===== -->
     
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 20px; }
-.container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #0d6efd; margin-bottom: 10px; font-size: 28px; }
-.subtitle { text-align: center; color: #666; margin-bottom: 25px; }
-       
-       /* ADSENSE PLACEHOLDER - COMPULSORY */
-.ad-placeholder { 
-           background: #f8f9fa; border: 2px dashed #dee2e6; padding: 20px; 
-           text-align: center; margin: 20px 0; border-radius: 8px; min-height: 90px;
-           display: flex; align-items: center; justify-content: center; color: #6c757d;
-       }
-.ad-placeholder::before { content: "Advertisement"; font-size: 12px; }
-       
-.convert-tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 2px solid #e0e0e0; }
-.convert-tab { flex: 1; padding: 14px 24px; background: #f8f9fa; border: none; border-radius: 8px 8px 0 0; cursor: pointer; font-weight: 600; font-size: 15px; transition: all 0.3s; }
-.convert-tab.active { background: #0d6efd; color: white; }
-.convert-tab:hover { background: #e0e0e0; }
-.convert-tab.active:hover { background: #0a58ca; }
-       
-.upload-zone { border: 3px dashed #0d6efd; padding: 50px 20px; text-align: center; border-radius: 12px; background: #f0f7ff; cursor: pointer; transition: all 0.3s; }
-.upload-zone:hover { background: #e7f3ff; border-color: #0a58ca; }
-.upload-zone.drag-over { background: #d1e7ff; border-color: #0d6efd; border-style: solid; }
-.upload-zone svg { width: 60px; height: 60px; color: #0d6efd; margin-bottom: 15px; }
-.upload-zone h3 { color: #0d6efd; margin-bottom: 10px; font-size: 20px; }
-.upload-zone p { color: #666; font-size: 14px; }
-  #fileInput { display: none; }
-       
-.preview-section { margin-top: 30px; display: none; }
-.preview-section.active { display: block; }
-.preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-.preview-box { background: #f8f9fa; padding: 20px; border-radius: 12px; text-align: center; }
-.preview-box h4 { color: #0d6efd; margin-bottom: 15px; font-size: 16px; }
-.preview-image { max-width: 100%; max-height: 300px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); background: white; }
-.image-info { margin-top: 15px; padding: 12px; background: white; border-radius: 6px; font-size: 13px; }
-.image-info p { margin: 5px 0; color: #666; }
-.image-info strong { color: #333; }
-       
-.options-section { background: #fafbfc; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; margin: 20px 0; }
-.options-section h3 { color: #0d6efd; margin-bottom: 15px; font-size: 16px; }
-.checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-.checkbox-group input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
-.checkbox-group label { font-weight: 600; font-size: 14px; color: #333; cursor: pointer; margin: 0; }
-       
-.btn { padding: 14px 28px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; margin: 5px; transition: all 0.3s; width: 100%; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-.btn-primary { background: #0d6efd; color: white; }
-.btn-success { background: #28a745; color: white; }
-.btn-secondary { background: #6c757d; color: white; }
-.btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
-.btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-       
-.future-section { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 12px; margin-top: 30px; }
-.future-section h3 { color: #856404; margin-bottom: 15px; }
-.future-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
-.future-item { background: white; padding: 15px; border-radius: 8px; text-align: center; }
-.future-badge { display: inline-block; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 8px; }
-.future-item h4 { font-size: 14px; margin-bottom: 5px; }
-.future-item p { font-size: 12px; color: #666; }
-       
-.legal-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
-       
-        @media print {.no-print,.ad-placeholder { display: none!important; } body { background: white; padding: 0; }}
-        @media (max-width: 768px) {.preview-grid { grid-template-columns: 1fr; }.btn-row { grid-template-columns: 1fr; }}
+        body { background: #0f172a; color: #f1f5f9; font-family: system-ui; padding: 20px; padding-bottom: 70px; }
+ .container { max-width: 1000px; margin: 0 auto; }
+        h1 { color: #3b82f6; text-align: center; margin-bottom: 10px; }
+ .subtitle { text-align: center; color: #94a3b8; margin-bottom: 20px; font-size: 14px; }
+ .tool-box { background: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; }
+        input, button, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #475569; background: #334155; color: white; font-size: 14px; }
+        button { background: #3b82f6; cursor: pointer; font-weight: bold; font-size: 16px; }
+        button:hover { background: #2563eb; }
+ .back-btn { background: #475569; width: auto; padding: 8px 16px; margin-bottom: 20px; }
+ .aihub-ad-box { display: none; text-align: center; margin: 20px auto; padding: 12px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; max-width: 728px; }
+ .footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #1e293b; padding: 10px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #334155; z-index: 100; }
+ .upload-zone { border: 3px dashed #3b82f6; padding: 50px 20px; text-align: center; border-radius: 12px; background: #0f172a; cursor: pointer; transition: all 0.3s; }
+ .upload-zone:hover { background: #1e293b; border-color: #2563eb; }
+ .upload-zone h3 { color: #3b82f6; margin-bottom: 10px; }
+ .upload-zone p { color: #94a3b8; font-size: 13px; }
+ .tabs { display: flex; gap: 10px; margin: 20px 0; border-bottom: 2px solid #334155; }
+ .tab { padding: 12px 24px; background: #334155; border: none; border-radius: 8px 8px 0 0; color: #94a3b8; cursor: pointer; font-weight: 600; }
+ .tab.active { background: #3b82f6; color: white; }
+ .tab-content { display: none; }
+ .tab-content.active { display: block; }
+ .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+ .preview-box { background: #0f172a; padding: 20px; border-radius: 8px; border: 1px solid #334155; }
+ .preview-box h4 { color: #10b981; margin-bottom: 15px; text-align: center; }
+ .preview-box img { max-width: 100%; max-height: 300px; border-radius: 8px; display: block; margin: 0 auto; }
+ .info { background: #1e293b; padding: 12px; border-radius: 6px; margin-top: 10px; font-size: 12px; color: #94a3b8; }
+ .btn-success { background: #10b981; }
+ .btn-success:hover { background: #059669; }
+  label { display: block; color: #cbd5e1; font-size: 13px; margin-top: 12px; margin-bottom: 6px; font-weight: 500; }
+ .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+   @media (max-width: 768px) {.preview-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>JPG ↔ PNG Converter</h1>
-        <p class="subtitle">Convert JPG to PNG or PNG to JPG with Transparent Background Option</p>
-
-        <!-- ADSENSE TOP BANNER - COMPULSORY -->
-        <div class="ad-placeholder no-print">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
-        <!-- CONVERSION TABS -->
-        <div class="convert-tabs">
-            <button class="convert-tab active" onclick="switchMode('jpg-to-png')">JPG → PNG</button>
-            <button class="convert-tab" onclick="switchMode('png-to-jpg')">PNG → JPG</button>
-        </div>
-
-        <!-- UPLOAD ZONE -->
-        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-            </svg>
-            <h3 id="uploadTitle">Click to Upload JPG Image</h3>
-            <p>Or drag & drop image here</p>
-            <p style="font-size: 12px; margin-top: 10px; color: #999;">Max 10MB • All processing done locally</p>
-            <input type="file" id="fileInput" accept="image/jpeg,image/jpg,image/png">
-        </div>
-
-        <!-- PREVIEW SECTION -->
-        <div class="preview-section" id="previewSection">
-            <div class="preview-grid">
-                <div class="preview-box">
-                    <h4>Original Image</h4>
-                    <img id="originalPreview" class="preview-image" alt="Original">
-                    <div class="image-info">
-                        <p><strong>Format:</strong> <span id="originalFormat">-</span></p>
-                        <p><strong>Size:</strong> <span id="originalSize">-</span></p>
-                        <p><strong>Dimensions:</strong> <span id="originalDimensions">-</span></p>
+        <button onclick="window.location.href='/'" class="back-btn">← Back to Home</button>
+        <h1>🔄 JPG PNG Converter</h1>
+        <p class="subtitle">Convert JPG ↔ PNG ↔ WebP - Keep Quality & Transparency</p>
+        
+        <div class="aihub-ad-box"></div>
+        
+        <div class="tool-box">
+            <div class="tabs">
+                <button class="tab active" onclick="switchMode('jpg-to-png')">JPG → PNG</button>
+                <button class="tab" onclick="switchMode('png-to-jpg')">PNG → JPG</button>
+                <button class="tab" onclick="switchMode('to-webp')">To WebP</button>
+            </div>
+            
+            <div class="aihub-ad-box"></div>
+            
+            <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                <h3 id="uploadTitle">📁 Click to Upload JPG Image</h3>
+                <p>Or drag & drop image here</p>
+                <p style="font-size:12px;margin-top:10px;">JPG, PNG, WebP • Max 10MB • All processing done locally</p>
+                <input type="file" id="fileInput" accept="image/*" style="display:none;">
+            </div>
+            
+            <div id="converterSection" style="display:none;">
+                <div class="preview-grid">
+                    <div class="preview-box">
+                        <h4>📤 Original</h4>
+                        <img id="originalPreview">
+                        <div class="info" id="originalInfo"></div>
+                    </div>
+                    <div class="preview-box">
+                        <h4>📥 Converted</h4>
+                        <img id="convertedPreview" style="display:none;">
+                        <div id="convertedPlaceholder" style="color:#64748b;padding:40px;text-align:center;">Click Convert to preview</div>
+                        <div class="info" id="convertedInfo" style="display:none;"></div>
                     </div>
                 </div>
-                <div class="preview-box">
-                    <h4>Converted Image</h4>
-                    <img id="convertedPreview" class="preview-image" alt="Converted" style="display:none;">
-                    <div id="convertedPlaceholder" style="color:#999; padding: 40px;">Click Convert to preview</div>
-                    <div class="image-info" id="convertedInfo" style="display:none;">
-                        <p><strong>Format:</strong> <span id="convertedFormat">-</span></p>
-                        <p><strong>Size:</strong> <span id="convertedSize">-</span></p>
-                        <p><strong>Dimensions:</strong> <span id="convertedDimensions">-</span></p>
+                
+                <div class="grid">
+                    <div>
+                        <label>Quality [JPG/WebP only]:</label>
+                        <select id="quality">
+                            <option value="0.6">Low - 60%</option>
+                            <option value="0.8">Medium - 80%</option>
+                            <option value="0.92" selected>High - 92%</option>
+                            <option value="1.0">Best - 100%</option>
+                        </select>
+                    </div>
+                    <div id="pngOptions" style="display:none;">
+                        <label>
+                            <input type="checkbox" id="whiteBg" checked style="width:auto;margin-right:8px;">
+                            White Background for PNG→JPG
+                        </label>
                     </div>
                 </div>
-            </div>
-
-            <!-- OPTIONS -->
-            <div class="options-section" id="pngOptions" style="display:none;">
-                <h3>⚙️ PNG Options</h3>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="transparentBg" checked>
-                    <label for="transparentBg">Keep Transparent Background (for PNG with alpha)</label>
-                </div>
-                <p style="font-size: 13px; color: #666;">Note: Transparent background only works if original PNG has transparency</p>
-            </div>
-
-            <div class="options-section" id="jpgOptions" style="display:none;">
-                <h3>⚙️ JPG Options</h3>
-                <div class="checkbox-group">
-                    <input type="checkbox" id="whiteBg" checked>
-                    <label for="whiteBg">Replace Transparent with White Background</label>
-                </div>
-                <p style="font-size: 13px; color: #666;">Note: JPG does not support transparency. Transparent areas will be filled.</p>
-            </div>
-
-            <!-- ACTION BUTTONS -->
-            <div class="btn-row">
-                <button class="btn btn-primary" id="convertBtn" onclick="convertImage()">🔄 Convert Image</button>
-                <button class="btn btn-secondary" onclick="resetAll()">🔄 Upload New Image</button>
-            </div>
-
-            <div class="btn-row" id="downloadSection" style="display:none;">
-                <button class="btn btn-success" id="downloadBtn">📥 Download Converted Image</button>
+                
+                <button onclick="convertImage()" class="btn-success">🔄 Convert Image</button>
+                <button onclick="downloadImage()" id="downloadBtn" style="display:none;">⬇️ Download Converted Image</button>
             </div>
         </div>
-
-        <!-- ADSENSE MIDDLE RECTANGLE - COMPULSORY -->
-        <div class="ad-placeholder no-print">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
-        <!-- FUTURE FEATURES -->
-        <div class="future-section no-print">
-            <h3>🚀 Coming Soon - More Formats</h3>
-            <div class="future-features">
-                <div class="future-item">
-                    <span class="future-badge">WEBP</span>
-                    <h4>WEBP Converter</h4>
-                    <p>Modern format with better compression</p>
-                </div>
-                <div class="future-item">
-                    <span class="future-badge">AVIF</span>
-                    <h4>AVIF Converter</h4>
-                    <p>Next-gen format, smaller files</p>
-                </div>
-                <div class="future-item">
-                    <span class="future-badge">BMP</span>
-                    <h4>BMP Converter</h4>
-                    <p>Uncompressed bitmap format</p>
-                </div>
-                <div class="future-item">
-                    <span class="future-badge">TIFF</span>
-                    <h4>TIFF Converter</h4>
-                    <p>High-quality print format</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ADSENSE BOTTOM BANNER - COMPULSORY -->
-        <div class="ad-placeholder no-print">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
-        <!-- Legal Footer -->
-        <div class="legal-footer">
-            <p>All images are processed locally in your browser. We do not upload or store your images.</p>
-            <p>Generated by <strong>AI Hub Pro Tools</strong> | Free JPG PNG Converter</p>
-            <p>All disputes subject to exclusive jurisdiction of Courts at <strong>Yamunanagar, Haryana, India</strong> only.</p>
+        
+        <div class="aihub-ad-box"></div>
+        
+        <div class="footer">
+            ⚖️ Jurisdiction: Yamunanagar District Court, Haryana Only | IT Act 2000 Sec 79 Compliant | AIHubPro
         </div>
     </div>
-
+    
     <script>
         let currentMode = 'jpg-to-png';
         let originalFile = null;
         let convertedBlob = null;
-
-        // File Input Handler
-        document.getElementById('fileInput').addEventListener('change', handleFileSelect);
-
-        // Drag & Drop Handlers
-        const uploadZone = document.getElementById('uploadZone');
-        uploadZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadZone.classList.add('drag-over');
-        });
-
-        uploadZone.addEventListener('dragleave', () => {
-            uploadZone.classList.remove('drag-over');
-        });
-
+        
+        document.getElementById('fileInput').addEventListener('change', handleFile);
+        
+        const uploadZone = document.querySelector('.upload-zone');
+        uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.style.background = '#1e293b'; });
+        uploadZone.addEventListener('dragleave', () => { uploadZone.style.background = '#0f172a'; });
         uploadZone.addEventListener('drop', (e) => {
             e.preventDefault();
-            uploadZone.classList.remove('drag-over');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) handleFile(files[0]);
+            uploadZone.style.background = '#0f172a';
+            if (e.dataTransfer.files[0]) {
+                document.getElementById('fileInput').files = e.dataTransfer.files;
+                handleFile({ target: { files: e.dataTransfer.files } });
+            }
         });
-
-        // Switch Mode
+        
         function switchMode(mode) {
             currentMode = mode;
-            document.querySelectorAll('.convert-tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             event.target.classList.add('active');
             
             const uploadTitle = document.getElementById('uploadTitle');
             const fileInput = document.getElementById('fileInput');
             
             if (mode === 'jpg-to-png') {
-                uploadTitle.textContent = 'Click to Upload JPG Image';
+                uploadTitle.textContent = '📁 Click to Upload JPG Image';
                 fileInput.accept = 'image/jpeg,image/jpg';
-                document.getElementById('pngOptions').style.display = 'block';
-                document.getElementById('jpgOptions').style.display = 'none';
-            } else {
-                uploadTitle.textContent = 'Click to Upload PNG Image';
-                fileInput.accept = 'image/png';
                 document.getElementById('pngOptions').style.display = 'none';
-                document.getElementById('jpgOptions').style.display = 'block';
+            } else if (mode === 'png-to-jpg') {
+                uploadTitle.textContent = '📁 Click to Upload PNG Image';
+                fileInput.accept = 'image/png';
+                document.getElementById('pngOptions').style.display = 'block';
+            } else {
+                uploadTitle.textContent = '📁 Click to Upload Image';
+                fileInput.accept = 'image/*';
+                document.getElementById('pngOptions').style.display = 'none';
             }
-            
             resetAll();
         }
-
-        // Handle File Select
-        function handleFileSelect(e) {
+        
+        function handleFile(e) {
             const file = e.target.files[0];
-            if (file) handleFile(file);
-        }
-
-        // Handle File
-        function handleFile(file) {
-            const isValidJPG = (currentMode === 'jpg-to-png') && (file.type === 'image/jpeg' || file.type === 'image/jpg');
-            const isValidPNG = (currentMode === 'png-to-jpg') && (file.type === 'image/png');
+            if (!file) return;
+            if (file.size > 10 * 1024 * 1024) { alert('File too large. Max 10MB'); return; }
+            if (!file.type.startsWith('image/')) { alert('Please select an image file'); return; }
             
-            if (!isValidJPG &&!isValidPNG) {
-                alert(`Please upload a ${currentMode === 'jpg-to-png'? 'JPG' : 'PNG'} file`);
-                return;
-            }
-            
-            if (file.size > 10 * 1024 * 1024) {
-                alert('File is too large. Max 10MB allowed');
-                return;
-            }
-
             originalFile = file;
             const reader = new FileReader();
-            
             reader.onload = (e) => {
                 const img = new Image();
                 img.onload = () => {
                     document.getElementById('originalPreview').src = e.target.result;
-                    document.getElementById('originalFormat').textContent = file.type.split('/')[1].toUpperCase();
-                    document.getElementById('originalSize').textContent = formatFileSize(file.size);
-                    document.getElementById('originalDimensions').textContent = `${img.width} x ${img.height} px`;
-                    
-                    document.getElementById('previewSection').classList.add('active');
-                    document.getElementById('convertedPreview').style.display = 'none';
-                    document.getElementById('convertedPlaceholder').style.display = 'block';
-                    document.getElementById('convertedInfo').style.display = 'none';
-                    document.getElementById('downloadSection').style.display = 'none';
+                    document.getElementById('originalInfo').innerHTML = `
+                        Format: ${file.type.split('/')[1].toUpperCase()}<br>
+                        Size: ${(file.size / 1024).toFixed(2)} KB<br>
+                        Dimensions: ${img.width} x ${img.height} px
+                    `;
+                    document.getElementById('converterSection').style.display = 'block';
                 };
                 img.src = e.target.result;
             };
             reader.readAsDataURL(file);
         }
-
-        // Format File Size
-        function formatFileSize(bytes) {
-            if (bytes < 1024) return bytes + ' B';
-            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
-            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
-        }
-
-        // Convert Image
+        
         function convertImage() {
-            if (!originalFile) {
-                alert('Please upload an image first');
-                return;
-            }
-
+            if (!originalFile) { alert('Please upload an image first'); return; }
+            
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             const img = new Image();
@@ -325,7 +208,6 @@
                 canvas.width = img.width;
                 canvas.height = img.height;
                 
-                // For PNG to JPG: fill white background if checkbox checked
                 if (currentMode === 'png-to-jpg' && document.getElementById('whiteBg').checked) {
                     ctx.fillStyle = '#FFFFFF';
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -333,47 +215,39 @@
                 
                 ctx.drawImage(img, 0, 0);
                 
-                // Convert to target format
-                const outputFormat = currentMode === 'jpg-to-png'? 'image/png' : 'image/jpeg';
-                const quality = currentMode === 'png-to-jpg'? 0.92 : 1.0;
+                let outputFormat = 'image/jpeg';
+                if (currentMode === 'jpg-to-png') outputFormat = 'image/png';
+                else if (currentMode === 'to-webp') outputFormat = 'image/webp';
+                
+                const quality = currentMode === 'jpg-to-png' ? 1.0 : parseFloat(document.getElementById('quality').value);
                 
                 canvas.toBlob((blob) => {
                     convertedBlob = blob;
-                    
-                    // Update preview
-                    const convertedPreview = document.getElementById('convertedPreview');
-                    convertedPreview.src = URL.createObjectURL(blob);
-                    convertedPreview.style.display = 'block';
+                    const url = URL.createObjectURL(blob);
+                    document.getElementById('convertedPreview').src = url;
+                    document.getElementById('convertedPreview').style.display = 'block';
                     document.getElementById('convertedPlaceholder').style.display = 'none';
-                    
-                    // Update info
-                    document.getElementById('convertedFormat').textContent = outputFormat.split('/')[1].toUpperCase();
-                    document.getElementById('convertedSize').textContent = formatFileSize(blob.size);
-                    document.getElementById('convertedDimensions').textContent = `${img.width} x ${img.height} px`;
                     document.getElementById('convertedInfo').style.display = 'block';
-                    
-                    // Show download button
-                    document.getElementById('downloadSection').style.display = 'grid';
-                    document.getElementById('downloadBtn').onclick = () => downloadImage();
-                    
+                    document.getElementById('convertedInfo').innerHTML = `
+                        Format: ${outputFormat.split('/')[1].toUpperCase()}<br>
+                        Size: ${(blob.size / 1024).toFixed(2)} KB<br>
+                        Dimensions: ${img.width} x ${img.height} px
+                    `;
+                    document.getElementById('downloadBtn').style.display = 'block';
                 }, outputFormat, quality);
             };
             
             const reader = new FileReader();
-            reader.onload = (e) => {
-                img.src = e.target.result;
-            };
+            reader.onload = (e) => { img.src = e.target.result; };
             reader.readAsDataURL(originalFile);
         }
-
-        // Download Image
+        
         function downloadImage() {
             if (!convertedBlob) return;
-            
             const url = URL.createObjectURL(convertedBlob);
             const a = document.createElement('a');
             a.href = url;
-            const ext = currentMode === 'jpg-to-png'? 'png' : 'jpg';
+            const ext = currentMode === 'jpg-to-png' ? 'png' : currentMode === 'png-to-jpg' ? 'jpg' : 'webp';
             const originalName = originalFile.name.split('.')[0];
             a.download = `${originalName}-converted.${ext}`;
             document.body.appendChild(a);
@@ -381,15 +255,13 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
-
-        // Reset All
+        
         function resetAll() {
             originalFile = null;
             convertedBlob = null;
-            
             document.getElementById('fileInput').value = '';
-            document.getElementById('previewSection').classList.remove('active');
-            document.getElementById('downloadSection').style.display = 'none';
+            document.getElementById('converterSection').style.display = 'none';
+            document.getElementById('downloadBtn').style.display = 'none';
             document.getElementById('originalPreview').src = '';
             document.getElementById('convertedPreview').src = '';
         }
