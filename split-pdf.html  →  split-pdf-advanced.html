@@ -1,115 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Split PDF Online | Extract Pages from PDF | Download ZIP</title>
-    <meta name="description" content="Free online PDF splitter. Upload PDF, select pages to extract, split into multiple files. Download as ZIP. Preview pages, batch split coming soon.">
-    <meta name="keywords" content="split pdf, extract pdf pages, pdf splitter online, separate pdf pages, pdf page extractor, download pdf pages">
-    <link rel="canonical" href="https://aihubpro.in/split-pdf.html">
+    <title>Split PDF - AIHubPro | Extract PDF Pages Online Free</title>
+    <meta name="description" content="Free PDF Splitter. Extract specific pages from PDF. Split by range or select pages. Download as PDF or ZIP.">
     
-    <!-- Google AdSense - COMPULSORY -->
+    <!-- ===== AIHUBPRO COMPLETE SYSTEM ===== -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-    
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Libraries: PDF-lib + JSZip + PDF.js -->
+    <script>
+    function checkAccess() {
+        const now = Date.now();
+        const trialStart = localStorage.getItem('aihubpro_trial_start');
+        const isPaid = localStorage.getItem('aihubpro_paid') === 'true';
+        const paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
+        if (isPaid && paidExpiry && now < parseInt(paidExpiry)) return true;
+        if (!trialStart) { localStorage.setItem('aihubpro_trial_start', now.toString()); return true; }
+        const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
+        if (elapsed < 300) return true;
+        const nextFree = parseInt(trialStart) + (24 * 60 * 60 * 1000);
+        if (now < nextFree) { alert('⏰ 5 Minute Free Trial Khatam!\n\nAgla Free Access: ' + new Date(nextFree).toLocaleString('hi-IN') + '\n\n⚖️ Jurisdiction: Yamunanagar Court Only'); window.location.href = '/'; return false; }
+        localStorage.removeItem('aihubpro_trial_start'); return true;
+    }
+    const AIHUB_ADS = { client: 'ca-pub-XXXXXXXXXXXXXXXX', getConfig: () => { if (!localStorage.getItem('aihubpro_ads_master')) { localStorage.setItem('aihubpro_ads_master', JSON.stringify({ show_666: true, show_999: false, show_free: false })); } return JSON.parse(localStorage.getItem('aihubpro_ads_master')); }, canShow: () => { const plan = localStorage.getItem('aihubpro_plan'); const paid = localStorage.getItem('aihubpro_paid') === 'true'; const cfg = AIHUB_ADS.getConfig(); if (!paid) return false; if (plan === '666' && cfg.show_666) return true; if (plan === '999' && cfg.show_999) return true; return false; }, load: () => { if (!AIHUB_ADS.canShow()) return; const adCode = `<ins class="adsbygoogle" style="display:block" data-ad-client="${AIHUB_ADS.client}" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>`; document.querySelectorAll('.aihub-ad-box').forEach(box => { box.innerHTML = adCode; box.style.display = 'block'; }); (adsbygoogle = window.adsbygoogle || []).push({}); } };
+    if (!checkAccess()) { document.body.innerHTML = '<h1 style="text-align:center;margin-top:50px;color:#ef4444;font-family:system-ui;">Access Blocked - Buy Plan<br><small style="font-size:16px;color:#94a3b8;">⚖️ Yamunanagar Court, Haryana</small></h1>'; } else { document.addEventListener('DOMContentLoaded', AIHUB_ADS.load); }
+    </script>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-
+    <!-- ===== SYSTEM END ===== -->
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 20px; }
-  .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #0d6efd; margin-bottom: 10px; font-size: 28px; }
-  .subtitle { text-align: center; color: #666; margin-bottom: 25px; }
-       
-       /* ADSENSE PLACEHOLDER - COMPULSORY */
-  .ad-placeholder { 
-           background: #f8f9fa; border: 2px dashed #dee2e6; padding: 20px; 
-           text-align: center; margin: 20px 0; border-radius: 8px; min-height: 90px;
-           display: flex; align-items: center; justify-content: center; color: #6c757d;
-       }
-  .ad-placeholder::before { content: "Advertisement"; font-size: 12px; }
-       
-  .upload-zone { border: 3px dashed #0d6efd; padding: 50px 20px; text-align: center; border-radius: 12px; background: #f0f7ff; cursor: pointer; transition: all 0.3s; }
-  .upload-zone:hover { background: #e7f3ff; border-color: #0a58ca; }
-  .upload-zone.drag-over { background: #d1e7ff; border-color: #0d6efd; border-style: solid; }
-  .upload-zone svg { width: 60px; height: 60px; color: #0d6efd; margin-bottom: 15px; }
-  .upload-zone h3 { color: #0d6efd; margin-bottom: 10px; font-size: 20px; }
-  .upload-zone p { color: #666; font-size: 14px; }
-  #fileInput { display: none; }
-       
-  .file-info { margin-top: 25px; padding: 20px; background: #f8f9fa; border-radius: 8px; display: none; }
-  .file-info.active { display: block; }
-  .file-info-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px solid #0d6efd; }
-  .file-info h3 { color: #0d6efd; font-size: 18px; }
-  .file-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
-  .stat-item { text-align: center; }
-  .stat-label { font-size: 12px; color: #666; margin-bottom: 5px; }
-  .stat-value { font-size: 24px; font-weight: 700; color: #0d6efd; }
-       
-  .pages-section { margin-top: 30px; display: none; }
-  .pages-section.active { display: block; }
-  .pages-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #0d6efd; }
-  .pages-header h3 { color: #0d6efd; font-size: 18px; }
-  .selection-tools { display: flex; gap: 10px; flex-wrap: wrap; }
-       
-  .pages-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-top: 20px; max-height: 600px; overflow-y: auto; padding: 10px; }
-  .page-item { background: white; border: 2px solid #e0e0e0; border-radius: 8px; padding: 10px; cursor: pointer; transition: all 0.3s; position: relative; }
-  .page-item:hover { border-color: #0d6efd; box-shadow: 0 4px 12px rgba(13,110,253,0.15); }
-  .page-item.selected { border-color: #28a745; background: #f0fff4; }
-  .page-checkbox { position: absolute; top: 5px; right: 5px; width: 24px; height: 24px; cursor: pointer; }
-  .page-number { text-align: center; font-weight: 700; color: #0d6efd; margin-bottom: 8px; font-size: 14px; }
-  .page-preview { width: 100%; height: 140px; background: #f8f9fa; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #999; }
-  .page-preview canvas { max-width: 100%; max-height: 100%; }
-       
-  .progress-container { margin: 25px 0; display: none; }
-  .progress-label { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; font-weight: 600; color: #333; }
-  .progress-bar { width: 100%; height: 12px; background: #e0e0e0; border-radius: 10px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, #0d6efd, #28a745); width: 0%; transition: width 0.3s; border-radius: 10px; }
-       
-  .btn { padding: 14px 28px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; margin: 5px; transition: all 0.3s; }
-  .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-  .btn-primary { background: #0d6efd; color: white; }
-  .btn-success { background: #28a745; color: white; }
-  .btn-secondary { background: #6c757d; color: white; }
-  .btn-warning { background: #ffc107; color: #000; }
-  .btn-small { padding: 8px 16px; font-size: 13px; }
-  .btn:disabled { background: #ccc; cursor: not-allowed; transform: none; }
-  .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-       
-  .future-section { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 12px; margin-top: 30px; }
-  .future-section h3 { color: #856404; margin-bottom: 15px; }
-  .future-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-  .future-item { background: white; padding: 20px; border-radius: 8px; text-align: center; }
-  .future-badge { display: inline-block; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
-       
-  .legal-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
-       
-        @media print {.no-print,.ad-placeholder { display: none!important; } body { background: white; padding: 0; }}
-        @media (max-width: 768px) {.btn-row { grid-template-columns: 1fr; }.pages-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }}
+        body { background: #0f172a; color: #f1f5f9; font-family: system-ui; padding: 20px; padding-bottom: 70px; }
+    .container { max-width: 900px; margin: 0 auto; }
+        h1 { color: #3b82f6; text-align: center; margin-bottom: 10px; }
+    .subtitle { text-align: center; color: #94a3b8; margin-bottom: 20px; font-size: 14px; }
+    .tool-box { background: #1e293b; padding: 30px; border-radius: 12px; border: 1px solid #334155; }
+        input, button, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #475569; background: #334155; color: white; font-size: 14px; }
+        button { background: #3b82f6; cursor: pointer; font-weight: bold; font-size: 16px; }
+        button:hover { background: #2563eb; }
+    .back-btn { background: #475569; width: auto; padding: 8px 16px; margin-bottom: 20px; }
+    .aihub-ad-box { display: none; text-align: center; margin: 20px auto; padding: 12px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; max-width: 728px; }
+    .footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #1e293b; padding: 10px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #334155; z-index: 100; }
+    .upload-zone { border: 3px dashed #3b82f6; padding: 50px 20px; text-align: center; border-radius: 12px; background: #0f172a; cursor: pointer; transition: all 0.3s; }
+    .upload-zone:hover { background: #1e293b; border-color: #2563eb; }
+    .upload-zone h3 { color: #3b82f6; margin-bottom: 10px; }
+    .upload-zone p { color: #94a3b8; font-size: 13px; }
+    .file-info { margin-top: 20px; padding: 20px; background: #0f172a; border-radius: 8px; display: none; border: 1px solid #334155; }
+    .file-info.active { display: block; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 15px; }
+    .info-card { background: #1e293b; padding: 15px; border-radius: 8px; text-align: center; }
+    .info-label { font-size: 12px; color: #94a3b8; margin-bottom: 5px; }
+    .info-value { font-size: 24px; font-weight: 700; color: #3b82f6; }
+    .tabs { display: flex; gap: 10px; margin: 20px 0; border-bottom: 2px solid #334155; }
+    .tab { padding: 10px 20px; background: #334155; border: none; border-radius: 8px 8px 0 0; color: #94a3b8; cursor: pointer; font-weight: 500; }
+    .tab.active { background: #3b82f6; color: white; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .btn-success { background: #10b981; }
+    .btn-success:hover { background: #059669; }
+    label { display: block; color: #cbd5e1; font-size: 13px; margin-top: 12px; margin-bottom: 6px; font-weight: 500; }
+    .progress-container { margin: 20px 0; display: none; }
+    .progress-bar { width: 100%; height: 12px; background: #334155; border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #10b981); width: 0%; transition: width 0.3s; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Split PDF Files</h1>
-        <p class="subtitle">Extract Specific Pages from PDF - Download as ZIP</p>
-
-        <!-- ADSENSE TOP BANNER - COMPULSORY -->
-        <div class="ad-placeholder no-print">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <button onclick="window.location.href='/'" class="back-btn">← Back to Home</button>
+        <h1>✂️ Split PDF Files</h1>
+        <p class="subtitle">Extract Specific Pages from PDF - Download as PDF or ZIP</p>
+        
+        <div class="aihub-ad-box"></div>
+        
+        <div class="tool-box">
+            <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+                <h3>📁 Click to Upload PDF</h3>
+                <p>Or drag & drop file here</p>
+                <p style="font-size:12px;margin-top:10px;">Supports PDF files • Max 50MB</p>
+                <input type="file" id="fileInput" accept=".pdf" style="display:none;">
+            </div>
+            
+            <div class="aihub-ad-box"></div>
+            
+            <div class="file-info" id="fileInfo">
+                <h3 style="color:#10b981;margin-bottom:15px;">📄 File Loaded</h3>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-label">File Name</div>
+                        <div class="info-value" id="fileName" style="font-size:14px;">-</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">Total Pages</div>
+                        <div class="info-value" id="totalPages">0</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-label">File Size</div>
+                        <div class="info-value" id="fileSize" style="font-size:14px;">-</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tabs" id="tabs" style="display:none;">
+                <button class="tab active" onclick="switchTab('range')">Page Range</button>
+                <button class="tab" onclick="switchTab('specific')">Specific Pages</button>
+                <button class="tab" onclick="switchTab('each')">Each Page Separately</button>
+            </div>
+            
+            <div id="range-tab" class="tab-content active">
+                <label>Page Range [e.g. 1-3, 7-9]:</label>
+                <input type="text" id="pageRange" placeholder="1-5, 8-10">
+                <p style="color:#94a3b8;font-size:12px;margin-top:5px;">💡 Example: "1-5" extracts pages 1 to 5, "1-3, 7-9" extracts multiple ranges</p>
+            </div>
+            
+            <div id="specific-tab" class="tab-content">
+                <label>Specific Pages [e.g. 1, 3, 5, 7]:</label>
+                <input type="text" id="specificPages" placeholder="1, 3, 5, 7">
+                <p style="color:#94a3b8;font-size:12px;margin-top:5px;">💡 Example: "1, 3, 5" extracts only page 1, 3, and 5</p>
+            </div>
+            
+            <div id="each-tab" class="tab-content">
+                <p style="color:#94a3b8;font-size:13px;margin:15px 0;">💡 This will split every page into separate PDF files and download as ZIP</p>
+            </div>
+            
+            <div class="progress-container" id="progressContainer">
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;">
+                    <span>Processing PDF...</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <button onclick="splitPDF()" id="splitBtn" style="display:none;">✂️ Split PDF</button>
+            <div id="status"></div>
         </div>
-
-        <!-- UPLOAD ZONE -->
-        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-            </svg>
-            <h3>Click to Upload PDF</h3>
-            <p>Or drag & drop file here</p>
-            <p style="font-size: 12px; margin-top: 10px; color: #999;">Supports PDF files • Max 50MB</p>
-            <input type="file" id="fileInput" accept=".
+        
+        <div class="aihub-ad-box"></div>
+        
+        <div class="footer">
+            ⚖️ Jurisdiction: Yamunanagar District Court, Haryana Only | IT Act 2000 Sec 79 Compliant | AIHubPro
+        </div>
+    </div>
+    
+    <script>
+        let pdfFile = null;
+        let pdfDoc = null;
+        let currentTab = 'range';
+        
+        document.getElementById('fileInput').addEventListener('change', handleFile);
+        
+        const uploadZone = document.getElementById('uploadZone');
+        uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.style.background = '#1e293b'; });
+        uploadZone.addEventListener('dragleave', () => { uploadZone.style.background = '#0f172a'; });
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.style.background = '#0f172a';
+            if (e.dataTransfer.files[0]) {
+                document.getElementById('fileInput').files = e.dataTransfer.files;
+                handleFile({ target: { files: e.dataTransfer.files } });
+            }
+        });
+        
+        async function handleFile(e) {
+            const file = e.target.files[0];
+            if (!file || file.type !== 'application/pdf') {
+                alert('Please select a valid PDF file');
+                return;
+            }
+            
+            pdfFile = file;
+            const bytes = await file.arrayBuffer();
+            pdfDoc = await PDFLib.PDFDocument.load(bytes);
+            
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('totalPages').textContent = pdfDoc.getPageCount();
+            document.getElementById('fileSize').textContent = (file.size / 1024).toFixed(1) + ' KB';
+            document.getElementById('fileInfo').classList.add('active');
+            document.getElementById('tabs').style.display = 'flex';
+            document.getElementById('splitBtn').style.display = 'block';
+        }
+        
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(tab + '-tab').classList.add('active');
+        }
+        
+        async function splitPDF() {
+            if (!pdfDoc) { alert('Select a PDF file first'); return; }
+            
+            const status = document.getElementById('status');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressFill = document.getElementById('progressFill');
+            const progressPercent = document.getElementById('progressPercent');
+            progressContainer.style.display = 'block';
+            status.innerHTML = '';
+            
+            try {
+                let pages = [];
+                
+                if (currentTab === 'range') {
+                    const input = document.getElementById('pageRange').value;
+                    if (!input) { alert('Enter page range'); progressContainer.style.display = 'none'; return; }
+                    pages = parseRange(input, pdfDoc.getPageCount());
+                } else if (currentTab === 'specific') {
+                    const input = document.getElementById('specificPages').value;
+                    if (!input) { alert('Enter page numbers'); progressContainer.style.display = 'none'; return; }
+                    pages = parseSpecific(input, pdfDoc.getPageCount());
+                } else if (currentTab === 'each') {
+                    pages = Array.from({ length: pdfDoc.getPageCount() }, (_, i) => i);
+                }
+                
+                if (pages.length === 0) { alert('No valid pages selected'); progressContainer.style.display = 'none'; return; }
+                
+                if (currentTab === 'each') {
+                    const zip = new JSZip();
+                    for (let i = 0; i < pages.length; i++) {
+                        const newPdf = await PDFLib.PDFDocument.create();
+                        const [copiedPage] = await newPdf.copyPages(pdfDoc, [pages[i]]);
+                        newPdf.addPage(copiedPage);
+                        const pdfBytes = await newPdf.save();
+                        zip.file(`page-${pages[i] + 1}.pdf`, pdfBytes);
+                        
+                        const progress = ((i + 1) / pages.length) * 100;
+                        progressFill.style.width = progress + '%';
+                        progressPercent.textContent = Math.round(progress) + '%';
+                    }
+                    const zipBlob = await zip.generateAsync
