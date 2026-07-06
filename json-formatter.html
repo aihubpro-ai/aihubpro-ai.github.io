@@ -3,100 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free JSON Formatter & Validator | Beautify, Minify, Tree View Online</title>
-    <meta name="description" content="Free online JSON formatter, beautifier, minifier and validator. View JSON in tree structure. Copy and download formatted JSON. XML and YAML converter coming soon.">
-    <meta name="keywords" content="json formatter, json beautifier, json minify, json validator, json tree view, format json online, json pretty print">
-    <link rel="canonical" href="https://aihubpro.in/json-formatter.html">
+    <title>JSON Formatter & Validator - AIHubPro | Beautify, Minify, Tree View Online</title>
+    <meta name="description" content="Free online JSON formatter, beautifier, minifier and validator. View JSON in tree structure. Format JSON instantly.">
+    <meta name="keywords" content="json formatter, json beautifier, json minify, json validator, json tree view, format json online">
+    <link rel="canonical" href="https://aihubpro-ai.github.io/json-formatter.html">
     
-    <!-- Google AdSense - COMPULSORY -->
+    <!-- ===== AIHUBPRO COMPLETE SYSTEM ===== -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+    <script>
+    function checkAccess() {
+        const now = Date.now();
+        const trialStart = localStorage.getItem('aihubpro_trial_start');
+        const isPaid = localStorage.getItem('aihubpro_paid') === 'true';
+        const paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
+        if (isPaid && paidExpiry && now < parseInt(paidExpiry)) return true;
+        if (!trialStart) { localStorage.setItem('aihubpro_trial_start', now.toString()); return true; }
+        const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
+        if (elapsed < 300) return true;
+        const nextFree = parseInt(trialStart) + (24 * 60 * 60 * 1000);
+        if (now < nextFree) { alert('⏰ 5 Minute Free Trial Khatam!\n\nAgla Free Access: ' + new Date(nextFree).toLocaleString('hi-IN') + '\n\n⚖️ Jurisdiction: Yamunanagar Court Only'); window.location.href = '/'; return false; }
+        localStorage.removeItem('aihubpro_trial_start'); return true;
+    }
+    const AIHUB_ADS = { client: 'ca-pub-XXXXXXXXXXXXXXXX', getConfig: () => { if (!localStorage.getItem('aihubpro_ads_master')) { localStorage.setItem('aihubpro_ads_master', JSON.stringify({ show_666: true, show_999: false, show_free: false })); } return JSON.parse(localStorage.getItem('aihubpro_ads_master')); }, canShow: () => { const plan = localStorage.getItem('aihubpro_plan'); const paid = localStorage.getItem('aihubpro_paid') === 'true'; const cfg = AIHUB_ADS.getConfig(); if (!paid) return false; if (plan === '666' && cfg.show_666) return true; if (plan === '999' && cfg.show_999) return true; return false; }, load: () => { if (!AIHUB_ADS.canShow()) return; const adCode = `<ins class="adsbygoogle" style="display:block" data-ad-client="${AIHUB_ADS.client}" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins>`; document.querySelectorAll('.aihub-ad-box').forEach(box => { box.innerHTML = adCode; box.style.display = 'block'; }); (adsbygoogle = window.adsbygoogle || []).push({}); } };
+    if (!checkAccess()) { document.body.innerHTML = '<h1 style="text-align:center;margin-top:50px;color:#ef4444;font-family:system-ui;">Access Blocked - Buy Plan<br><small style="font-size:16px;color:#94a3b8;">⚖️ Yamunanagar Court, Haryana</small></h1>'; } else { document.addEventListener('DOMContentLoaded', AIHUB_ADS.load); }
+    </script>
+    <!-- ===== SYSTEM END ===== -->
     
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #f5f7fa; color: #1a1a2e; padding: 20px; }
-.container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #0d6efd; margin-bottom: 10px; font-size: 28px; }
-.subtitle { text-align: center; color: #666; margin-bottom: 25px; }
-       
-       /* ADSENSE PLACEHOLDER - COMPULSORY */
-.ad-placeholder { 
-           background: #f8f9fa; border: 2px dashed #dee2e6; padding: 20px; 
-           text-align: center; margin: 20px 0; border-radius: 8px; min-height: 90px;
-           display: flex; align-items: center; justify-content: center; color: #6c757d;
-       }
-.ad-placeholder::before { content: "Advertisement"; font-size: 12px; }
-       
-.editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-.editor-section { border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; }
-.editor-header { background: #f8f9fa; padding: 12px 15px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center; }
-.editor-header h3 { color: #0d6efd; font-size: 16px; margin: 0; }
-.editor-actions { display: flex; gap: 8px; }
-       
-.btn-small { padding: 6px 12px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px; transition: all 0.3s; }
-.btn-small:hover { transform: translateY(-1px); }
-.btn-primary { background: #0d6efd; color: white; }
-.btn-success { background: #28a745; color: white; }
-.btn-secondary { background: #6c757d; color: white; }
-.btn-danger { background: #dc3545; color: white; }
-       
-textarea,.tree-view { 
-           width: 100%; height: 500px; padding: 15px; border: none; font-family: 'Courier New', monospace; 
-           font-size: 14px; line-height: 1.6; resize: none; background: #fafbfc;
-       }
-textarea:focus { outline: none; background: white; }
-.tree-view { overflow: auto; background: white; }
-       
-.validation-status { padding: 12px; border-radius: 6px; margin-bottom: 15px; font-weight: 600; font-size: 14px; display: none; }
-.validation-status.valid { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; display: block; }
-.validation-status.invalid { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; display: block; }
-       
-.tab-buttons { display: flex; gap: 8px; margin-bottom: 15px; }
-.tab-btn { padding: 10px 20px; background: #f8f9fa; border: 2px solid #e0e0e0; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; transition: all 0.3s; }
-.tab-btn.active { background: #0d6efd; color: white; border-color: #0d6efd; }
-.tab-btn:hover { background: #e0e0e0; }
-.tab-btn.active:hover { background: #0a58ca; }
-       
-.tree-item { margin-left: 20px; }
-.tree-key { color: #0d6efd; font-weight: 600; }
-.tree-string { color: #28a745; }
-.tree-number { color: #fd7e14; }
-.tree-boolean { color: #6f42c1; font-weight: 600; }
-.tree-null { color: #6c757d; font-style: italic; }
-.tree-toggle { cursor: pointer; user-select: none; color: #0d6efd; font-weight: 700; margin-right: 5px; }
-       
-.btn-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
-.btn { padding: 14px 20px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; transition: all 0.3s; }
-.btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-       
-.future-section { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 12px; margin-top: 30px; }
-.future-section h3 { color: #856404; margin-bottom: 15px; }
-.future-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-.future-item { background: white; padding: 20px; border-radius: 8px; text-align: center; }
-.future-badge { display: inline-block; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
-       
-.legal-footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #666; }
-       
-        @media print {.no-print,.ad-placeholder { display: none!important; } body { background: white; padding: 0; }}
-        @media (max-width: 768px) {.editor-grid { grid-template-columns: 1fr; }.btn-row { grid-template-columns: 1fr 1fr; } textarea,.tree-view { height: 300px; }}
+        body { font-family: 'Inter', sans-serif; background: #0f172a; color: #f1f5f9; padding: 20px; padding-bottom: 70px; }
+       .container { max-width: 1400px; margin: 0 auto; }
+        h1 { text-align: center; color: #3b82f6; margin-bottom: 10px; font-size: 28px; }
+       .subtitle { text-align: center; color: #94a3b8; margin-bottom: 25px; }
+        
+        /* ADSENSE - AIHUBPRO SYSTEM */
+       .aihub-ad-box { display: none; text-align: center; margin: 20px auto; padding: 12px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; max-width: 728px; }
+        
+       .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+       .editor-section { background: #1e293b; border: 1px solid #334155; border-radius: 8px; overflow: hidden; }
+       .editor-header { background: #0f172a; padding: 12px 15px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
+       .editor-header h3 { color: #3b82f6; font-size: 16px; margin: 0; }
+       .editor-actions { display: flex; gap: 8px; }
+        
+       .btn-small { padding: 6px 12px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px; transition: all 0.3s; }
+       .btn-small:hover { transform: translateY(-1px); }
+       .btn-primary { background: #0d6efd; color: white; }
+       .btn-success { background: #28a745; color: white; }
+       .btn-secondary { background: #6c757d; color: white; }
+       .btn-danger { background: #dc3545; color: white; }
+        
+        textarea,.tree-view { width: 100%; height: 500px; padding: 15px; border: none; font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.6; resize: none; background: #0f172a; color: #10b981; }
+        textarea:focus { outline: none; background: #1a2332; }
+       .tree-view { overflow: auto; background: #0f172a; }
+        
+       .validation-status { padding: 12px; border-radius: 6px; margin-bottom: 15px; font-weight: 600; font-size: 14px; display: none; }
+       .validation-status.valid { background: #065f46; color: #10b981; border: 1px solid #10b981; display: block; }
+       .validation-status.invalid { background: #7f1d1d; color: #ef4444; border: 1px solid #ef4444; display: block; }
+        
+       .tab-buttons { display: flex; gap: 8px; margin-bottom: 15px; }
+       .tab-btn { padding: 10px 20px; background: #1e293b; border: 2px solid #334155; border-radius: 6px; cursor: pointer; font-weight: 600; color: #94a3b8; }
+       .tab-btn.active { background: #0d6efd; color: white; border-color: #0d6efd; }
+       .tab-btn:hover { background: #334155; }
+       .tab-btn.active:hover { background: #0a58ca; }
+        
+       .tree-item { margin-left: 20px; }
+       .tree-key { color: #3b82f6; font-weight: 600; }
+       .tree-string { color: #28a745; }
+       .tree-number { color: #fd7e14; }
+       .tree-boolean { color: #6f42c1; font-weight: 600; }
+       .tree-null { color: #6c757d; font-style: italic; }
+       .tree-toggle { cursor: pointer; user-select: none; color: #3b82f6; font-weight: 700; margin-right: 5px; }
+       .tree-children { margin-left: 15px; }
+        
+       .btn-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0; }
+       .btn { padding: 14px 20px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 15px; transition: all 0.3s; }
+       .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+       .btn-primary { background: #0d6efd; color: white; }
+       .btn-success { background: #28a745; color: white; }
+       .btn-secondary { background: #6c757d; color: white; }
+       .btn-danger { background: #dc3545; color: white; }
+        
+       .future-section { background: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 12px; margin-top: 30px; }
+       .future-section h3 { color: #856404; margin-bottom: 15px; }
+       .future-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+       .future-item { background: white; padding: 20px; border-radius: 8px; text-align: center; color: #1a1a2e; }
+       .future-badge { display: inline-block; background: #ffc107; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+        
+       .footer { position: fixed; bottom: 0; left: 0; width: 100%; background: #1e293b; padding: 10px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #334155; z-index: 100; }
+        
+       .back-btn { background: #475569; width: auto; padding: 8px 16px; margin-bottom: 20px; border: none; border-radius: 6px; color: white; cursor: pointer; font-weight: 600; }
+        
+        @media print {.no-print,.aihub-ad-box { display: none!important; } body { background: white; padding: 0; } }
+        @media (max-width: 768px) {.editor-grid { grid-template-columns: 1fr; }.btn-row { grid-template-columns: 1fr 1fr; } }
     </style>
 </head>
 <body>
     <div class="container">
+        <button onclick="window.location.href='/'" class="back-btn">← Back to Home</button>
         <h1>JSON Formatter & Validator</h1>
         <p class="subtitle">Beautify, Minify, Validate and View JSON in Tree Structure</p>
-
-        <!-- ADSENSE TOP BANNER - COMPULSORY -->
-        <div class="ad-placeholder no-print">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
+        
+        <!-- ADSENSE TOP BANNER -->
+        <div class="aihub-ad-box"></div>
+        
         <!-- VALIDATION STATUS -->
         <div class="validation-status" id="validationStatus"></div>
-
+        
         <!-- ACTION BUTTONS -->
         <div class="btn-row">
             <button class="btn btn-primary" onclick="beautifyJSON()">✨ Beautify</button>
@@ -104,7 +119,10 @@ textarea:focus { outline: none; background: white; }
             <button class="btn btn-secondary" onclick="validateJSON()">✓ Validate</button>
             <button class="btn btn-danger" onclick="clearAll()">🗑️ Clear All</button>
         </div>
-
+        
+        <!-- ADSENSE MIDDLE -->
+        <div class="aihub-ad-box"></div>
+        
         <!-- EDITOR GRID -->
         <div class="editor-grid">
             <!-- LEFT: INPUT -->
@@ -116,13 +134,13 @@ textarea:focus { outline: none; background: white; }
                         <button class="btn-small btn-primary" onclick="loadSample()">Sample</button>
                     </div>
                 </div>
-                <textarea id="inputJSON" placeholder="Paste your JSON here...&#10;&#10;Example:&#10;{&quot;name&quot;:&quot;John&quot;,&quot;age&quot;:30,&quot;city&quot;:&quot;New York&quot;}" oninput="autoValidate()"></textarea>
+                <textarea id="inputJSON" placeholder="Paste your JSON here...&#10;&#10;Example:&#10;{&quot;name&quot;:&quot;John&quot;,&quot;age&quot;:30,&quot;city&quot;:&quot;New York&quot;}"></textarea>
             </div>
-
+            
             <!-- RIGHT: OUTPUT -->
             <div class="editor-section">
                 <div class="editor-header">
-                    <h3>📤 Output</h3>
+                    <h3>📦 Output</h3>
                     <div class="editor-actions">
                         <button class="btn-small btn-success" onclick="copyOutput()">Copy</button>
                         <button class="btn-small btn-primary" onclick="downloadJSON()">Download</button>
@@ -133,18 +151,15 @@ textarea:focus { outline: none; background: white; }
                     <button class="tab-btn active" onclick="switchTab('formatted')">Formatted</button>
                     <button class="tab-btn" onclick="switchTab('tree')">Tree View</button>
                 </div>
-
+                
                 <textarea id="outputJSON" readonly style="display:block;"></textarea>
                 <div id="treeView" class="tree-view" style="display:none;"></div>
             </div>
         </div>
-
-        <!-- ADSENSE MIDDLE RECTANGLE - COMPULSORY -->
-        <div class="ad-placeholder no-print">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
+        
+        <!-- ADSENSE BOTTOM -->
+        <div class="aihub-ad-box"></div>
+        
         <!-- FUTURE FEATURES -->
         <div class="future-section no-print">
             <h3>🚀 Coming Soon - Advanced Features</h3>
@@ -166,24 +181,16 @@ textarea:focus { outline: none; background: white; }
                 </div>
             </div>
         </div>
-
-        <!-- ADSENSE BOTTOM BANNER - COMPULSORY -->
-        <div class="ad-placeholder no-print">
-            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
+        
         <!-- Legal Footer -->
-        <div class="legal-footer">
-            <p>All JSON processing happens locally in your browser. We do not store or transmit your data.</p>
-            <p>Generated by <strong>AI Hub Pro Tools</strong> | Free JSON Formatter</p>
-            <p>All disputes subject to exclusive jurisdiction of Courts at <strong>Yamunanagar, Haryana, India</strong> only.</p>
+        <div class="footer">
+            ⚖️ Jurisdiction: Yamunanagar District Court, Haryana Only | IT Act 2000 Sec 79 Compliant | AIHubPro
         </div>
     </div>
-
+    
     <script>
         let currentTab = 'formatted';
-
+        
         function switchTab(tab) {
             currentTab = tab;
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -198,7 +205,7 @@ textarea:focus { outline: none; background: white; }
                 renderTreeView();
             }
         }
-
+        
         function beautifyJSON() {
             const input = document.getElementById('inputJSON').value.trim();
             if (!input) {
@@ -216,7 +223,7 @@ textarea:focus { outline: none; background: white; }
                 showStatus('Invalid JSON: ' + e.message, false);
             }
         }
-
+        
         function minifyJSON() {
             const input = document.getElementById('inputJSON').value.trim();
             if (!input) {
@@ -233,7 +240,7 @@ textarea:focus { outline: none; background: white; }
                 showStatus('Invalid JSON: ' + e.message, false);
             }
         }
-
+        
         function validateJSON() {
             const input = document.getElementById('inputJSON').value.trim();
             if (!input) {
@@ -248,7 +255,7 @@ textarea:focus { outline: none; background: white; }
                 showStatus('Invalid JSON: ' + e.message, false);
             }
         }
-
+        
         function autoValidate() {
             const input = document.getElementById('inputJSON').value.trim();
             if (!input) {
@@ -263,13 +270,13 @@ textarea:focus { outline: none; background: white; }
                 showStatus('Invalid JSON: ' + e.message, false);
             }
         }
-
+        
         function showStatus(message, isValid) {
             const status = document.getElementById('validationStatus');
             status.textContent = message;
             status.className = 'validation-status ' + (isValid? 'valid' : 'invalid');
         }
-
+        
         function renderTreeView() {
             const input = document.getElementById('outputJSON').value.trim() || document.getElementById('inputJSON').value.trim();
             if (!input) return;
@@ -279,10 +286,10 @@ textarea:focus { outline: none; background: white; }
                 const treeHTML = buildTreeHTML(obj, 'root');
                 document.getElementById('treeView').innerHTML = treeHTML;
             } catch (e) {
-                document.getElementById('treeView').innerHTML = '<p style="color:#dc3545;">Invalid JSON - Cannot render tree view</p>';
+                document.getElementById('treeView').innerHTML = '<p style="color:#dc3545;">Invalid JSON - Cannot render tree</p>';
             }
         }
-
+        
         function buildTreeHTML(obj, key, level = 0) {
             if (obj === null) return `<div class="tree-item"><span class="tree-key">${key}:</span> <span class="tree-null">null</span></div>`;
             
@@ -300,10 +307,10 @@ textarea:focus { outline: none; background: white; }
             const bracket = isArray? '[' : '{';
             const closeBracket = isArray? ']' : '}';
             
-            let html = `<div class="tree-item">`;
+            let html = '<div class="tree-item">';
             html += `<span class="tree-toggle" onclick="toggleTree(this)">▼</span>`;
             html += `<span class="tree-key">${key}:</span> ${bracket}`;
-            html += `<div class="tree-children">`;
+            html += '<div class="tree-children">';
             
             if (isArray) {
                 obj.forEach((item, index) => {
@@ -318,7 +325,7 @@ textarea:focus { outline: none; background: white; }
             html += `</div><span>${closeBracket}</span></div>`;
             return html;
         }
-
+        
         function toggleTree(element) {
             const children = element.parentElement.querySelector('.tree-children');
             if (children.style.display === 'none') {
@@ -329,7 +336,7 @@ textarea:focus { outline: none; background: white; }
                 element.textContent = '▶';
             }
         }
-
+        
         function copyOutput() {
             const output = document.getElementById('outputJSON').value;
             if (!output) {
@@ -341,7 +348,7 @@ textarea:focus { outline: none; background: white; }
                 alert('JSON copied to clipboard!');
             });
         }
-
+        
         function downloadJSON() {
             const output = document.getElementById('outputJSON').value;
             if (!output) {
@@ -359,14 +366,39 @@ textarea:focus { outline: none; background: white; }
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
-
+        
         function pasteJSON() {
             navigator.clipboard.readText().then(text => {
                 document.getElementById('inputJSON').value = text;
                 autoValidate();
             });
         }
-
+        
         function loadSample() {
             const sample = {
-                "name": "AI
+                "name": "AI Hub Pro",
+                "version": "1.0.0",
+                "features": ["JSON Formatter", "PDF Tools", "Calculators"],
+                "active": true,
+                "users": 10000,
+                "settings": {
+                    "theme": "dark",
+                    "language": "en"
+                }
+            };
+            document.getElementById('inputJSON').value = JSON.stringify(sample, null, 2);
+            autoValidate();
+        }
+        
+        function clearAll() {
+            document.getElementById('inputJSON').value = '';
+            document.getElementById('outputJSON').value = '';
+            document.getElementById('treeView').innerHTML = '';
+            document.getElementById('validationStatus').style.display = 'none';
+        }
+        
+        // Auto validate on input
+        document.getElementById('inputJSON').addEventListener('input', autoValidate);
+    </script>
+</body>
+</html>
