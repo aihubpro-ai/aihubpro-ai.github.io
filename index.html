@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIHubPro 2026 - Free AI Chat + 18 Tools | Yamunanagar, Haryana</title>
-    <meta name="description" content="India's #1 Free AI: ChatGPT Alternative + GST Calculator + PDF Tools. 5 Min Free Trial Daily. Standard ₹666/month, Premium ₹999/month.">
+    <meta name="description" content="India's #1 Free AI: ChatGPT Alternative + GST Calculator + PDF Tools. 5 Min Free Daily, ₹666 Plan With Ads, ₹999 Premium No Ads.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://aihubpro.in/">
 
-    <!-- ===== RAZORPAY + ADSENSE + MARKED ===== -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <!-- ===== STRIPE + ADSENSE + MARKED ===== -->
+    <script src="https://js.stripe.com/v3/"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 
     <style>
-        :root { --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --accent:#3b82f6; --success:#10b981; --danger:#dc2626; }
+        :root { --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --accent:#3b82f6; --success:#10b981; --danger:#ef4444; }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:system-ui; background:var(--bg); color:var(--text); padding-bottom:240px; }
         .header { background:var(--card); padding:16px 24px; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
@@ -22,42 +22,42 @@
         .logo { font-size:24px; font-weight:800; background:linear-gradient(90deg,#3b82f6,#8b5cf6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
         .nav { display:flex; gap:20px; margin-top:8px; flex-wrap:wrap; }
         .nav a { color:var(--text); text-decoration:none; font-weight:500; font-size:14px; }
-        .trial-timer { background:#dc2626; padding:6px 16px; border-radius:20px; font-size:14px; font-weight:600; margin-left:auto; }
+        .trial-timer { background:#dc2626; padding:6px 16px; border-radius:20px; font-size:14px; font-weight:600; margin-left:12px; }
         .lang-switcher { display:flex; gap:8px; }
-        .lang-btn { padding:6px 12px; background:#334155; border:1px solid #475569; border-radius:6px; color:#e2e8f0; cursor:pointer; font-size:12px; }
+        .lang-btn { padding:6px 12px; background:#334155; border:1px solid #475569; border-radius:6px; color:#e2e8f0; cursor:pointer; }
         .lang-btn.active { background:#3b82f6; border-color:#3b82f6; }
         .lang-btn:hover { background:#475569; }
         .hero { text-align:center; padding:60px 20px; background:linear-gradient(180deg,#1e293b 0%,#0f172a 100%); }
         .hero h1 { font-size:42px; margin-bottom:16px; background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
         .hero p { font-size:18px; color:#94a3b8; margin-bottom:32px; }
-        .cta-btn { padding:16px 32px; background:var(--accent); border:none; border-radius:12px; color:white; font-size:18px; font-weight:700; cursor:pointer; margin:0 8px; }
+        .cta-btn { padding:16px 32px; background:var(--accent); border:none; border-radius:12px; color:white; font-size:18px; font-weight:700; cursor:pointer; margin:5px; }
         .container { max-width:1200px; margin:0 auto; padding:40px 20px; }
         .section-title { font-size:32px; margin-bottom:8px; text-align:center; }
         .section-desc { color:#94a3b8; margin-bottom:32px; text-align:center; }
-        .tools-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; margin-bottom:60px; }
+        .tools-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; margin-bottom:40px; }
         .tool-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; cursor:pointer; transition:all 0.3s; }
-        .tool-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 10px 30px rgba(59,130,246,0.2); }
+        .tool-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 10px 30px rgba(59,130,246,0.3); }
         .tool-card.disabled { opacity:0.3; pointer-events:none; }
         .tool-icon { font-size:40px; margin-bottom:12px; }
         .tool-name { font-size:20px; font-weight:700; margin-bottom:8px; }
         .tool-desc { color:#94a3b8; font-size:14px; margin-bottom:12px; }
-        .tool-badge { display:inline-block; padding:4px 12px; background:var(--success); border-radius:20px; font-size:12px; font-weight:600; }
-        .chat-widget { position:fixed; bottom:260px; right:20px; width:380px; height:600px; background:var(--card); border:1px solid var(--border); border-radius:16px; display:none; flex-direction:column; z-index:999; }
+        .tool-badge { display:inline-block; padding:4px 12px; background:var(--success); border-radius:20px; font-size:11px; font-weight:600; }
+        .chat-widget { position:fixed; bottom:260px; right:20px; width:380px; height:600px; background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,0.5); display:flex; flex-direction:column; z-index:999; }
         .chat-header { padding:16px; border-bottom:1px solid var(--border); font-weight:700; display:flex; justify-content:space-between; align-items:center; }
         .chat-box { flex:1; overflow-y:auto; padding:16px; }
-        .message { margin-bottom:12px; padding:12px; border-radius:12px; max-width:85%; word-wrap:break-word; font-size:14px; }
+        .message { margin-bottom:12px; padding:12px; border-radius:12px; max-width:85%; word-wrap:break-word; font-size:14px; line-height:1.6; }
         .user-msg { background:var(--accent); margin-left:auto; }
         .ai-msg { background:var(--bg); border:1px solid var(--border); }
         .chat-input { padding:16px; border-top:1px solid var(--border); display:flex; gap:8px; }
-        .chat-input input { flex:1; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); }
+        .chat-input input { flex:1; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:14px; }
         .chat-input button { padding:12px 20px; background:var(--accent); border:none; border-radius:8px; color:white; font-weight:600; cursor:pointer; }
-        .blocked-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; display:none; align-items:center; justify-content:center; }
-        .footer { background:var(--card); border-top:1px solid var(--border); padding:30px 20px; position:fixed; bottom:0; left:0; right:0; z-index:50; }
+        .blocked-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; display:none; align-items:center; justify-content:center; padding:20px; overflow-y:auto; }
+        .footer { background:var(--card); border-top:1px solid var(--border); padding:30px 20px; position:fixed; bottom:0; left:0; right:0; z-index:50; max-height:240px; overflow-y:auto; }
         .footer-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
         .footer-col h4 { margin-bottom:10px; color:var(--accent); font-size:14px; }
         .footer-col p, .footer-col a { color:#94a3b8; text-decoration:none; margin-bottom:5px; display:block; line-height:1.6; font-size:12px; }
-        .ad-banner { position:fixed; top:80px; width:100%; background:#f59e0b; color:#000; text-align:center; padding:8px; font-weight:700; z-index:99; display:none; }
-        @media(max-width:768px) { .hero h1 { font-size:32px; } .tools-grid { grid-template-columns:1fr; } .chat-widget { width:calc(100% - 40px); right:20px; left:20px; } }
+        .ad-banner { position:fixed; top:80px; width:100%; background:#f59e0b; color:#000; text-align:center; padding:8px; font-size:12px; font-weight:600; z-index:90; display:none; }
+        @media(max-width:768px) { .hero h1 { font-size:32px; } .tools-grid { grid-template-columns:1fr; } .chat-widget { width:95%; right:2.5%; height:70vh; bottom:250px; } }
     </style>
 </head>
 <body>
@@ -65,13 +65,13 @@
     <!-- ADS BANNER - SIRF ₹666 PLAN KE LIYE -->
     <div class="ad-banner" id="adBanner">
         🚀 <span>Advertisement: Best Hosting ₹99/month</span> | 
-        <button onclick="this.parentElement.style.display='none'" style="background:#000;color:#fff;border:none;padding:4px 12px;border-radius:4px;cursor:pointer;">Close</button>
+        <button onclick="this.parentElement.style.display='none'" style="background:#000;color:#fff;border:none;padding:2px 8px;border-radius:4px;cursor:pointer;">✕</button>
     </div>
 
     <!-- BLOCKED OVERLAY - 2 PLAN POPUP -->
     <div class="blocked-overlay" id="blockedOverlay">
-        <div style="background:#1e293b;padding:40px;border-radius:20px;max-width:1000px;border:2px solid #334155;margin:20px;">
-            <h2 style="font-size:32px;margin-bottom:16px;color:#ef4444;">🕒 5 Minute Free Trial Khatam</h2>
+        <div style="background:#1e293b;padding:40px;border-radius:20px;max-width:1000px;border:2px solid #334155;margin:auto;">
+            <h2 style="font-size:32px;margin-bottom:16px;color:#ef4444;">⏰ 5 Minute Free Trial Khatam</h2>
             <p style="font-size:18px;margin-bottom:24px;color:#94a3b8;">
                 <span>Agla Free Access:</span> <span id="nextFreeTime" style="color:#3b82f6;font-weight:700;"></span>
             </p>
@@ -82,9 +82,7 @@
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin:30px 0;">
                 <!-- PLAN 1: ₹666 - ADS WALA -->
                 <div style="background:#0f172a;border:2px solid #f59e0b;border-radius:16px;padding:24px;text-align:left;">
-                    <div style="background:#f59e0b;color:#000;padding:6px 12px;border-radius:20px;display:inline-block;margin-bottom:12px;font-weight:700;font-size:12px;">
-                        POPULAR CHOICE
-                    </div>
+                    <div style="background:#f59e0b;color:#000;padding:6px 12px;border-radius:20px;display:inline-block;font-size:12px;font-weight:700;margin-bottom:16px;">POPULAR CHOICE</div>
                     <h3 style="font-size:32px;margin-bottom:8px;">₹666<span style="font-size:16px;color:#94a3b8;">/month</span></h3>
                     <p style="color:#f59e0b;font-size:14px;margin-bottom:16px;font-weight:600;">⚠️ With Ads</p>
                     <ul style="list-style:none;padding:0;margin:20px 0;font-size:14px;line-height:2.2;">
@@ -104,7 +102,7 @@
                         <li>✅ 30 Days Validity</li>
                         <li>✅ Email Support 24hr</li>
                     </ul>
-                    <button onclick="buyPlan(666)" style="width:100%;background:#f59e0b;color:#000;border:none;padding:14px;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;">
+                    <button onclick="buyPlan(666)" style="width:100%;background:#f59e0b;color:#000;border:none;padding:16px;border-radius:12px;font-size:18px;font-weight:700;cursor:pointer;">
                         ₹666 Plan Lo - Ads Ke Sath
                     </button>
                     <p style="font-size:11px;color:#666;margin-top:10px;text-align:center;">
@@ -114,9 +112,7 @@
 
                 <!-- PLAN 2: ₹999 - NO ADS -->
                 <div style="background:linear-gradient(135deg,#1e293b,#0f172a);border:2px solid #10b981;border-radius:16px;padding:24px;text-align:left;">
-                    <div style="background:#10b981;color:#000;padding:6px 12px;border-radius:20px;display:inline-block;margin-bottom:12px;font-weight:700;font-size:12px;">
-                        BEST VALUE ⭐
-                    </div>
+                    <div style="background:#10b981;color:#000;padding:6px 12px;border-radius:20px;display:inline-block;font-size:12px;font-weight:700;margin-bottom:16px;">BEST VALUE ⭐</div>
                     <h3 style="font-size:32px;margin-bottom:8px;">₹999<span style="font-size:16px;color:#94a3b8;">/month</span></h3>
                     <p style="color:#10b981;font-size:14px;margin-bottom:16px;font-weight:600;">✅ No Ads - Bilkul Saaf</p>
                     <ul style="list-style:none;padding:0;margin:20px 0;font-size:14px;line-height:2.2;">
@@ -139,7 +135,7 @@
                         <li>✅ Priority WhatsApp Support</li>
                         <li>✅ Fastest AI Response Speed</li>
                     </ul>
-                    <button onclick="buyPlan(999)" style="width:100%;background:#10b981;color:#000;border:none;padding:14px;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;">
+                    <button onclick="buyPlan(999)" style="width:100%;background:#10b981;color:#000;border:none;padding:16px;border-radius:12px;font-size:18px;font-weight:700;cursor:pointer;">
                         ₹999 Plan Lo - No Ads 🚀
                     </button>
                     <p style="font-size:11px;color:#10b981;margin-top:10px;text-align:center;">
@@ -165,6 +161,7 @@
                 <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">English</button>
                 <button class="lang-btn" onclick="setLanguage('hinglish')" id="btn-hinglish">Hinglish</button>
             </div>
+        </div>
         <div class="nav">
             <a href="#tools">Tools</a>
             <a href="#pricing">Pricing</a>
@@ -189,7 +186,7 @@
         <p class="section-desc">GST, Invoice, Quotation - Business ke liye sab kuch</p>
         <div class="tools-grid">
             <div class="tool-card" onclick="openTool('gst-calculator')">
-                <div class="tool-icon">📊</div>
+                <div class="tool-icon">🧮</div>
                 <div class="tool-name">GST Calculator</div>
                 <div class="tool-desc">Calculate GST with CGST, SGST, IGST breakdown. 0%, 5%, 12%, 18%, 28% slabs.</div>
                 <span class="tool-badge">100% Free</span>
@@ -270,11 +267,11 @@
     <!-- CHAT WIDGET -->
     <div class="chat-widget" id="chatWidget">
         <div class="chat-header">
-            🤖 AihubPro AI <span id="planBadge" style="font-size:11px; background:#3b82f6; padding:2px 8px; border-radius:10px;">Free</span>
+            🤖 AihubPro AI <span id="planBadge" style="font-size:11px; background:#3b82f6; padding:2px 8px; border-radius:10px;">Free Trial</span>
             <button style="background:none; border:none; color:white; cursor:pointer; font-size:20px;" onclick="closeChat()">×</button>
         </div>
         <div class="chat-box" id="chatBox">
-            <div class="message ai-msg">Hi! Main AihubPro AI hun. Kya help chahiye? 😊<br><small>5 minute free trial active</small></div>
+            <div class="message ai-msg">Hi! Main AihubPro AI hun. Kya help chahiye? 😊<br><small>5 minute free trial active hai</small></div>
         </div>
         <div class="chat-input">
             <input type="text" id="chatInput" placeholder="Message..." onkeypress="if(event.key==='Enter') sendChat()">
@@ -286,7 +283,7 @@
     <div class="footer">
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>📋 Firm Details</h4>
+                <h4>🏢 Firm Details</h4>
                 <p><b>Firm Name:</b> Vasu Enterprises</p>
                 <p><b>Owner:</b> Vasu</p>
                 <p><b>Address:</b> Yamunanagar, Haryana, India - 135001</p>
@@ -328,16 +325,17 @@
 <script>
 // ===== AIHUBPRO COMPLETE SYSTEM - 2026 - FIXED VERSION =====
 
-// 1. TRIAL SYSTEM - FIXED: OVERLAY INSTEAD OF BODY REPLACE
+// 1. TRIAL SYSTEM - FIXED: RESET ON FIRST VISIT
 function checkAccess() {
     const now = Date.now();
-    const trialStart = localStorage.getItem('aihubpro_trial_start');
+    let trialStart = localStorage.getItem('aihubpro_trial_start');
     const isPaid = localStorage.getItem('aihubpro_paid') === 'true';
     const paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
 
     // Paid user check
     if (isPaid && paidExpiry && now < parseInt(paidExpiry)) {
         document.getElementById('blockedOverlay').style.display = 'none';
+        document.getElementById('chatWidget').style.display = 'flex';
         if (localStorage.getItem('aihubpro_plan') === '666') {
             document.getElementById('adBanner').style.display = 'block';
         }
@@ -350,6 +348,7 @@ function checkAccess() {
     if (!trialStart) {
         localStorage.setItem('aihubpro_trial_start', now.toString());
         startTrialTimer(300);
+        document.getElementById('chatWidget').style.display = 'flex';
         return true;
     }
 
@@ -357,6 +356,7 @@ function checkAccess() {
     const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
     if (elapsed < 300) {
         startTrialTimer(300 - elapsed);
+        document.getElementById('chatWidget').style.display = 'flex';
         return true;
     }
 
@@ -394,6 +394,7 @@ function startTrialTimer(seconds) {
 function showBlockScreen(nextFree) {
     document.getElementById('nextFreeTime').textContent = new Date(nextFree).toLocaleString('hi-IN');
     document.getElementById('blockedOverlay').style.display = 'flex';
+    document.getElementById('chatWidget').style.display = 'none';
 
     // Saare tools disable karo but dikhte rahen
     document.querySelectorAll('.tool-card').forEach(card => {
@@ -401,51 +402,25 @@ function showBlockScreen(nextFree) {
     });
 }
 
-// 2. RAZORPAY PAYMENT SYSTEM - EDITED LINE 407
-function buyPlan(amount) {
-    const options = {
-        key: '%%RAZORPAY_KEY_ID%%', // EDITED: Cloudflare isko replace kar dega
-        amount: amount * 100,
-        currency: 'INR',
-        name: 'AIHubPro',
-        description: amount === 666 ? 'Standard Plan - With Ads (30 Days)' : 'Premium Plan - No Ads (30 Days)',
-        image: 'https://aihubpro.in/logo.png',
-        handler: function (response) {
-            // Payment success
-            const expiry = Date.now() + (30 * 24 * 60 * 60 * 1000);
-            localStorage.setItem('aihubpro_paid', 'true');
-            localStorage.setItem('aihubpro_paid_expiry', expiry.toString());
-            localStorage.setItem('aihubpro_plan', amount.toString());
-            localStorage.setItem('aihubpro_payment_id', response.razorpay_payment_id);
-            localStorage.removeItem('aihubpro_trial_start');
-
-            // Success page pe bhejo
-            window.location.href = '/success.html?payment_id=' + response.razorpay_payment_id + '&amount=' + amount;
-        },
-        prefill: {
-            name: '',
-            email: '',
-            contact: ''
-        },
-        notes: {
-            plan: amount === 666 ? 'Standard' : 'Premium',
-            website: 'aihubpro.in'
-        },
-        theme: {
-            color: amount === 666 ? '#f59e0b' : '#10b981'
-        },
-        modal: {
-            ondismiss: function() {
-                console.log('Payment cancelled by user');
-            }
+// 2. STRIPE PAYMENT SYSTEM - EDITED
+async function buyPlan(amount) {
+    try {
+        // Call Cloudflare Function
+        const response = await fetch('/functions/create-checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ plan: amount })
+        });
+        const data = await response.json();
+        
+        if (data.url) {
+            window.location.href = data.url; // Stripe Checkout page
+        } else {
+            alert('Payment init failed. Try again.');
         }
-    };
-
-    const rzp = new Razorpay(options);
-    rzp.on('payment.failed', function (response) {
-        alert('Payment Failed: ' + response.error.description);
-    });
-    rzp.open();
+    } catch (e) {
+        alert('Payment error: ' + e.message);
+    }
 }
 
 // 3. TOOL OPEN FUNCTION
@@ -456,7 +431,7 @@ function openTool(toolName) {
     window.location.href = `/${toolName}.html`;
 }
 
-// 4. CHAT FUNCTIONS - EDITED: ASLI GEMINI + OPENAI FAILOVER
+// 4. CHAT FUNCTIONS - USES CLOUDFLARE FUNCTION
 function openChat() {
     if (!checkAccess()) return;
     document.getElementById('chatWidget').style.display = 'flex';
@@ -473,61 +448,39 @@ async function sendChat() {
     if (!msg) return;
 
     const box = document.getElementById('chatBox');
-    box.innerHTML += '<div class="message user-msg">'+msg+'</div>';
+    box.innerHTML += '<div class="message user-msg">' + msg + '</div>';
     input.value = '';
-    
+
     const loadingId = 'loading-' + Date.now();
-    box.innerHTML += '<div class="message ai-msg" id="'+loadingId+'">Soch raha hun...</div>';
+    box.innerHTML += '<div class="message ai-msg" id="' + loadingId + '">Soch raha hun...</div>';
     box.scrollTop = box.scrollHeight;
 
-    let aiReply = '';
-    
-    // ENGINE 1: GEMINI TRY KARO
     try {
-        const geminiRes = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=GEMINI_API_KEY_YAHAN_DAALO', {
+        // FIXED: Call Cloudflare Function instead of direct API
+        const response = await fetch('/functions/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: msg }] })
+            body: JSON.stringify({ message: msg })
         });
-        if (!geminiRes.ok) throw new Error('Gemini fail');
-        const geminiData = await geminiRes.json();
-        aiReply = geminiData.candidates[0].content.parts[0].text;
+        
+        if (!response.ok) throw new Error('API Error');
+        const data = await response.json();
+        document.getElementById(loadingId).innerHTML = marked.parse(data.reply || 'Reply nahi mila');
     } catch (e) {
-        console.log('Gemini fail, OpenAI pe shift...');
-        // ENGINE 2: OPENAI FAILOVER
-        try {
-            const openaiRes = await fetch('https://api.openai.com/v1/chat/completions', {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer OPENAI_API_KEY_YAHAN_DAALO'
-                },
-                body: JSON.stringify({
-                    model: 'gpt-3.5-turbo',
-                    messages: [{ role: 'user', content: msg }]
-                })
-            });
-            if (!openaiRes.ok) throw new Error('OpenAI fail');
-            const openaiData = await openaiRes.json();
-            aiReply = openaiData.choices[0].message.content;
-        } catch (e2) {
-            aiReply = 'Maaf karo bhai, dono AI engine busy hain. 2 min baad try karo ya support pe contact karo.';
-        }
+        document.getElementById(loadingId).innerHTML = 'Maaf karo bhai, AI busy hai. 2 min baad try karo ya support pe contact karo.';
     }
-    
-    document.getElementById(loadingId).innerHTML = aiReply;
     box.scrollTop = box.scrollHeight;
 }
 
 // 5. LANGUAGE SWITCHER
 const translations = {
     hi: {
-        trial_ended: "🕒 5 मिनट फ्री ट्रायल खत्म",
+        trial_ended: "⏰ 5 मिनट फ्री ट्रायल ख़त्म",
         next_free: "अगला फ्री एक्सेस:",
         wait_msg: "24 घंटे इंतजार मत करो। तुरंत अनलिमिटेड एक्सेस चाहिए तो प्लान चुनो:",
     },
     en: {
-        trial_ended: "🕒 5 Minute Free Trial Ended",
+        trial_ended: "⏰ 5 Minute Free Trial Ended",
         next_free: "Next Free Access:",
         wait_msg: "Don't wait 24 hours. Choose a plan for instant unlimited access:",
     }
@@ -536,7 +489,7 @@ const translations = {
 function setLanguage(lang) {
     localStorage.setItem('aihubpro_lang', lang);
     document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    document.getElementById(`btn-${lang}`).classList.add('active');
+    document.getElementById('btn-' + lang).classList.add('active');
     // Full translation implementation yahan add kar sakte ho
 }
 
@@ -557,6 +510,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
-
 </body>
 </html>
