@@ -137,7 +137,7 @@ export async function onRequestPost(context) {
             stripe_key: env.STRIPE_PUBLISHABLE_KEY || null,
             currency: isIndian? 'INR' : 'USD',
             message: isIndian
-            ? '⏰ 5 minute free trial khatam.\n\n💎 ₹666 Basic ya ₹999 Pro plan lo.\n\n🔒 Secure payment via Razorpay'
+           ? '⏰ 5 minute free trial khatam.\n\n💎 ₹666 Basic ya ₹999 Pro plan lo.\n\n🔒 Secure payment via Razorpay'
               : '⏰ 5 minute free trial ended.\n\n💎 $8 Basic / $12 Pro plan lo.\n\n🔒 Secure payment via Stripe'
           }, { headers: securityHeaders });
         }
