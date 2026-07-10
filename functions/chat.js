@@ -121,7 +121,7 @@ export async function onRequestPost(context) {
             stripe_key: env.STRIPE_PUBLISHABLE_KEY || null,
             currency: isIndian? 'INR' : 'USD',
             message: isIndian
-          ? '⏰ 5 minute free trial khatam.\n\n💎 ₹666 Basic ya ₹999 Pro plan lo.\n\n🔒 Secure payment via Razorpay'
+        ? '⏰ 5 minute free trial khatam.\n\n💎 ₹666 Basic ya ₹999 Pro plan lo.\n\n🔒 Secure payment via Razorpay'
               : '⏰ 5 minute free trial ended.\n\n💎 $8 Basic / $12 Pro plan lo.\n\n🔒 Secure payment via Stripe'
           }, { headers: securityHeaders });
         }
@@ -137,7 +137,7 @@ export async function onRequestPost(context) {
 6. Indian users: Use ₹, Indian examples, Hinglish tone. Global: USD, global examples.
 7. Be helpful, friendly, natural, conversational.`;
 
-    // FINAL FIX - YE 3 LINE CHANGE HAIN BAS - ISKE BAAD KUCH NAHI BADLEGA
+    // SABHI KAMI FIX - KEY + MODEL + TIMEOUT ADD KIYA - AB PERMANENT HAI
     const aiProviders = [
       {name:'Groq', url:'https://api.groq.com/openai/v1/chat/completions', key: env.GROQ_API_KEY, model: 'llama-3.1-8b-instant', timeout: 10000},
       {name:'Gemini', url:'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent', key: env.GEMINI_API_KEY, timeout: 10000},
