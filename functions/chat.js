@@ -33,7 +33,7 @@ export async function onRequestPost(context) {
     if (isBanned) {
       return Response.json({
         error: 'IP_BANNED',
-        message: '⛔ Aapka IP permanently banned hai due to illegal activity'
+        message: '⛔ Aapka IP permanently banned hai due to illegal activity.'
       }, { status: 403, headers: securityHeaders });
     }
 
@@ -45,13 +45,13 @@ export async function onRequestPost(context) {
       'gun','pistol','rifle','ak47','ak-47','weapon','hathiyaar',
       'hack','hacking','crack','cracking','phishing','ddos','sql injection',
       'fake id','fake passport','fake aadhar','fake currency','nakli note',
-      'credit card fraud','carding','skimming','money laundering','hawala'
+      'credit card fraud','carding','skimmig','money laundering','hawala'
     ];
 
     // LAYER 5: ILLEGAL DETECTION
     const isIllegal = ILLEGAL_KEYWORDS.some(keyword => {
       return message.includes(keyword) ||
-             message.replace(/[^a-z0-9]/g, '').includes(keyword.replace(/[^a-z0-9]/g, ''));
+        message.replace(/[^a-z0-9]/g, '').includes(keyword.replace(/[^a-z0-9]/g, ''));
     });
 
     if (isIllegal) {
@@ -72,12 +72,12 @@ export async function onRequestPost(context) {
         police_report: 'Eligible for Yamunanagar Cyber Crime Cell'
       };
 
-      await env.ILLEGAL_LOGS?.put(`illegal_${Date.now()}_${ip}`, JSON.stringify(logData), { expirationTtl: 31536000 });
+      await env.ILLEGAL_LOGS?.put(`illegal_${Date.now()}_${ip}`, JSON.stringify(logData), { expirationTtl: 2592000 });
 
       // 3 STRIKE = PERMANENT BAN
       const illegalAttempts = await env.RATE_LIMIT?.get(`illegal_${ip}`);
       const attempts = parseInt(illegalAttempts || '0') + 1;
-      await env.RATE_LIMIT?.put(`illegal_${ip}`, attempts.toString(), { expirationTtl: 31536000 });
+      await env.RATE_LIMIT?.put(`illegal_${ip}`, attempts.toString(), { expirationTtl: 86400 });
 
       if (attempts >= 3) {
         await env.BANNED_IPS?.put(ip, 'PERMANENT_BAN_ILLEGAL', { expirationTtl: 31536000 });
@@ -85,15 +85,15 @@ export async function onRequestPost(context) {
 
       return Response.json({
         error: 'LEGAL_WARNING',
-        message: '⚠️ Ye request illegal hai aur Indian Law ke khilaf hai\n' +
-                 '❌ IPC Section 505, 506, IT Act 66F ke under ye crime hai\n' +
+        message: '⚠️ Ye request illegal hai aur Indian Law ke khilaf hai.\n' +
+                 '❌ IPC Section 505, 506, IT Act 66F ke under ye crime hai.\n' +
                  '📍 Aapka IP: ' + ip + ', Location: ' + city + ', ' + country + '\n' +
-                 '🕐 Time: ' + new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + '\n' +
+                 '⏰ Time: ' + new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + '\n' +
                  '👮 Police ko report kiya ja sakta hai.\n' +
                  '⚖️ Jurisdiction: Yamunanagar District Court, Haryana\n' +
                  '✅ Kripya legal aur ethical sawal puche.',
         blocked: true,
-        legal_notice: 'This attempt logged for Yamunanagar Court compliance'
+        legal_notice: 'This attempt logged for Yamunanagar Court compliance.'
       }, { status: 403, headers: securityHeaders });
     }
 
@@ -102,7 +102,7 @@ export async function onRequestPost(context) {
     if (rateLimit && parseInt(rateLimit) > 30) {
       return Response.json({
         error: 'Too many requests. 1 minute baad try karo.',
-        message: '⏳ Server overload protection active. 60 sec wait karo'
+        message: '⏳ Server overload protection active. 60 sec wait karo.'
       }, { status: 429, headers: securityHeaders });
     }
     await env.RATE_LIMIT?.put(`rate_${ip}`, (parseInt(rateLimit || '0') + 1).toString(), { expirationTtl: 60 });
@@ -132,13 +132,13 @@ export async function onRequestPost(context) {
           const isIndian = country === 'IN';
           return Response.json({
             reply: "TRIAL_ENDED",
-            nextFreeTime: nextFreeTime.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+            nextFreeTime: nextFreeTime.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
             razorpay_key: env.RAZORPAY_KEY_ID || null,
             stripe_key: env.STRIPE_PUBLISHABLE_KEY || null,
             currency: isIndian? 'INR' : 'USD',
             message: isIndian
-             ? '⏰ 5 minute free trial khatam.\n💰 ₹666 Basic ya ₹999 Pro plan lo'
-              : '⏰ 5 minute free trial ended.\n💰 $8 Basic / $12 Pro plan'
+             ? '⏰ 5 minute free trial khatam.\n\n💎 ₹666 Basic ya ₹999 Pro plan lo.\n\n🔒 Secure payment via Razorpay'
+              : '⏰ 5 minute free trial ended.\n\n💎 $8 Basic / $12 Pro plan lo.\n\n🔒 Secure payment via Stripe'
           }, { headers: securityHeaders });
         }
       }
@@ -154,17 +154,16 @@ export async function onRequestPost(context) {
 6. Indian users: Use ₹, Indian examples, Hinglish tone. Global: USD, global examples.
 7. Be helpful, friendly, natural, conversational.`;
 
-    // API KEYS FIXED - env se lena hai
+    // API KEYS FIXED - env se lena hai + KEY PROPERTY ADD KI HAI
     const aiProviders = [
-      {name:'Groq', url:'https://api.groq.com/openai/v1/chat/completions', key: env.GROQ_API_KEY, model: 'llama3-8b-8192', timeout: 8000},
-      {name:'Gemini', url:'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent', key: env.GEMINI_API_KEY, timeout: 8000},
-      {name:'CloudflareAI', url:`https://api.cloudflare.com/client/v4/accounts/${env.CF_ACCOUNT_ID}/ai/run/@cf/meta/llama-3-8b-instruct`, key: env.CF_API_TOKEN, timeout: 8000},
-      {name:'OpenAI', url:'https://api.openai.com/v1/chat/completions', key: env.OPENAI_API_KEY, model: 'gpt-3.5-turbo', timeout: 8000}
+      {name:'Groq', url:'https://api.groq.com/openai/v1/chat/completions', key: env.GROQ_API_KEY, model: 'llama-3.1-8b-instant', timeout: 10000},
+      {name:'Gemini', url:'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent', key: env.GEMINI_API_KEY, timeout: 10000},
+      {name:'OpenAI', url:'https://api.openai.com/v1/chat/completions', key: env.OPENAI_API_KEY, model: 'gpt-4o-mini', timeout: 10000},
     ];
 
     let reply = null, usedProvider = null;
     for (const p of aiProviders) {
-      if (!p.key) continue; // KEY NAHI HAI TO SKIP KARO - FIXED
+      if (!p.key) continue; // KEY NAHI HAI TO SKIP KARO - AB KEY HAI TO CHALEGA
       try {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), p.timeout);
@@ -172,37 +171,34 @@ export async function onRequestPost(context) {
 
         if (p.name === 'Gemini') {
           bodyPayload = {contents:[{parts:[{text: `${hinglishPrompt}\n\nUser: ${originalMessage}`}]}]};
-        } else if (p.name === 'CloudflareAI') {
-          headers['Authorization'] = `Bearer ${p.key}`;
-          bodyPayload = {messages:[{role:'system',content:hinglishPrompt},{role:'user',content:originalMessage}]};
+          headers['x-goog-api-key'] = p.key;
         } else {
           headers['Authorization'] = `Bearer ${p.key}`;
-          bodyPayload = {model:p.model, messages:[{role:'system',content:hinglishPrompt},{role:'user',content:originalMessage}], temperature:0.7, max_tokens:1000};
+          bodyPayload = {model:p.model, messages:[{role:'system',content:hinglishPrompt},{role:'user',content:originalMessage}]};
         }
 
-        const res = await fetch(p.url, {method:'POST',headers,body:JSON.stringify(bodyPayload),signal:controller.signal});
+        const res = await fetch(p.url, {method:'POST', headers, body:JSON.stringify(bodyPayload), signal: controller.signal});
         clearTimeout(timeout);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
 
         if (p.name==='Gemini') reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
-        else if (p.name==='CloudflareAI') reply = data.result?.response;
         else reply = data.choices?.[0]?.message?.content;
 
         if (reply) {
           usedProvider = p.name;
-          await env.SYSTEM_LOGS?.put(`success_${Date.now()}`, JSON.stringify({provider:p.name, ip}));
+          await env.SYSTEM_LOGS?.put(`success_${Date.now()}`, JSON.stringify({provider:p.name, ip, time:new Date().toISOString()}), {expirationTtl: 86400});
           break;
         }
       } catch (e) {
-        await env.ERROR_LOGS?.put(`fail_${p.name}_${Date.now()}`, JSON.stringify({error:e.message, ip}));
+        await env.ERROR_LOGS?.put(`fail_${p.name}_${Date.now()}`, JSON.stringify({error:e.message, ip, time:new Date().toISOString()}), {expirationTtl: 86400});
         continue;
       }
     }
 
     if (!reply) {
-      await env.ALERT_KV?.put('CRITICAL_DOWN', JSON.stringify({time:Date.now()}), {expirationTtl:3600});
-      return Response.json({ error: 'All AI services temporarily down. API keys check karo.' }, { status: 503, headers: securityHeaders });
+      await env.ALERT_KV?.put('CRITICAL_DOWN', JSON.stringify({time:Date.now(), ip, message: originalMessage}), {expirationTtl: 3600});
+      return Response.json({ error: 'All AI services temporarily down. Admin ko alert bhej diya gaya hai.' }, { status: 503, headers: securityHeaders });
     }
 
     return Response.json({
