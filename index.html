@@ -366,7 +366,7 @@
         }
 
         // Trial khatam - Block karo with overlay
-        const nextFree = parseInt(trialStart) + (24 * 60 * 60 * 1000);
+        const nextFree = parseInt(trialStart) + (24 * 60 * 1000);
         if (now < nextFree) {
             showBlockScreen(nextFree);
             return false;
@@ -518,4 +518,12 @@
     };
 
     function setLanguage(lang) {
-        local
+        localStorage.setItem('aihubpro_lang', lang);
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('btn-' + lang).classList.add('active');
+    }
+
+    // INIT
+    window.onload = function() {
+        checkAccess();
+        const lang = localStorage.getItem('aihubpro_lang') || '
