@@ -17,7 +17,7 @@ export async function onRequestPost(context) {
     
     return Response.json({ 
       success: true,
-      url: testUrls || testUrls.basic,
+      url: testUrls[plan] || testUrls.basic, // <-- Ye line fix ki hai
       plan: plan,
       currency: isIndian? 'INR' : 'USD'
     }, { status: 200, headers: securityHeaders });
