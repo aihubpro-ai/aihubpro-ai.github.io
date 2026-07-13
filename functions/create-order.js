@@ -1,65 +1,41 @@
 export async function onRequestPost(context) {
-  const { request, env } = context;
-  const headers = {
+  const { env, request, cf } = context;
+  const securityHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'application/json'
   };
-
   try {
-    const body = await request.json();
-    const { plan, email } = body;
+    const body = await request.json().catch(() => null);
+    const plan = body?.plan || 'basic';
+    const country = cf.country || 'IN';
+    const isIndian = country === 'IN';
 
-    // PRICE CALCULATOR - 9% YEARLY INCREASE
-    function getCurrentPrice(basePrice) {
-      const launchDate = new Date('2026-01-01');
-      const now = new Date();
-      const yearsPassed = now.getFullYear() - launchDate.getFullYear();
-      const monthNow = now.getMonth();
-
-      let price = basePrice;
-      for (let i = 0; i < yearsPassed; i++) {
-        price = Math.round(price * 1.09);
-      }
-
-      // April 1st ke baad 9% badh jayega
-      if (monthNow >= 3 && yearsPassed >= 0) {
-        price = Math.round(price * 1.09);
-      }
-
-      return price;
-    }
-
-    const prices = {
-      basic: getCurrentPrice(666),
-      pro: getCurrentPrice(999)
+    const testUrls = {
+      basic: isIndian? 'https://buy.stripe.com/test_28o8xA0Hq5iF8N28ww' : 'https://buy.stripe.com/test_bIY8xA0Hq5iF8N28ww',
+      pro: isIndian? 'https://buy.stripe.com/test_14k8xA0Hq5iF8N28ww' : 'https://buy.stripe.com/test_6oE8xA0Hq5iF8N28ww'
     };
-
-    const amount = prices[plan];
-    if (!amount) return Response.json({ error: 'Invalid plan' }, { status: 400, headers });
-
-    const order = await fetch('https://api.razorpay.com/v1/orders', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Basic ' + btoa(env.RAZORPAY_KEY_ID + ':' + env.RAZORPAY_KEY_SECRET),
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        amount: amount * 100,
-        currency: 'INR',
-        receipt: `aihub_${Date.now()}`,
-        notes: { plan, email, price_increase: '9% every April 1st with 1 month email notice' }
-      })
-    });
-
-    const data = await order.json();
-    return Response.json({
-      order_id: data.id,
-      amount: data.amount,
-      key: env.RAZORPAY_KEY_ID,
-      current_price: amount
-    }, { headers });
-
+    
+    return Response.json({ 
+      success: true,
+      url: testUrls[plan] || testUrls.basic, // <-- Yahi line fix ki hai
+      plan: plan,
+      currency: isIndian? 'INR' : 'USD'
+    }, { status: 200, headers: securityHeaders });
   } catch (error) {
-    return Response.json({ error: 'Order creation failed' }, { status: 500, headers });
+    return Response.json({ 
+      error: 'Checkout failed', 
+      details: error.message
+    }, { status: 500, headers: securityHeaders });
   }
+}
+
+export async function onRequestOptions() {
+  return new Response(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+    }
+  });
 }
