@@ -1,31 +1,41 @@
 export async function onRequestPost(context) {
-  const { env, request, cf } = context;
-  const securityHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Content-Type': 'application/json'
-  };
+  const { request, cf } = context;
   try {
-    const body = await request.json().catch(() => null);
-    const plan = body?.plan || 'basic';
-    const country = cf.country || 'IN';
+    const body = await request.json().catch(function() { return null; });
+    const plan = body && body.plan? body.plan : 'basic';
+    const country = cf && cf.country? cf.country : 'IN';
     const isIndian = country === 'IN';
 
-    const testUrls = {
+    var testUrls = {
       basic: isIndian? 'https://buy.stripe.com/test_28o8xA0Hq5iF8N28ww' : 'https://buy.stripe.com/test_bIY8xA0Hq5iF8N28ww',
       pro: isIndian? 'https://buy.stripe.com/test_14k8xA0Hq5iF8N28ww' : 'https://buy.stripe.com/test_6oE8xA0Hq5iF8N28ww'
     };
-    
-    return Response.json({ 
+
+    var url = testUrls[plan] || testUrls.basic;
+
+    return new Response(JSON.stringify({
       success: true,
-      url: testUrls[plan] || testUrls.basic, // <-- Ye line fix ki hai
+      url: url,
       plan: plan,
       currency: isIndian? 'INR' : 'USD'
-    }, { status: 200, headers: securityHeaders });
+    }), {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      }
+    });
   } catch (error) {
-    return Response.json({ 
-      error: 'Checkout failed', 
+    return new Response(JSON.stringify({
+      error: 'Checkout failed',
       details: error.message
-    }, { status: 500, headers: securityHeaders });
+    }), {
+      status: 500,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      }
+    });
   }
 }
 
@@ -39,4 +49,3 @@ export async function onRequestOptions() {
     }
   });
 }
-→
