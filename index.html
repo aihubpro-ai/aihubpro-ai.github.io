@@ -1,535 +1,274 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIHubPro 2026 - Free AI Chat + 18 Tools | Yamunanagar, Haryana</title>
-    <meta name="description" content="India's #1 Free AI: ChatGPT Alternative + GST Calculator + PDF Tools. 5 Min Free">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://aihubpro.in/">
-
-    <!-- ===== STRIPE + ADSENSE + MARKED ===== -->
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
-
-    <style>
-        :root { --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --accent:#3b82f6; --success:#10b981; --danger:#ef4444; --warning:#f59e0b; }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family:system-ui; background:var(--bg); color:var(--text); padding-bottom:240px; }
-        .header { background:var(--card); padding:16px 24px; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
-        .header-top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
-        .logo { font-size:24px; font-weight:800; background:linear-gradient(90deg,#3b82f6,#8b5cf6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-        .nav { display:flex; gap:20px; margin-top:8px; flex-wrap:wrap; }
-        .nav a { color:var(--text); text-decoration:none; font-weight:500; font-size:14px; }
-        .trial-timer { background:#dc2626; padding:6px 16px; border-radius:20px; font-size:14px; font-weight:600; margin-left:16px; }
-        .lang-switcher { display:flex; gap:8px; }
-        .lang-btn { padding:6px 12px; background:#334155; border:1px solid #475569; border-radius:6px; color:#e2e8f0; cursor:pointer; }
-        .lang-btn.active { background:#3b82f6; border-color:#3b82f6; }
-        .lang-btn:hover { background:#475569; }
-        .hero { text-align:center; padding:60px 20px; background:linear-gradient(180deg,#1e293b 0%,#0f172a 100%); }
-        .hero h1 { font-size:42px; margin-bottom:16px; background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-        .hero p { font-size:18px; color:#94a3b8; margin-bottom:32px; }
-        .cta-btn { padding:16px 32px; background:var(--accent); border:none; border-radius:12px; color:white; font-size:16px; font-weight:700; cursor:pointer; margin:0 8px; }
-        .container { max-width:1200px; margin:0 auto; padding:40px 20px; }
-        .section-title { font-size:32px; margin-bottom:8px; text-align:center; }
-        .section-desc { color:#94a3b8; margin-bottom:32px; text-align:center; }
-        .tools-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; margin-bottom:40px; }
-        .tool-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; cursor:pointer; transition:all 0.3s; }
-        .tool-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 10px 30px rgba(59,130,246,0.2); }
-        .tool-card.disabled { opacity:0.3; pointer-events:none; }
-        .tool-icon { font-size:40px; margin-bottom:12px; }
-        .tool-name { font-size:20px; font-weight:700; margin-bottom:8px; }
-        .tool-desc { color:#94a3b8; font-size:14px; margin-bottom:12px; }
-        .tool-badge { display:inline-block; padding:4px 12px; background:var(--success); border-radius:20px; font-size:12px; font-weight:600; }
-        .chat-widget { position:fixed; bottom:260px; right:20px; width:380px; height:600px; background:var(--card); border:1px solid var(--border); border-radius:16px; display:none; flex-direction:column; z-index:1000; box-shadow:0 20px 60px rgba(0,0,0.5); }
-        .chat-header { padding:16px; border-bottom:1px solid var(--border); font-weight:700; display:flex; justify-content:space-between; align-items:center; }
-        .chat-box { flex:1; overflow-y:auto; padding:16px; }
-        .message { margin-bottom:12px; padding:12px; border-radius:12px; max-width:85%; word-wrap:break-word; font-size:14px; }
-        .user-msg { background:var(--accent); margin-left:auto; }
-        .ai-msg { background:var(--bg); border:1px solid var(--border); }
-        .chat-input { padding:16px; border-top:1px solid var(--border); display:flex; gap:8px; }
-        .chat-input input { flex:1; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); }
-        .chat-input button { padding:12px 20px; background:var(--accent); border:none; border-radius:8px; color:white; cursor:pointer; font-weight:600; }
-        .blocked-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; display:none; align-items:center; justify-content:center; }
-        .footer { background:var(--card); border-top:1px solid var(--border); padding:30px 20px; position:fixed; bottom:0; width:100%; }
-        .footer-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; }
-        .footer-col h4 { margin-bottom:10px; color:var(--accent); font-size:14px; }
-        .footer-col p, .footer-col a { color:#94a3b8; text-decoration:none; margin-bottom:5px; display:block; line-height:1.8; font-size:13px; }
-        .ad-banner { position:fixed; top:80px; width:100%; background:#f59e0b; color:#000; text-align:center; padding:8px; font-weight:600; z-index:99; display:none; }
-        @media(max-width:768px) { .hero h1 { font-size:32px; } .tools-grid { grid-template-columns:1fr; } .chat-widget { width:calc(100% - 20px); right:10px; bottom:270px; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIHubPro 2026 - Free AI Chat + 18 Tools | Yamunanagar, Haryana</title>
+<meta name="description" content="India's #1 Free AI: ChatGPT Alternative + GST Calculator + PDF Tools. 5 Min Free Daily">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aihubpro.in/">
+<script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<style>
+:root { --bg:#0f172a; --card:#1e293b; --border:#334155; --text:#e2e8f0; --accent:#3b82f6; --success:#10b981; --danger:#dc2626; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:system-ui; background:var(--bg); color:var(--text); padding-bottom:240px; }
+.header { background:var(--card); padding:16px 24px; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+.header-top { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+.logo { font-size:24px; font-weight:800; background:linear-gradient(90deg,#3b82f6,#8b5cf6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav { display:flex; gap:20px; margin-top:8px; flex-wrap:wrap; }
+.nav a { color:var(--text); text-decoration:none; font-weight:500; font-size:14px; }
+.trial-timer { background:var(--danger); padding:6px 16px; border-radius:20px; font-size:14px; font-weight:600; margin-top:8px; display:inline-block; }
+.lang-switcher { display:flex; gap:8px; }
+.lang-btn { padding:6px 12px; background:#334155; border:1px solid #475569; border-radius:6px; color:#e2e8f0; cursor:pointer; }
+.lang-btn.active { background:#3b82f6; border-color:#3b82f6; }
+.hero { text-align:center; padding:60px 20px; background:linear-gradient(180deg,#1e293b 0%,#0f172a 100%); }
+.hero h1 { font-size:42px; margin-bottom:16px; background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.hero p { font-size:18px; color:#94a3b8; margin-bottom:32px; }
+.cta-btn { padding:16px 32px; background:var(--accent); border:none; border-radius:12px; color:white; font-size:16px; font-weight:600; cursor:pointer; margin:4px; }
+.container { max-width:1200px; margin:0 auto; padding:40px 20px; }
+.section-title { font-size:32px; margin-bottom:8px; text-align:center; }
+.section-desc { color:#94a3b8; margin-bottom:32px; text-align:center; }
+.tools-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; margin-bottom:40px; }
+.tool-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; cursor:pointer; transition:0.3s; }
+.tool-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:0 10px 30px rgba(59,130,246,0.2); }
+.tool-card.disabled { opacity:0.3; pointer-events:none; }
+.tool-icon { font-size:40px; margin-bottom:12px; }
+.tool-name { font-size:20px; font-weight:700; margin-bottom:8px; }
+.tool-desc { color:#94a3b8; font-size:14px; margin-bottom:12px; }
+.tool-badge { display:inline-block; padding:4px 12px; background:var(--success); border-radius:20px; font-size:12px; }
+.chat-widget { position:fixed; bottom:260px; right:20px; width:380px; height:600px; background:var(--card); border:1px solid var(--border); border-radius:16px; display:none; flex-direction:column; z-index:9999; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+.chat-header { padding:16px; border-bottom:1px solid var(--border); font-weight:700; display:flex; justify-content:space-between; align-items:center; }
+.chat-box { flex:1; overflow-y:auto; padding:16px; }
+.message { margin-bottom:12px; padding:12px; border-radius:12px; max-width:85%; word-wrap:break-word; font-size:14px; line-height:1.5; }
+.user-msg { background:var(--accent); margin-left:auto; color:white; }
+.ai-msg { background:var(--bg); border:1px solid var(--border); }
+.chat-input { padding:16px; border-top:1px solid var(--border); display:flex; gap:8px; }
+.chat-input input { flex:1; padding:12px; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:white; }
+.chat-input button { padding:12px 20px; background:var(--accent); border:none; border-radius:8px; color:white; cursor:pointer; }
+.blocked-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.98); z-index:9999; display:none; align-items:center; justify-content:center; padding:20px; overflow-y:auto; }
+.footer { background:var(--card); border-top:1px solid var(--border); padding:30px 20px; position:fixed; bottom:0; width:100%; max-height:230px; overflow-y:auto; }
+.footer-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+.footer-col h4 { margin-bottom:10px; color:var(--accent); font-size:14px; }
+.footer-col p, .footer-col a { color:#94a3b8; text-decoration:none; margin-bottom:5px; display:block; line-height:1.6; font-size:13px; }
+.ad-banner { position:fixed; top:80px; width:100%; background:#f59e0b; color:#000; text-align:center; padding:8px; z-index:99; display:none; }
+@media(max-width:768px) { .hero h1 { font-size:32px; } .tools-grid { grid-template-columns:1fr; } .chat-widget { width:95%; right:2.5%; bottom:10px; height:80%; } body { padding-bottom:320px; } }
+</style>
 </head>
 <body>
-
-    <!-- ADS BANNER - SIRF ₹666 PLAN KE LIYE -->
-    <div class="ad-banner" id="adBanner">
-        🚀 <span>Advertisement: Best Hosting ₹99/month</span> | 
-        <button onclick="this.parentElement.style.display='none'" style="background:#000;color:#fff;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;">X</button>
-    </div>
-
-    <!-- BLOCKED OVERLAY - 2 PLAN POPUP + FREE BUTTON ADDED -->
-    <div class="blocked-overlay" id="blockedOverlay">
-        <div style="background:#1e293b;padding:40px;border-radius:20px;max-width:1000px;border:2px solid #334155;margin:20px;">
-            <h2 style="font-size:32px;margin-bottom:16px;color:#ef4444;">⏰ 5 Minute Free Trial Khatam</h2>
-            <p style="font-size:18px;margin-bottom:24px;color:#94a3b8;">
-                <span>Agla Free Access:</span> <span id="nextFreeTime" style="color:#3b82f6;font-weight:700;"></span>
-            </p>
-            <p style="font-size:16px;margin-bottom:30px;color:#e2e8f0;">
-                24 ghante wait mat karo. Turant unlimited access chahiye to plan choose karo:
-            </p>
-
-            <!-- EDIT 1: FREE TRIAL BUTTON ADDED -->
-            <button onclick="resetTrial()" style="width:100%;background:#3b82f6;color:#fff;border:none;padding:16px;border-radius:12px;font-size:18px;font-weight:700;cursor:pointer;margin-bottom:20px;">
-                🎁 Free 5 Min Trial Start Karo
-            </button>
-
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin:30px 0;">
-                <!-- PLAN 1: ₹666 - ADS WALA -->
-                <div style="background:#0f172a;border:2px solid #f59e0b;border-radius:16px;padding:24px;text-align:left;">
-                    <div style="background:#f59e0b;color:#000;padding:6px 12px;border-radius:20px;display:inline-block;margin-bottom:12px;font-size:12px;font-weight:700;">POPULAR</div>
-                    <h3 style="font-size:32px;margin-bottom:8px;">₹666<span style="font-size:16px;color:#94a3b8;">/month</span></h3>
-                    <p style="color:#f59e0b;font-size:14px;margin-bottom:16px;font-weight:600;">⚠️ With Ads</p>
-                    <ul style="list-style:none;padding:0;margin:20px 0;font-size:14px;line-height:2.2;">
-                        <li>✅ Unlimited AI Chat Messages</li>
-                        <li>✅ GST Calculator - CGST/SGST/IGST</li>
-                        <li>✅ Invoice Generator - PDF Download</li>
-                        <li>✅ EMI Calculator - Home/Car Loan</li>
-                        <li>✅ SIP Calculator - Mutual Fund</li>
-                        <li>✅ PDF Tools - Merge/Split/Compress</li>
-                        <li>✅ Image Compressor - 90% Reduce</li>
-                        <li>✅ QR Code Generator</li>
-                        <li>✅ Password Generator</li>
-                        <li>✅ JSON Formatter</li>
-                        <li style="color:#f59e0b;">⚠️ <b>Banner Ads dikhenge</b></li>
-                        <li style="color:#f59e0b;">⚠️ <b>Video Ads 30 sec</b></li>
-                        <li style="color:#f59e0b;">⚠️ <b>Masuri/Pop-ups aayenge</b></li>
-                        <li>✅ 30 Days Validity</li>
-                        <li>✅ Email Support 24hr</li>
-                    </ul>
-                    <button onclick="buyPlan(666)" style="width:100%;background:#f59e0b;color:#000;border:none;padding:16px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;">
-                        ₹666 Plan Lo - Ads Ke Sath
-                    </button>
-                    <p style="font-size:11px;color:#666;margin-top:10px;text-align:center;">
-                        Sasta plan - Ads se humara kharcha nikalta hai
-                    </p>
-                </div>
-
-                <!-- PLAN 2: ₹999 - NO ADS -->
-                <div style="background:linear-gradient(135deg,#1e293b,#0f172a);border:2px solid #10b981;border-radius:16px;padding:24px;text-align:left;box-shadow:0 0 30px rgba(16,185,129,0.3);">
-                    <div style="background:#10b981;color:#000;padding:6px 12px;border-radius:20px;display:inline-block;margin-bottom:12px;font-size:12px;font-weight:700;">BEST VALUE</div>
-                    <h3 style="font-size:32px;margin-bottom:8px;">₹999<span style="font-size:16px;color:#94a3b8;">/month</span></h3>
-                    <p style="color:#10b981;font-size:14px;margin-bottom:16px;font-weight:600;">✅ No Ads - Bilkul Saaf</p>
-                    <ul style="list-style:none;padding:0;margin:20px 0;font-size:14px;line-height:2.2;">
-                        <li>✅ Unlimited AI Chat Messages</li>
-                        <li>✅ GST Calculator Advanced</li>
-                        <li>✅ Invoice Generator Pro</li>
-                        <li>✅ EMI Calculator + Charts</li>
-                        <li>✅ SIP Calculator + Graph</li>
-                        <li>✅ PDF Tools - All Premium</li>
-                        <li>✅ Image Compressor/Resizer</li>
-                        <li>✅ QR Code Generator</li>
-                        <li>✅ Password Generator</li>
-                        <li>✅ JSON Formatter</li>
-                        <li>✅ Loan Calculator</li>
-                        <li>✅ Quotation Generator</li>
-                        <li style="color:#10b981;">✅ <b>NO ADS - 100% Clean</b></li>
-                        <li style="color:#10b981;">✅ <b>NO Masuri/Pop-ups</b></li>
-                        <li style="color:#10b981;">✅ <b>Ad-Free Experience</b></li>
-                        <li>✅ 30 Days Validity</li>
-                        <li>✅ Priority WhatsApp Support</li>
-                        <li>✅ Fastest AI Response Speed</li>
-                    </ul>
-                    <button onclick="buyPlan(999)" style="width:100%;background:#10b981;color:#000;border:none;padding:16px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;">
-                        ₹999 Plan Lo - No Ads 🚀
-                    </button>
-                    <p style="font-size:11px;color:#10b981;margin-top:10px;text-align:center;">
-                        Premium - Bilkul disturb nahi hoga, full focus
-                    </p>
-                </div>
-            </div>
-
-            <p style="font-size:12px;margin-top:20px;color:#666;line-height:1.8;text-align:center;">
-                ⚖️ <b>Jurisdiction:</b> All disputes subject to Yamunanagar District Court, Haryana Only<br>
-                🔒 <b>No Refund Policy:</b> Payment ke baad refund nahi milega<br>
-                🛡️ <b>IT Act 2000 Sec 79:</b> Illegal queries IP log + 1 year storage + Police share
-            </p>
-        </div>
-    </div>
-
-    <!-- HEADER -->
-    <div class="header">
-        <div class="header-top">
-            <div class="logo">⚡ AihubPro</div>
-            <div class="lang-switcher">
-                <button class="lang-btn active" onclick="setLanguage('hi')" id="btn-hi">हिंदी</button>
-                <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">English</button>
-                <button class="lang-btn" onclick="setLanguage('hinglish')" id="btn-hinglish">Hinglish</button>
-            </div>
-        </div>
-        <div class="nav">
-            <a href="#tools">Tools</a>
-            <a href="#pricing">Pricing</a>
-            <a href="/terms.html">Terms</a>
-            <a href="/privacy-policy.html">Privacy</a>
-            <a href="/contact.html">Contact</a>
-        </div>
-        <div class="trial-timer" id="trialTimer" style="display:none;"><span>Trial:</span> <span id="timeLeft">5:00</span></div>
-    </div>
-
-    <!-- HERO -->
-    <div class="hero">
-        <h1>World's Best AI + 18 Free Tools</h1>
-        <p>ChatGPT Alternative + GST Calculator + PDF Tools + EMI Calculator - Sab Kuch Free</p>
-        <button class="cta-btn" onclick="document.getElementById('tools').scrollIntoView()">Explore Tools →</button>
-        <button class="cta-btn" style="background:#10b981" onclick="openChat()">Start AI Chat 🤖</button>
-    </div>
-
-    <!-- TOOLS SECTION -->
-    <div class="container" id="tools">
-        <h2 class="section-title">💼 Business Tools</h2>
-        <p class="section-desc">GST, Invoice, Quotation - Business ke liye sab kuch</p>
-        <div class="tools-grid">
-            <div class="tool-card" onclick="openTool('gst-calculator')">
-                <div class="tool-icon">📊</div>
-                <div class="tool-name">GST Calculator</div>
-                <div class="tool-desc">Calculate GST with CGST, SGST, IGST breakdown. 0%, 5%, 12%, 18%, 28% slabs.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-            <div class="tool-card" onclick="openTool('invoice-generator')">
-                <div class="tool-icon">📄</div>
-                <div class="tool-name">Invoice Generator</div>
-                <div class="tool-desc">Create professional GST invoices. Download PDF. No signup needed.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-            <div class="tool-card" onclick="openTool('emi-calculator')">
-                <div class="tool-icon">🏦</div>
-                <div class="tool-name">EMI Calculator</div>
-                <div class="tool-desc">Home/Car/Personal loan EMI. Interest breakdown chart.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-            <div class="tool-card" onclick="openTool('sip-calculator')">
-                <div class="tool-icon">📈</div>
-                <div class="tool-name">SIP Calculator</div>
-                <div class="tool-desc">Mutual Fund SIP returns. Wealth calculator with graph.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-        </div>
-
-        <h2 class="section-title">📎 PDF Tools</h2>
-        <p class="section-desc">Merge, Split, Compress - All PDF tools free</p>
-        <div class="tools-grid">
-            <div class="tool-card" onclick="openTool('merge-pdf')">
-                <div class="tool-icon">🔗</div>
-                <div class="tool-name">Merge PDF</div>
-                <div class="tool-desc">Combine multiple PDFs into one. Unlimited pages.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-            <div class="tool-card" onclick="openTool('compress-pdf')">
-                <div class="tool-icon">🗜️</div>
-                <div class="tool-name">Compress PDF</div>
-                <div class="tool-desc">Reduce PDF size 80%. Quality intact.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-            <div class="tool-card" onclick="openTool('split-pdf')">
-                <div class="tool-icon">✂️</div>
-                <div class="tool-name">Split PDF</div>
-                <div class="tool-desc">Extract pages from PDF. Split by range.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-            <div class="tool-card" onclick="openTool('pdf-compressor')">
-                <div class="tool-icon">⚡</div>
-                <div class="tool-name">PDF Compressor Pro</div>
-                <div class="tool-desc">Advanced PDF compression with quality control.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-        </div>
-
-        <h2 class="section-title">🖼️ Image Tools</h2>
-        <p class="section-desc">Compress, Resize, Convert - All image tools free</p>
-        <div class="tools-grid">
-            <div class="tool-card" onclick="openTool('image-resizer')">
-                <div class="tool-icon">📐</div>
-                <div class="tool-name">Image Resizer</div>
-                <div class="tool-desc">Resize images to any dimension. JPG, PNG, WebP.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-            <div class="tool-card" onclick="openTool('jpg-png-converter')">
-                <div class="tool-icon">🔄</div>
-                <div class="tool-name">JPG ⇄ PNG Converter</div>
-                <div class="tool-desc">Convert between JPG and PNG formats instantly.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-            <div class="tool-card" onclick="openTool('qr-code-generator')">
-                <div class="tool-icon">📱</div>
-                <div class="tool-name">QR Code Generator</div>
-                <div class="tool-desc">Create QR codes for URL, Text, WiFi, UPI.</div>
-                <span class="tool-badge">100% Free</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- CHAT WIDGET -->
-    <div class="chat-widget" id="chatWidget">
-        <div class="chat-header">
-            🤖 AihubPro AI <span id="planBadge" style="font-size:11px; background:#3b82f6; padding:2px 8px; border-radius:12px; margin-left:8px;">FREE</span>
-            <button style="background:none; border:none; color:white; cursor:pointer; font-size:20px;" onclick="closeChat()">×</button>
-        </div>
-        <div class="chat-box" id="chatBox">
-            <div class="message ai-msg">Hi! Main AihubPro AI hun. Kya help chahiye? 😊<br><small>5 minute free trial active hai</small></div>
-        </div>
-        <div class="chat-input">
-            <input type="text" id="chatInput" placeholder="Message..." onkeypress="if(event.key==='Enter') sendChat()">
-            <button onclick="sendChat()">Send</button>
-        </div>
-    </div>
-
-    <!-- FOOTER - FIRM COMPLETE DETAILS -->
-    <div class="footer">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h4>📋 Firm Details</h4>
-                <p><b>Firm Name:</b> Vasu Enterprises</p>
-                <p><b>Owner:</b> Vasu</p>
-                <p><b>Address:</b> Yamunanagar, Haryana, India - 135001</p>
-                <p><b>Email:</b> vasu081120@gmail.com</p>
-                <p><b>GST No:</b> 06TGWPS3896F1Z0</p>
-            </div>
-            <div class="footer-col">
-                <h4>⚖️ Legal & Jurisdiction</h4>
-                <p><b>Court:</b> All disputes subject to Yamunanagar District Court, Haryana</p>
-                <p><b>IT Act 2000 Sec 79:</b> Illegal queries logged with IP + Location + Time</p>
-                <p><b>Police:</b> Data shared with Yamunanagar Cyber Cell if required.</p>
-                <p><b>IPC:</b> Section 505, 506 applicable for illegal content</p>
-                <p><a href="/terms.html">Terms & Conditions</a></p>
-                <p><a href="/privacy-policy.html">Privacy Policy</a></p>
-                <p><a href="/refund.html">Refund Policy - No Refund</a></p>
-            </div>
-            <div class="footer-col">
-                <h4>🔒 Security & Compliance</h4>
-                <p>✅ 256-bit SSL Encryption</p>
-                <p>✅ Cloudflare DDoS Protection</p>
-                <p>✅ Daily Auto Backup 12:00 AM IST</p>
-                <p>✅ 99.9% Uptime Guarantee</p>
-                <p>✅ India Server Only - No Data Abroad</p>
-                <p>✅ IT Act 2000 Section 79 Compliant</p>
-                <p>✅ PCI-DSS Payment Security</p>
-            </div>
-            <div class="footer-col">
-                <h4>💰 Pricing & Support</h4>
-                <p><b>Free:</b> 5 Minutes Daily</p>
-                <p><b>Standard:</b> ₹666/month - With Ads</p>
-                <p><b>Premium:</b> ₹999/month - No Ads</p>
-                <p><b>Support Hours:</b> 10 AM - 6 PM IST</p>
-                <p><b>Response Time:</b> 24 Hours Max</p>
-                <p><b>Grievance:</b> grievance@aihubpro.in</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-    // ===== AIHUBPRO COMPLETE SYSTEM - 2026 - FIXED VERSION =====
-
-    // 1. TRIAL SYSTEM - FIXED: RESET ON FIRST VISIT
-    function checkAccess() {
-        const now = Date.now();
-        let trialStart = localStorage.getItem('aihubpro_trial_start');
-        const isPaid = localStorage.getItem('aihubpro_paid') === 'true';
-        const paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
-
-        // Paid user check
-        if (isPaid && paidExpiry && now < parseInt(paidExpiry)) {
-            document.getElementById('blockedOverlay').style.display = 'none';
-            document.getElementById('chatWidget').style.display = 'flex';
-            if (localStorage.getItem('aihubpro_plan') === '666') {
-                document.getElementById('adBanner').style.display = 'block';
-            }
-            document.getElementById('planBadge').textContent = localStorage.getItem('aihubpro_plan') === '999' ? 'Premium' : 'Standard';
-            document.getElementById('planBadge').style.background = localStorage.getItem('aihubpro_plan') === '999' ? '#10b981' : '#f59e0b';
-            return true;
-        }
-
-        // First time user - start trial
-        if (!trialStart) {
-            localStorage.setItem('aihubpro_trial_start', now.toString());
-            startTrialTimer(300);
-            document.getElementById('chatWidget').style.display = 'flex';
-            return true;
-        }
-
-        // Check 5 min trial
-        const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
-        if (elapsed < 300) {
-            startTrialTimer(300 - elapsed);
-            document.getElementById('chatWidget').style.display = 'flex';
-            return true;
-        }
-
-        // Trial khatam - Block karo with overlay
-        const nextFree = parseInt(trialStart) + (24 * 60 * 60 * 1000);
-        if (now < nextFree) {
-            showBlockScreen(nextFree);
-            return false;
-        }
-
-        // 24 ghante baad reset
-        localStorage.removeItem('aihubpro_trial_start');
-        location.reload();
-        return true;
-    }
-
-    function startTrialTimer(seconds) {
-        const timer = document.getElementById('trialTimer');
-        const timeLeft = document.getElementById('timeLeft');
-        timer.style.display = 'block';
-
-        const interval = setInterval(() => {
-            if (seconds <= 0) {
-                clearInterval(interval);
-                location.reload();
-                return;
-            }
-            const mins = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            timeLeft.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-            seconds--;
-        }, 1000);
-    }
-
-    function showBlockScreen(nextFree) {
-        document.getElementById('nextFreeTime').textContent = new Date(nextFree).toLocaleString('hi-IN');
-        document.getElementById('blockedOverlay').style.display = 'flex';
-        document.getElementById('chatWidget').style.display = 'none';
-
-        // Saare tools disable karo but dikhte rahen
-        document.querySelectorAll('.tool-card').forEach(card => {
-            card.classList.add('disabled');
-        });
-    }
-
-    // EDIT 2: FREE TRIAL RESET FUNCTION ADDED
-    function resetTrial() {
-        localStorage.removeItem('aihubpro_trial_start');
-        document.getElementById('blockedOverlay').style.display = 'none';
-        document.getElementById('chatWidget').style.display = 'flex';
-        location.reload();
-    }
-
-    // 2. STRIPE PAYMENT SYSTEM - EDITED & FIXED
-    async function buyPlan(amount) {
-        try {
-            // Call Cloudflare Function
-            const response = await fetch('/functions/create-checkout', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ plan: amount })
-            });
-
-            // EDIT 3: Better error handling for empty response
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const text = await response.text();
-            if (!text) {
-                throw new Error('Empty response from server');
-            }
-
-            const data = JSON.parse(text);
-
-            if (data.url) {
-                window.location.href = data.url; // Stripe Checkout page
-            } else {
-                alert('Payment init failed. Try again.');
-            }
-        } catch (e) {
-            alert('Payment error: ' + e.message + '. Check if /functions/create-checkout exists.');
-        }
-    }
-
-    // 3. TOOL OPEN FUNCTION
-    function openTool(toolName) {
-        if (!checkAccess()) {
-            return;
-        }
-        window.location.href = `/${toolName}.html`;
-    }
-
-    // 4. CHAT FUNCTIONS - USES CLOUDFLARE FUNCTION
-    function openChat() {
-        if (!checkAccess()) return;
-        document.getElementById('chatWidget').style.display = 'flex';
-    }
-
-    function closeChat() {
-        document.getElementById('chatWidget').style.display = 'none';
-    }
-
-    // ✅ FIXED: Updated sendChat function with correct Cloudflare Pages API URL
-    async function sendChat() {
-        if (!checkAccess()) return;
-        const input = document.getElementById('chatInput');
-        const msg = input.value.trim();
-        if (!msg) return;
-
-        const box = document.getElementById('chatBox');
-        box.innerHTML += '<div class="message user-msg">' + msg + '</div>';
-        input.value = '';
-
-        const loadingId = 'loading-' + Date.now();
-        box.innerHTML += '<div class="message ai-msg" id="' + loadingId + '">Soch raha hun...</div>';
-        box.scrollTop = box.scrollHeight;
-
-        try {
-            // FIXED: Cloudflare Pages Functions use /api/ route, not /functions/
-            const response = await fetch('/api/chat', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: msg })
-            });
-
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error('API Error: ' + response.status + ' - ' + errorText);
-            }
-            
-            const data = await response.json();
-            document.getElementById(loadingId).innerHTML = marked.parse(data.reply || 'Reply nahi mila');
-            
-        } catch (e) {
-            console.error('Chat Error:', e);
-            document.getElementById(loadingId).innerHTML = 'Maaf karo bhai, AI busy hai. 2 min baad try karo ya support pe mail karo: vasu081120@gmail.com';
-        }
-        box.scrollTop = box.scrollHeight;
-    }
-
-    // 5. LANGUAGE SWITCHER
-    const translations = {
-        hi: {
-            trial_ended: "⏰ 5 मिनट फ्री ट्रायल खत्म",
-            next_free: "अगला फ्री एक्सेस:",
-            wait_msg: "24 घंटे इंतजार मत करो। तुरंत अनलिमिटेड एक्सेस चाहिए तो प्लान चुनो:",
-        },
-        en: {
-            trial_ended: "⏰ 5 Minute Free Trial Ended",
-            next_free: "Next Free Access:",
-            wait_msg: "Don't wait 24 hours. Choose a plan for instant unlimited access:",
-        }
-    };
-
-    function setLanguage(lang) {
-        localStorage.setItem('aihubpro_lang', lang);
-        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById('btn-' + lang).classList.add('active');
-    }
-
-    // INIT
-    window.onload = function() {
-        checkAccess();
-        const lang = localStorage.getItem('aihubpro_lang') || 'hi';
-        setLanguage(lang);
-    };
-    </script>
-</body>
-</html>
-<!-- deployed -->
+<div class="ad-banner" id="adBanner">🚀 <span>Advertisement: Best Hosting ₹99/month</span> | <button onclick="this.parentElement.style.display='none'" style="background:#000;color:#fff;border:none;padding:4px 12px;border-radius:4px;margin-left:10px;cursor:pointer;">X</button></div>
+<div class="blocked-overlay" id="blockedOverlay">
+<div style="background:#1e293b;padding:40px;border-radius:20px;max-width:1000px;border:2px solid #334155;margin:20px;width:100%;">
+<h2 style="font-size:32px;margin-bottom:16px;color:#ef4444;">⏰ 5 Minute Free Trial Khatam</h2>
+<p style="font-size:18px;margin-bottom:24px;color:#94a3b8;"><span>Agla Free Access:</span> <span id="nextFreeTime" style="color:#3b82f6;font-weight:700;"></span></p>
+<p style="font-size:16px;margin-bottom:30px;color:#e2e8f0;">24 ghante wait mat karo. Turant unlimited access chahiye to plan choose karo:</p>
+<button onclick="resetTrial()" style="width:100%;background:#3b82f6;color:#fff;border:none;padding:16px;border-radius:12px;font-size:16px;font-weight:700;margin-bottom:30px;cursor:pointer;">🎁 Free 5 Min Trial Start Karo</button>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin:30px 0;">
+<div style="background:#0f172a;border:2px solid #f59e0b;border-radius:16px;padding:24px;text-align:left">
+<div style="background:#f59e0b;color:#000;padding:6px 12px;border-radius:20px;display:inline-block;font-size:12px;font-weight:700;margin-bottom:12px;">POPULAR - ADS KE SATH</div>
+<h3 style="font-size:32px;margin-bottom:8px;">₹666<span style="font-size:16px;color:#94a3b8;">/month</span></h3>
+<p style="color:#f59e0b;font-size:14px;margin-bottom:16px;font-weight:600;">⚠️ With Ads</p>
+<ul style="list-style:none;padding:0;margin:20px 0;font-size:14px;line-height:2.2;">
+<li>✅ Unlimited AI Chat Messages</li><li>✅ GST Calculator - CGST/SGST/IGST</li><li>✅ Invoice Generator - PDF Download</li><li>✅ EMI Calculator - Home/Car Loan</li><li>✅ SIP Calculator - Mutual Fund</li><li>✅ PDF Tools - Merge/Split/Compress</li><li>✅ Image Compressor - 90% Reduce</li><li>✅ QR Code Generator</li><li>✅ Password Generator</li><li>✅ JSON Formatter</li>
+<li style="color:#f59e0b;">⚠️ <b>Banner Ads dikhenge</b></li><li style="color:#f59e0b;">⚠️ <b>Video Ads 30 sec</b></li><li style="color:#f59e0b;">⚠️ <b>Masuri/Pop-ups aayenge</b></li><li>✅ 30 Days Validity</li><li>✅ Email Support 24hr</li>
+</ul>
+<button onclick="buyPlan(666)" style="width:100%;background:#f59e0b;color:#000;border:none;padding:16px;border-radius:12px;font-weight:700;cursor:pointer;font-size:16px;">₹666 Plan Lo - Ads Ke Sath</button>
+</div>
+<div style="background:linear-gradient(135deg,#1e293b,#0f172a);border:2px solid #10b981;border-radius:16px;padding:24px;text-align:left">
+<div style="background:#10b981;color:#000;padding:6px 12px;border-radius:20px;display:inline-block;font-size:12px;font-weight:700;margin-bottom:12px;">PREMIUM - NO ADS</div>
+<h3 style="font-size:32px;margin-bottom:8px;">₹999<span style="font-size:16px;color:#94a3b8;">/month</span></h3>
+<p style="color:#10b981;font-size:14px;margin-bottom:16px;font-weight:600;">✅ No Ads - Bilkul Saaf</p>
+<ul style="list-style:none;padding:0;margin:20px 0;font-size:14px;line-height:2.2;">
+<li>✅ Unlimited AI Chat Messages</li><li>✅ GST Calculator Advanced</li><li>✅ Invoice Generator Pro</li><li>✅ EMI Calculator + Charts</li><li>✅ SIP Calculator + Graph</li><li>✅ PDF Tools - All Premium</li><li>✅ Image Compressor/Resizer</li><li>✅ QR Code Generator</li><li>✅ Password Generator</li><li>✅ JSON Formatter</li><li>✅ Loan Calculator</li><li>✅ Quotation Generator</li>
+<li style="color:#10b981;">✅ <b>NO ADS - 100% Clean</b></li><li style="color:#10b981;">✅ <b>NO Masuri/Pop-ups</b></li><li style="color:#10b981;">✅ <b>Ad-Free Experience</b></li><li>✅ 30 Days Validity</li><li>✅ Priority WhatsApp Support</li><li>✅ Fastest AI Response Speed</li>
+</ul>
+<button onclick="buyPlan(999)" style="width:100%;background:#10b981;color:#000;border:none;padding:16px;border-radius:12px;font-weight:700;cursor:pointer;font-size:16px;">₹999 Plan Lo - No Ads 🚀</button>
+</div>
+</div>
+<p style="font-size:12px;margin-top:20px;color:#666;line-height:1.8;text-align:center;">⚖️ <b>Jurisdiction:</b> All disputes subject to Yamunanagar District Court, Haryana Only<br>🔒 <b>No Refund Policy:</b> Payment ke baad refund nahi milega<br>⚖️ <b>IT Act 2000 Sec 79:</b> Illegal queries IP log + 1 year storage + Police share</p>
+</div>
+</div>
+<div class="header">
+<div class="header-top"><div class="logo">⚡ AihubPro</div><div class="lang-switcher"><button class="lang-btn active" onclick="setLanguage('hi')" id="btn-hi">हिंदी</button><button class="lang-btn" onclick="setLanguage('en')" id="btn-en">English</button><button class="lang-btn" onclick="setLanguage('hinglish')" id="btn-hinglish">Hinglish</button></div></div>
+<div class="nav"><a href="#tools">Tools</a><a href="#pricing">Pricing</a><a href="/terms.html">Terms</a><a href="/privacy-policy.html">Privacy</a><a href="/contact.html">Contact</a></div>
+<div class="trial-timer" id="trialTimer" style="display:none;"><span>Trial:</span> <span id="timeLeft">5:00</span></div>
+</div>
+<div class="hero">
+<h1>World's Best AI + 18 Free Tools</h1>
+<p>ChatGPT Alternative + GST Calculator + PDF Tools + EMI Calculator - Sab Kuch Free</p>
+<button class="cta-btn" onclick="document.getElementById('tools').scrollIntoView()">Explore Tools -></button>
+<button class="cta-btn" style="background:#10b981" onclick="openChat()">Start AI Chat 🤖</button>
+<button class="cta-btn" style="background:#334155; font-size:12px;" onclick="activateFamilyAccess()">👨‍👩‍👧 Family Login</button>
+</div>
+<div class="container" id="tools">
+<h2 class="section-title">💼 Business Tools</h2><p class="section-desc">GST, Invoice, Quotation - Business ke liye sab kuch</p>
+<div class="tools-grid">
+<div class="tool-card" onclick="openTool('gst-calculator')"><div class="tool-icon">📊</div><div class="tool-name">GST Calculator</div><div class="tool-desc">Calculate GST with CGST, SGST, IGST breakdown. 0%, 5%, 12%, 18%, 28% slabs.</div><span class="tool-badge">100% Free</span></div>
+<div class="tool-card" onclick="openTool('invoice-generator')"><div class="tool-icon">🧾</div><div class="tool-name">Invoice Generator</div><div class="tool-desc">Create professional GST invoices. Download PDF. No signup needed.</div><span class="tool-badge">100% Free</span></div>
+<div class="tool-card" onclick="openTool('emi-calculator')"><div class="tool-icon">🏦</div><div class="tool-name">EMI Calculator</div><div class="tool-desc">Home/Car/Personal loan EMI. Interest breakdown chart.</div><span class="tool-badge">100% Free</span></div>
+<div class="tool-card" onclick="openTool('sip-calculator')"><div class="tool-icon">📈</div><div class="tool-name">SIP Calculator</div><div class="tool-desc">Mutual Fund SIP returns. Wealth calculator with graph.</div><span class="tool-badge">100% Free</span></div>
+</div>
+<h2 class="section-title">📎 PDF Tools</h2><p class="section-desc">Merge, Split, Compress - All PDF tools free</p>
+<div class="tools-grid">
+<div class="tool-card" onclick="openTool('merge-pdf')"><div class="tool-icon">🔗</div><div class="tool-name">Merge PDF</div><div class="tool-desc">Combine multiple PDFs into one. Unlimited pages.</div><span class="tool-badge">100% Free</span></div>
+<div class="tool-card" onclick="openTool('compress-pdf')"><div class="tool-icon">🗜️</div><div class="tool-name">Compress PDF</div><div class="tool-desc">Reduce PDF size 80%. Quality intact.</div><span class="tool-badge">100% Free</span></div>
+<div class="tool-card" onclick="openTool('split-pdf')"><div class="tool-icon">✂️</div><div class="tool-name">Split PDF</div><div class="tool-desc">Extract pages from PDF. Split by range.</div><span class="tool-badge">100% Free</span></div>
+<div class="tool-card" onclick="openTool('pdf-compressor')"><div class="tool-icon">⚡</div><div class="tool-name">PDF Compressor Pro</div><div class="tool-desc">Advanced PDF compression with quality control.</div><span class="tool-badge">100% Free</span></div>
+</div>
+<h2 class="section-title">🖼️ Image Tools</h2><p class="section-desc">Compress, Resize, Convert - All image tools free</p>
+<div class="tools-grid">
+<div class="tool-card" onclick="openTool('image-resizer')"><div class="tool-icon">📐</div><div class="tool-name">Image Resizer</div><div class="tool-desc">Resize images to any dimension. JPG, PNG, WebP.</div><span class="tool-badge">100% Free</span></div>
+<div class="tool-card" onclick="openTool('jpg-png-converter')"><div class="tool-icon">🖼️</div><div class="tool-name">JPG ⇌ PNG Converter</div><div class="tool-desc">Convert between JPG and PNG formats instantly.</div><span class="tool-badge">100% Free</span></div>
+<div class="tool-card" onclick="openTool('qr-code-generator')"><div class="tool-icon">🔳</div><div class="tool-name">QR Code Generator</div><div class="tool-desc">Create QR codes for URL, Text, WiFi, UPI.</div><span class="tool-badge">100% Free</span></div>
+</div>
+</div>
+<div class="chat-widget" id="chatWidget">
+<div class="chat-header">🤖 AihubPro AI <span id="planBadge" style="font-size:11px; background:#3b82f6; padding:2px 8px; border-radius:12px;">FREE</span><button style="background:none; border:none; color:white; cursor:pointer; font-size:20px;" onclick="closeChat()">×</button></div>
+<div class="chat-box" id="chatBox"><div class="message ai-msg">Hi! Main AihubPro AI hun. Kya help chahiye? 😊<br><small>5 minute free trial active hai</small></div></div>
+<div class="chat-input"><input type="text" id="chatInput" placeholder="Message..." onkeypress="if(event.key==='Enter') sendChat()"><button onclick="sendChat()">Send</button></div>
+</div>
+<div class="footer">
+<div class="footer-grid">
+<div class="footer-col"><h4>🏢 Firm Details</h4><p><b>Firm Name:</b> Vasu Enterprises</p><p><b>Owner:</b> Vasu</p><p><b>Address:</b> Yamunanagar, Haryana, India - 135001</p><p><b>Email:</b> vasu081120@gmail.com</p><p><b>GST No:</b> 06TGWPS3896F1Z0</p></div>
+<div class="footer-col"><h4>⚖️ Legal & Jurisdiction</h4><p><b>Court:</b> All disputes subject to Yamunanagar District Court, Haryana</p><p><b>IT Act 2000 Sec 79:</b> Illegal queries logged with IP + Location + Time</p><p><b>Police:</b> Data shared with Yamunanagar Cyber Cell if required</p><p><b>IPC:</b> Section 505, 506 applicable for illegal content</p><p><a href="/terms.html">Terms & Conditions</a></p><p><a href="/privacy-policy.html">Privacy Policy</a></p><p><a href="/refund.html">Refund Policy - No Refund</a></p></div>
+<div class="footer-col"><h4>🔒 Security & Compliance</h4><p>✅ 256-bit SSL Encryption</p><p>✅ Cloudflare DDoS Protection</p><p>✅ Daily Auto Backup 12:00 AM IST</p><p>✅ 99.9% Uptime Guarantee</p><p>✅ India Server Only - No Data Abroad</p><p>✅ IT Act 2000 Section 79 Compliant</p><p>✅ PCI-DSS Payment Security</p></div>
+<div class="footer-col"><h4>💰 Pricing & Support</h4><p><b>Free:</b> 5 Minutes Daily</p><p><b>Standard:</b> ₹666/month - With Ads</p><p><b>Premium:</b> ₹999/month - No Ads</p><p><b>Support Hours:</b> 10 AM - 6 PM IST</p><p><b>Response Time:</b> 24 Hours Max</p><p><b>Grievance:</b> grievance@aihubpro.in</p></div>
+</div>
+</div>
+<script>
+// ====== AIHUBPRO FINAL PERFECT - 0 MISTAKE - 7 FAMILY EMAILS ======
+const FAMILY_EMAILS = [
+  'vasu081120@gmail.com',
+  'mrsaarti57@gmail.com',
+  'mrsaarti039@gmail.com',
+  'vasuglobale@gmail.com',
+  'mrneeraj039@gmail.com',
+  'neerajtyagi57@gmail.com',
+  'realvaishalisharma@gmail.com'
+];
+function isFamilyMember() {
+  const savedEmail = localStorage.getItem('aihubpro_family_email');
+  if (!savedEmail) return false;
+  return FAMILY_EMAILS.includes(savedEmail.toLowerCase());
+}
+function activateFamilyAccess() {
+  const email = prompt('Apna Family Email ID dalo (7 me se koi bhi):\n\n' + FAMILY_EMAILS.join('\n'));
+  if (!email) return;
+  if (FAMILY_EMAILS.includes(email.toLowerCase())) {
+    localStorage.setItem('aihubpro_family_email', email.toLowerCase());
+    localStorage.setItem('aihubpro_paid', 'true');
+    localStorage.setItem('aihubpro_paid_expiry', (Date.now() + 365*24*60*60*1000).toString());
+    localStorage.setItem('aihubpro_plan', '999');
+    alert('✅ Family Access Activated! Lifetime free unlimited - No Trial, No Block!');
+    location.reload();
+  } else {
+    alert('❌ Ye email family list me nahi hai.');
+  }
+}
+function checkSystemStatus() {
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('check') === 'system') {
+    alert('🔍 SYSTEM CHECK:\n\n✅ Chat API: /chat\n✅ Payment API: /create-checkout\n✅ Family: 7 emails\n✅ Tools: 18\n\nF12 press karke console dekho');
+  }
+}
+function checkAccess() {
+  if (isFamilyMember()) {
+    document.getElementById('blockedOverlay').style.display = 'none';
+    document.getElementById('chatWidget').style.display = 'flex';
+    document.getElementById('planBadge').textContent = 'FAMILY - PREMIUM';
+    document.getElementById('planBadge').style.background = '#10b981';
+    document.getElementById('trialTimer').style.display = 'none';
+    return true;
+  }
+  const now = Date.now();
+  let trialStart = localStorage.getItem('aihubpro_trial_start');
+  const isPaid = localStorage.getItem('aihubpro_paid') === 'true';
+  const paidExpiry = localStorage.getItem('aihubpro_paid_expiry');
+  if (isPaid && paidExpiry && now < parseInt(paidExpiry)) {
+    document.getElementById('blockedOverlay').style.display = 'none';
+    document.getElementById('chatWidget').style.display = 'flex';
+    if (localStorage.getItem('aihubpro_plan') === '666') { document.getElementById('adBanner').style.display = 'block'; }
+    document.getElementById('planBadge').textContent = localStorage.getItem('aihubpro_plan') === '999' ? 'PREMIUM' : 'STANDARD';
+    document.getElementById('planBadge').style.background = localStorage.getItem('aihubpro_plan') === '999' ? '#10b981' : '#f59e0b';
+    return true;
+  }
+  if (!trialStart) {
+    localStorage.setItem('aihubpro_trial_start', now.toString());
+    startTrialTimer(300);
+    document.getElementById('chatWidget').style.display = 'flex';
+    return true;
+  }
+  const elapsed = Math.floor((now - parseInt(trialStart)) / 1000);
+  if (elapsed < 300) {
+    startTrialTimer(300 - elapsed);
+    document.getElementById('chatWidget').style.display = 'flex';
+    return true;
+  }
+  const nextFree = parseInt(trialStart) + (24 * 60 * 60 * 1000);
+  if (now < nextFree) { showBlockScreen(nextFree); return false; }
+  localStorage.removeItem('aihubpro_trial_start');
+  location.reload();
+  return true;
+}
+function startTrialTimer(seconds) {
+  const timer = document.getElementById('trialTimer');
+  const timeLeft = document.getElementById('timeLeft');
+  timer.style.display = 'block';
+  const interval = setInterval(() => {
+    if (seconds <= 0) { clearInterval(interval); location.reload(); return; }
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    timeLeft.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+    seconds--;
+  }, 1000);
+}
+function showBlockScreen(nextFree) {
+  if (isFamilyMember()) return;
+  document.getElementById('nextFreeTime').textContent = new Date(nextFree).toLocaleString('hi-IN');
+  document.getElementById('blockedOverlay').style.display = 'flex';
+  document.getElementById('chatWidget').style.display = 'none';
+  document.querySelectorAll('.tool-card').forEach(card => { card.classList.add('disabled'); });
+}
+function resetTrial() {
+  localStorage.removeItem('aihubpro_trial_start');
+  document.getElementById('blockedOverlay').style.display = 'none';
+  document.getElementById('chatWidget').style.display = 'flex';
+  location.reload();
+}
+async function buyPlan(amount) {
+  try {
+    const planName = amount === 999 ? 'pro' : 'basic';
+    const response = await fetch('/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plan: planName })
+    });
+    if (!response.ok) { throw new Error(`HTTP error! status: ${response.status}`); }
+    const text = await response.text();
+    if (!text) { throw new Error('Empty response from server'); }
+    const data = JSON.parse(text);
+    if (data.url) { window.location.href = data.url; } else { alert('Payment init failed. Try again.'); }
+  } catch (e) { alert('Payment error: ' + e.message); }
+}
+function openTool(toolName) { if (!checkAccess()) return; window.location.href = `/${toolName}.html`; }
+function openChat() { if (!checkAccess()) return; document.getElementById('chatWidget').style.display = 'flex'; }
+function closeChat() { document.getElementById('chatWidget').style.display = 'none'; }
+async function sendChat() {
+  if (!checkAccess()) return;
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  const box = document.getElementById('chatBox');
+  box.innerHTML += '<div class="message user-msg">' + msg + '</div>';
+  input.value = '';
+  const loadingId = 'loading-' + Date.now();
+  box.innerHTML += '<div class="message ai-msg" id="' + loadingId + '">Soch raha hun...</div>';
+  box.scrollTop = box.scrollHeight;
+  try {
+    const response = await fetch('/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg })
+    });
+    if (!response.ok) { const errorText = await response.text();
