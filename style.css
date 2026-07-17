@@ -1,0 +1,6 @@
+button,.btn,.card, a {
+  pointer-events: auto!important;
+  cursor: pointer!important;
+  position: relative;
+  z-index: 10;
+}
