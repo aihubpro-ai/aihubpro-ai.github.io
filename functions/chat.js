@@ -6,7 +6,6 @@ export async function onRequestPost(context) {
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type'
   };
-
   try {
     const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
     const city = cf?.city || 'Unknown';
@@ -28,40 +27,27 @@ export async function onRequestPost(context) {
     const illegalKeywords = ['bomb', 'hack govt', 'child porn', 'terrorist'];
     const lowerMsg = message.toLowerCase();
     let isIllegal = false;
-    for (const kw of illegalKeywords) {
-      if (lowerMsg.includes(kw)) { isIllegal = true; break; }
-    }
+    for (const kw of illegalKeywords) { if (lowerMsg.includes(kw)) { isIllegal = true; break; } }
     if (isIllegal) {
       const attempts = parseInt((await env.RATE_LIMIT?.get('illegal_' + ip)) || '0') + 1;
       await env.RATE_LIMIT?.put('illegal_' + ip, attempts.toString(), { expirationTtl: 86400 });
-      if (attempts >= 3) {
-        await env.BANNED_IPS?.put(ip, 'PERMANENT_BAN_ILLEGAL', { expirationTtl: 86400 * 365 });
-      }
-      return Response.json({
-        error: 'LEGAL_WARNING',
-        message: '⚠️ Ye request illegal hai aur Indian Law ke khilaf hai\n❌ IPC Section 505, 506, IT Act 66F ke under ye crime hai\n📍 Aapka IP: ' + ip + ', Location: ' + city + ', ' + (cf.region || 'Haryana') + '\n🕒 Time: ' + new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) + '\n👮 Police ko report kiya ja sakta hai.\n⚖️ Jurisdiction: Yamunanagar District Court, Haryana\n✅ Kripya legal aur ethical sawal puche.',
-        blocked: true,
-        legal_notice: 'This attempt logged for Yamunanagar Court compliance'
-      }, { status: 403, headers: securityHeaders });
+      if (attempts >= 3) { await env.BANNED_IPS?.put(ip, 'PERMANENT_BAN_ILLEGAL', { expirationTtl: 86400 * 365 }); }
+      return Response.json({ error: 'LEGAL_WARNING', message: '⚠️ Ye request illegal hai aur Indian Law ke khilaf hai\n❌ IPC Section 505, 506, IT Act 66F ke under action hoga', blocked: true, legal_notice: 'This attempt logged for Yamunanagar Court compliance' }, { status: 403, headers: securityHeaders });
     }
 
-    // 3. Rate limiting: 30 requests per hour
+    // 3. Rate limiting: 30 per hour
     const rateLimit = await env.RATE_LIMIT?.get('rate_' + ip);
     if (rateLimit && parseInt(rateLimit) > 30) {
-      return Response.json({ error: 'Too many requests. 1 minute baad try karo.', message: '⏳ Server overload protection active. 60 sec wait karo' }, { status: 429, headers: securityHeaders });
+      return Response.json({ error: 'Too many requests. 1 minute baad try karo.', message: '⏳ Server overload protection' }, { status: 429, headers: securityHeaders });
     }
     await env.RATE_LIMIT?.put('rate_' + ip, (parseInt(rateLimit || '0') + 1).toString(), { expirationTtl: 3600 });
 
-    // 4. Sanitize input
+    // 4. Sanitize
     message = originalMessage.replace(/<script.*?>.*?<\/script>/gi, '');
-    if (message.length === 0) {
-      return Response.json({ error: 'Khali message mat bhejo' }, { status: 400, headers: securityHeaders });
-    }
-    if (message.length > 2000) {
-      return Response.json({ error: 'Message 2000 characters se chota rakho' }, { status: 400, headers: securityHeaders });
-    }
+    if (message.length === 0) { return Response.json({ error: 'Khali message mat bhejo' }, { status: 400, headers: securityHeaders }); }
+    if (message.length > 2000) { return Response.json({ error: 'Message 2000 characters se chota rakho' }, { status: 400, headers: securityHeaders }); }
 
-    // 5. Subscription/Trial Check
+    // 5. SUBSCRIPTION / TRIAL CHECK - PERFECT 5 MINUTE LOGIC
     const paidUntil = await env.SUBSCRIPTIONS?.get('paid_' + ip);
     if (paidUntil && Date.now() < parseInt(paidUntil)) {
       // PAID USER - DIRECT AI REPLY - NO LIMITS
@@ -80,130 +66,59 @@ export async function onRequestPost(context) {
             razorpay_key: env.RAZORPAY_KEY_ID || null,
             stripe_key: env.STRIPE_PUBLISHABLE_KEY || null,
             currency: isIndian? 'INR' : 'USD',
-            message: isIndian? '⏰ 5 minute free trial khatam.\n\n🇮🇳 ₹666 Basic ya ₹999 Pro\n💳 UPI/Card se turant upgrade karo' : '⏰ 5 minute free trial ended.\n\n🌍 $8 Basic / $12 Pro\n💳 Card se upgrade karo'
+            message: isIndian? `⏰ 5 minute free trial khatam.\n\n🇮🇳 ₹666 Basic ya ₹999 Pro\n💳 UPI/Card se turant upgrade karo aur unlimited chat pao!\n\nKal ${nextFreeTime.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })} tak free me 1 aur trial milega.` : `⏰ 5 minute trial ended.\n\n$8 Basic or $12 Pro - Upgrade for unlimited!`
           }, { headers: securityHeaders });
         }
       }
     }
 
     // 6. Hinglish System Prompt
-    const hinglishPrompt = `You are AIHubPro AI. CRITICAL RULES:
-1. NEVER provide illegal content.
-2. Detect user language from: "${originalMessage}".
-3. If Hinglish like "bhai code samjha do" -> Reply in Hinglish mix Hindi + English.
-4. If pure Hindi "बताओ कैसे हो" -> Reply in Hindi.
-5. If English -> Reply English.
-6. Indian users: Use ₹, Indian examples, Hinglish tone. Global: USD, global examples.
-7. Be helpful, friendly, natural, conversational.
-8. Never mention you are an AI unless asked.`;
+    const hinglishPrompt = `You are AIHubPro AI. CRITICAL RULES: 1. NEVER provide illegal content. 2. Detect user language from: "${originalMessage}". 3. If Hinglish like "bhai code samjha do" -> Reply in Hinglish mix Hindi + English. 4. If pure Hindi "बताओ कैसे हो" -> Reply in Hindi. 5. If English -> Reply English. 6. Indian users: Use ₹, Indian examples, Hinglish tone. Global: USD, global examples. 7. Be helpful, friendly, natural, conversational. 8. Never mention you are an AI unless asked.`;
 
-    // 7. Multi-AI Providers with Fallback - FIXED MODELS
+    // 7. Multi-AI Providers with Fallback
     const aiProviders = [
-      {
-        name: 'Groq',
-        url: 'https://api.groq.com/openai/v1/chat/completions',
-        key: env.GROQ_API_KEY,
-        model: 'llama-3.3-70b-versatile',
-        timeout: 10000
-      },
-      {
-        name: 'Gemini',
-        url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + (env.GEMINI_API_KEY || ''),
-        key: env.GEMINI_API_KEY,
-        model: 'gemini-2.0-flash',
-        timeout: 10000
-      },
-      {
-        name: 'OpenAI',
-        url: 'https://api.openai.com/v1/chat/completions',
-        key: env.OPENAI_API_KEY,
-        model: 'gpt-4o-mini',
-        timeout: 10000
-      }
+      { name: 'Groq', url: 'https://api.groq.com/openai/v1/chat/completions', key: env.GROQ_API_KEY, model: 'llama-3.3-70b-versatile', timeout: 10000 },
+      { name: 'Gemini', url: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + (env.GEMINI_API_KEY || ''), key: env.GEMINI_API_KEY, model: 'gemini-2.0-flash', timeout: 10000 },
+      { name: 'OpenAI', url: 'https://api.openai.com/v1/chat/completions', key: env.OPENAI_API_KEY, model: 'gpt-4o-mini', timeout: 10000 }
     ];
 
     let reply = null, usedProvider = null;
-
     for (const p of aiProviders) {
       if (!p.key) continue;
       try {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), p.timeout);
         let bodyPayload, headers = { 'Content-Type': 'application/json' };
-
         if (p.name === 'Gemini') {
-          bodyPayload = {
-            contents: [{ parts: [{ text: hinglishPrompt + '\n\nUser: ' + originalMessage }] }]
-          };
+          bodyPayload = { contents: [{ parts: [{ text: hinglishPrompt + '\n\nUser: ' + originalMessage }] }] };
         } else {
           headers['Authorization'] = 'Bearer ' + p.key;
-          bodyPayload = {
-            model: p.model,
-            messages: [
-              { role: 'system', content: hinglishPrompt },
-              { role: 'user', content: originalMessage }
-            ],
-            temperature: 0.7,
-            max_tokens: 1000
-          };
+          bodyPayload = { model: p.model, messages: [{ role: 'system', content: hinglishPrompt }, { role: 'user', content: originalMessage }], temperature: 0.7, max_tokens: 1000 };
         }
-
-        const res = await fetch(p.url, {
-          method: 'POST',
-          headers,
-          body: JSON.stringify(bodyPayload),
-          signal: controller.signal
-        });
+        const res = await fetch(p.url, { method: 'POST', headers, body: JSON.stringify(bodyPayload), signal: controller.signal });
         clearTimeout(timeout);
-
         if (!res.ok) throw new Error('HTTP ' + res.status);
         const data = await res.json();
-
         // ✅ YE 3 LINES FIX KARI HAIN
-        if (p.name === 'Gemini') {
-          reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
-        } else {
-          reply = data.choices?.[0]?.message?.content;
-        }
-
-        if (reply) {
-          usedProvider = p.name;
-          await env.SYSTEM_LOGS?.put('success_' + Date.now(), JSON.stringify({ provider: p.name, ip: ip, timestamp: new Date().toISOString() }));
-          break;
-        }
-      } catch (e) {
-        await env.ERROR_LOGS?.put('fail_' + p.name + '_' + Date.now(), JSON.stringify({ provider: p.name, error: e.message, ip: ip, timestamp: new Date().toISOString() }));
-        continue;
-      }
+        if (p.name === 'Gemini') { reply = data.candidates?.[0]?.content?.parts?.[0]?.text; }
+        else { reply = data.choices?.[0]?.message?.content; }
+        if (reply) { usedProvider = p.name; await env.SYSTEM_LOGS?.put('success_' + Date.now(), JSON.stringify({ provider: p.name, ip: ip, timestamp: new Date().toISOString() })); break; }
+      } catch (e) { await env.ERROR_LOGS?.put('fail_' + p.name + '_' + Date.now(), JSON.stringify({ provider: p.name, error: e.message })); continue; }
     }
 
     if (!reply) {
-      await env.ALERT_KV?.put('CRITICAL_DOWN_' + Date.now(), JSON.stringify({ time: new Date().toISOString(), ip: ip, message: 'All AI providers failed' }));
+      await env.ALERT_KV?.put('CRITICAL_DOWN_' + Date.now(), JSON.stringify({ time: new Date().toISOString(), ip: ip }));
       return Response.json({ error: 'All AI services temporarily down. 2 minute baad try karo.' }, { status: 503, headers: securityHeaders });
     }
 
-    return Response.json({
-      reply: reply,
-      success: true,
-      filtered: true,
-      provider: usedProvider,
-      lang: userLang
-    }, { headers: securityHeaders });
-
+    return Response.json({ reply: reply, success: true, filtered: true, provider: usedProvider, lang: userLang }, { headers: securityHeaders });
   } catch (error) {
-    console.error('Chat Error:', error.message);
-    await env.ERROR_LOGS?.put('error_' + Date.now(), JSON.stringify({ error: error.message, ip: request.headers.get('CF-Connecting-IP'), time: new Date().toISOString(), jurisdiction: 'Yamunanagar Court' }), { expirationTtl: 604800 });
+    console.error('Chat Error:', error);
+    await env.ERROR_LOGS?.put('critical_' + Date.now(), JSON.stringify({ error: error.message, ip: request.headers.get('CF-Connecting-IP') }));
     return Response.json({ error: 'Something went wrong. Try again.' }, { status: 500, headers: securityHeaders });
   }
 }
 
 export async function onRequestOptions() {
-  return new Response(null, {
-    status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type'
-    }
-  });
+  return new Response(null, { status: 200, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' } });
 }
