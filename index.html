@@ -1,246 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>VASU AI PRO | AI Chat, Business Tools, PDF Tools & More</title>
-
-<meta name="description"
-content="VASU AI PRO - India's Smart AI Platform with Business Tools, GST Calculator, Invoice Generator, PDF Tools, Image Tools, AI Chat and much more.">
-
-<meta name="keywords"
-content="VASU AI PRO, AI Chat, GST Calculator, Invoice Generator, PDF Tools, Image Tools, Business Tools, AIHubPro">
-
-<meta name="author"
-content="Vasu Enterprises">
-
-<meta name="robots"
-content="index,follow">
-
-<meta name="theme-color"
-content="#0f172a">
-
-<link rel="canonical"
-href="https://aihubpro.in">
-
-<!-- Open Graph -->
-
-<meta property="og:type"
-content="website">
-
-<meta property="og:title"
-content="VASU AI PRO">
-
-<meta property="og:description"
-content="India's Powerful AI Platform">
-
-<meta property="og:image"
-content="assets/images/logo.png">
-
-<meta property="og:url"
-content="https://aihubpro.in">
-
-<!-- Twitter -->
-
-<meta name="twitter:card"
-content="summary_large_image">
-
-<meta name="twitter:title"
-content="VASU AI PRO">
-
-<meta name="twitter:description"
-content="India's Smart AI Platform">
-
-<meta name="twitter:image"
-content="assets/images/logo.png">
-
-<!-- PWA -->
-
-<link rel="manifest"
-href="manifest.json">
-
-<link rel="icon"
-href="assets/icons/favicon.png">
-
-<meta name="apple-mobile-web-app-capable"
-content="yes">
-
-<meta name="apple-mobile-web-app-status-bar-style"
-content="black">
-
-<meta name="apple-mobile-web-app-title"
-content="VASU AI PRO">
-
-<!-- Google Fonts -->
-
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-rel="stylesheet">
-
-<!-- CSS -->
-
-<link rel="stylesheet"
-href="style.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIHUBPRO | AI Chat, Business Tools, PDF Tools & More</title>
+<meta name="description" content="AIHUBPRO - India's Smart AI Platform with Business Tools, GST Calculator, Invoice Generator, PDF Tools, Image Tools, AI Chat and much more.">
+<meta name="theme-color" content="#0f172a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icons/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--border:#334155;--text:#e2e8f0;--accent:#3b82f6}
+*{margin:0;padding:0;box-sizing:border-box} body{font-family:'Poppins',system-ui;background:var(--bg);color:var(--text)}
+#loader{position:fixed;inset:0;background:#0f172a;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999}.loader-logo{font-size:42px;font-weight:800;background:linear-gradient(90deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;background:#1e293b;border-bottom:1px solid #334155;position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px}
+.logo{font-weight:800;font-size:22px;letter-spacing:1px} nav ul{display:flex;gap:16px;list-style:none} nav a{color:#e2e8f0;text-decoration:none;font-weight:500}
+.hero{text-align:center;padding:70px 20px;background:linear-gradient(180deg,#1e293b 0%,#0f172a 100%)} .hero h1{font-size:44px;line-height:1.1;background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px} .hero p{color:#94a3b8;font-size:18px;margin-bottom:28px}
+.hero-buttons button{padding:14px 28px;border:none;border-radius:12px;font-weight:700;font-size:16px;margin:6px;cursor:pointer;transition:0.2s} #chatBtn{background:#10b981;color:#fff} #toolsBtn{background:#3b82f6;color:#fff} .hero-buttons button:hover{transform:translateY(-2px)}
+.search-section{text-align:center;padding:24px} #searchBox{padding:12px 16px;width:380px;max-width:75%;border-radius:10px;border:1px solid #334155;background:#1e293b;color:#fff;font-size:15px}
+.tools-section{max-width:1200px;margin:0 auto;padding:20px} .section-title{font-size:28px;text-align:center;margin:20px 0 6px} .section-subtitle{text-align:center;color:#94a3b8;margin-bottom:20px}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.tool-card{background:#1e293b;border:1px solid #334155;border-radius:16px;padding:24px;text-align:left;transition:0.3s} .tool-card:hover{transform:translateY(-4px);border-color:#3b82f6;box-shadow:0 10px 30px rgba(59,130,246,0.25)}
+.tool-icon{font-size:36px;margin-bottom:10px} .tool-card h3{font-size:18px;margin-bottom:6px} .tool-card p{color:#94a3b8;font-size:13px;margin-bottom:14px;min-height:32px}
+.tool-btn{display:inline-block;padding:10px 18px;background:#3b82f6;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:13px}
+.chat-widget{position:fixed;bottom:20px;right:20px;width:380px;height:560px;background:#1e293b;border:1px solid #334155;border-radius:16px;display:none;flex-direction:column;z-index:9999;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+.chat-header{padding:14px;border-bottom:1px solid #334155;display:flex;justify-content:space-between;font-weight:700} .chat-box{flex:1;overflow-y:auto;padding:14px} .message{margin-bottom:10px;padding:10px 12px;border-radius:10px;font-size:14px;max-width:85%;line-height:1.5} .user-msg{background:#3b82f6;margin-left:auto;color:#fff} .ai-msg{background:#0f172a;border:1px solid #334155}
+.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid #334155} .chat-input input{flex:1;padding:11px;border-radius:8px;border:1px solid #334155;background:#0f172a;color:#fff} .chat-input button{padding:11px 16px;background:#3b82f6;border:none;border-radius:8px;color:#fff;cursor:pointer}
+@media(max-width:768px){.hero h1{font-size:32px} .tools-grid{grid-template-columns:1fr} .chat-widget{width:95%;right:2.5%;bottom:10px;height:75%}}
+</style>
 </head>
-
 <body>
 
-<!-- Loading Screen -->
-
-<div id="loader">
-
-<div class="loader-logo">
-
-VASU AI PRO
-
-</div>
-
-<div class="loader-text">
-
-Loading...
-
-</div>
-
-</div>
-
-<!-- Header -->
+<div id="loader"><div class="loader-logo">AIHUBPRO</div><div class="loader-text" style="color:#94a3b8;margin-top:8px">Loading...</div></div>
 
 <header>
-
-<div class="logo">
-
-🚀 VASU AI PRO
-
-</div>
-
-<nav>
-
-<ul>
-
-<li><a href="#">Home</a></li>
-
-<li><a href="#tools">Tools</a></li>
-
-<li><a href="#pricing">Pricing</a></li>
-
-<li><a href="#blog">Blog</a></li>
-
-<li><a href="#faq">FAQ</a></li>
-
-<li><a href="#contact">Contact</a></li>
-
-</ul>
-
-</nav>
-
-<div class="header-buttons">
-
-<button id="themeBtn">
-
-🌙
-
-</button>
-
-<button id="languageBtn">
-
-🌐
-
-</button>
-
-<button id="loginBtn">
-
-Login
-
-</button>
-
-</div>
-
+<div class="logo">⚡ AIHUBPRO</div>
+<nav><ul><li><a href="#">Home</a></li><li><a href="#tools">Tools</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+<div class="header-buttons"><button id="themeBtn" style="padding:6px 10px;border-radius:6px;background:#334155;border:1px solid #475569;color:#fff;cursor:pointer">🌙</button><button id="loginBtn" style="padding:8px 16px;background:#3b82f6;border:none;border-radius:8px;color:#fff;margin-left:8px;cursor:pointer">Login</button></div>
 </header>
 
-<!-- Hero -->
-
 <section class="hero">
-
 <div class="hero-content">
-
-<h1>
-
-India's Most Powerful AI Platform
-
-</h1>
-
-<p>
-
-AI Chat • Business Tools • PDF Tools • Image Tools • Developer Tools
-
-</p>
-
+<h1>India's Most Powerful AI Platform</h1>
+<p>AI Chat • Business Tools • PDF Tools • Image Tools • Developer Tools</p>
 <div class="hero-buttons">
-
-<button id="chatBtn">
-
-🤖 Start AI Chat
-
-</button>
-
-<button id="toolsBtn">
-
-🛠 Explore Tools
-
-</button>
-
+<button id="chatBtn">🤖 Start AI Chat</button>
+<button id="toolsBtn">🛠 Explore Tools</button>
 </div>
-
 </div>
-
-<div class="hero-image">
-
-<img
-src="assets/images/hero.png"
-alt="VASU AI PRO">
-
-</div>
-
 </section>
-
-<!-- Search -->
 
 <section class="search-section">
-
-<input
-type="text"
-id="searchBox"
-placeholder="Search any tool...">
-
-<button>
-
-Search
-
-</button>
-
+<input type="text" id="searchBox" placeholder="Search any tool... e.g. GST, PDF, QR">
 </section>
-
-<!-- Main Content Starts Here -->
 
 <main id="tools">
 
-<!-- Tool Cards will be added in Part 2 -->
+<section class="tools-section"><h2 class="section-title">💼 Business Tools</h2><p class="section-subtitle">Professional Business Tools for Everyone</p>
+<div class="tools-grid">
+<div class="tool-card"><div class="tool-icon">📊</div><h3>GST Calculator</h3><p>Inclusive, Exclusive, Reverse GST Calculator</p><a href="tools/gst-calculator/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">🧾</div><h3>Invoice Generator</h3><p>Create GST Invoice with PDF Download</p><a href="tools/invoice-generator/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">📑</div><h3>Quotation Generator</h3><p>Create Professional Quotations</p><a href="tools/quotation-generator/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">💰</div><h3>Profit Margin Calculator</h3><p>Calculate Profit, Margin & Markup</p><a href="tools/profit-margin/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">🏷</div><h3>GST Rate Finder</h3><p>Search GST Rates Quickly</p><a href="tools/gst-rate-finder/index.html" class="tool-btn">Open Tool</a></div>
+</div></section>
+
+<section class="tools-section"><h2 class="section-title">💰 Finance Tools</h2>
+<div class="tools-grid">
+<div class="tool-card"><div class="tool-icon">🏦</div><h3>EMI Calculator</h3><p>Loan EMI Calculator with Charts</p><a href="tools/emi-calculator/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">📈</div><h3>SIP Calculator</h3><p>Future Wealth Calculator</p><a href="tools/sip-calculator/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">💳</div><h3>Loan Calculator</h3><p>Complete Loan Analysis</p><a href="tools/loan-calculator/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">📊</div><h3>GST Advanced</h3><p>Advanced GST Calculations</p><a href="tools/gst-advanced/index.html" class="tool-btn">Open Tool</a></div>
+</div></section>
+
+<section class="tools-section"><h2 class="section-title">📄 PDF Tools</h2>
+<div class="tools-grid">
+<div class="tool-card"><div class="tool-icon">📑</div><h3>Merge PDF</h3><p>Merge Unlimited PDFs</p><a href="tools/merge-pdf/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">✂️</div><h3>Split PDF</h3><p>Split PDF by Pages</p><a href="tools/split-pdf/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">🗜️</div><h3>Compress PDF</h3><p>Reduce PDF Size</p><a href="tools/compress-pdf/index.html" class="tool-btn">Open Tool</a></div>
+</div></section>
+
+<section class="tools-section"><h2 class="section-title">🖼 Image Tools</h2>
+<div class="tools-grid">
+<div class="tool-card"><div class="tool-icon">📷</div><h3>Image Compressor</h3><p>Compress Images Online</p><a href="tools/image-compressor/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">📐</div><h3>Image Resizer</h3><p>Resize Images Easily</p><a href="tools/image-resizer/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">🖼</div><h3>JPG ↔ PNG</h3><p>Convert JPG & PNG</p><a href="tools/jpg-png/index.html" class="tool-btn">Open Tool</a></div>
+</div></section>
+
+<section class="tools-section"><h2 class="section-title">💻 Developer Tools</h2>
+<div class="tools-grid">
+<div class="tool-card"><div class="tool-icon">🔳</div><h3>QR Generator</h3><p>Create QR Codes</p><a href="tools/qr-generator/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">🔐</div><h3>Password Generator</h3><p>Strong Secure Passwords</p><a href="tools/password-generator/index.html" class="tool-btn">Open Tool</a></div>
+<div class="tool-card"><div class="tool-icon">{ }</div><h3>JSON Formatter</h3><p>Beautify & Validate JSON</p><a href="tools/json-formatter/index.html" class="tool-btn">Open Tool</a></div>
+</div></section>
 
 </main>
 
-<script src="script.js"></script>
+<div class="chat-widget" id="chatWidget">
+<div class="chat-header">🤖 AIHUBPRO <button onclick="closeChat()" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer">×</button></div>
+<div class="chat-box" id="chatBox"><div class="message ai-msg">Hi! Main AIHUBPRO hun. Kya help chahiye? 😊</div></div>
+<div class="chat-input"><input type="text" id="chatInput" placeholder="Message likho..." onkeypress="if(event.key==='Enter')sendChat()"><button onclick="sendChat()">Send</button></div>
+</div>
 
+<script>
+window.addEventListener('load',()=>{ setTimeout(()=>{document.getElementById('loader').style.opacity='0'; setTimeout(()=>document.getElementById('loader').style.display='none',500)},800)});
+document.getElementById('toolsBtn').addEventListener('click',()=>{document.getElementById('tools').scrollIntoView({behavior:'smooth'})});
+document.getElementById('chatBtn').addEventListener('click',()=>{openChat()});
+document.getElementById('loginBtn').addEventListener('click',()=>{activateFamilyAccess()});
+function openTool(url){ window.location.href=url; }
+function openChat(){ document.getElementById('chatWidget').style.display='flex'; }
+function closeChat(){ document.getElementById('chatWidget').style.display='none'; }
+document.getElementById('searchBox').addEventListener('input',function(){ const q=this.value.toLowerCase(); document.querySelectorAll('.tool-card').forEach(card=>{ card.style.display=card.innerText.toLowerCase().includes(q)?'block':'none'; }); });
+const FAMILY_EMAILS=['vasu081120@gmail.com','mrsaarti57@gmail.com','mrsaarti039@gmail.com','vasuglobale@gmail.com','mrneeraj039@gmail.com','neerajtyagi57@gmail.com','realvaishalisharma@gmail.com'];
+function activateFamilyAccess(){ const email=prompt('Family Email dalo:\n'+FAMILY_EMAILS.join('\n')); if(!email)return; if(FAMILY_EMAILS.includes(email.toLowerCase())){localStorage.setItem('aihubpro_family_email',email.toLowerCase());alert('✅ AIHUBPRO Family Access Activated!');} else{alert('❌ Email family list me nahi hai')} }
+async function sendChat(){
+  const input=document.getElementById('chatInput');const msg=input.value.trim();if(!msg)return;
+  const box=document.getElementById('chatBox');box.innerHTML+=`<div class="message user-msg">${msg}</div>`;input.value='';
+  const loadId='load-'+Date.now();box.innerHTML+=`<div class="message ai-msg" id="${loadId}">Soch raha hu...</div>`;box.scrollTop=box.scrollHeight;
+  const endpoints=['/api/chat','/.netlify/functions/api/chat','/.netlify/functions/chat','/chat'];
+  let reply=null;
+  for(let url of endpoints){
+    try{const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg})});if(res.ok){const data=await res.json();if(data.reply){reply=data.reply;break} if(data.error){reply='Error: '+data.error;break}}}catch(e){continue}
+  }
+  if(!reply) reply='❌ Netlify me OPENAI_API_KEY dalna baki hai. Project configuration > Environment variables me dalo.';
+  const el=document.getElementById(loadId); el.innerHTML=window.marked ? marked.parse(reply) : reply; box.scrollTop=box.scrollHeight;
+}
+</script>
+<script src="script.js"></script>
 </body>
 </html>
