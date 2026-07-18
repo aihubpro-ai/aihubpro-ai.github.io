@@ -1,80 +1,246 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AIHubPro 2026 - Free AI Chat + 18 Tools | Yamunanagar, Haryana</title>
-<meta name="description" content="India's #1 Free AI: ChatGPT Alternative + GST Calculator + PDF Tools. 5 Min Free Daily | AIHUBPRO">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f8fafc;--card:#ffffff;--dark:#0f172a;--border:#e2e8f0;--text:#334155;--muted:#64748b;--accent:#38bdf8;--success:#10b981;--warn:#f59e0b;--danger:#ef4444}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:var(--bg);color:var(--text);line-height:1.6}
-.container{max-width:1200px;margin:0 auto;padding:0 20px}
-.header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.header-inner{display:flex;justify-content:space-between;align-items:center;padding:12px 0;flex-wrap:wrap;gap:12px}
-.logo{font-size:22px;font-weight:800;color:var(--dark)} .logo span{background:linear-gradient(90deg,#3b82f6,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.lang-switch{display:flex;gap:6px;background:#f1f5f9;padding:4px;border-radius:999px;border:1px solid var(--border)}
-.lang-btn{padding:5px 12px;border-radius:999px;border:0;background:transparent;font-size:13px;cursor:pointer}
-.lang-btn.active{background:var(--dark);color:#fff}
-.trial-pill{background:var(--danger);color:#fff;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600;display:none}
-.trial-pill.show{display:inline-block}
-.btn{padding:9px 18px;border-radius:999px;border:1px solid var(--border);background:#fff;font-weight:600;cursor:pointer}
-.btn-dark{background:var(--dark);color:#fff;border-color:var(--dark)}
-.hero{padding:70px 0;text-align:center;background:#fff}
-.hero h1{font-size:42px;font-weight:800;color:var(--dark)} .hero h1 span{background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:20px}
-.tool-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px;cursor:pointer}
-.footer{background:#020617;color:#94a3b8;padding:40px 0 20px;margin-top:40px}
-.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}.hero h1{font-size:32px}}
-</style>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>VASU AI PRO | AI Chat, Business Tools, PDF Tools & More</title>
+
+<meta name="description"
+content="VASU AI PRO - India's Smart AI Platform with Business Tools, GST Calculator, Invoice Generator, PDF Tools, Image Tools, AI Chat and much more.">
+
+<meta name="keywords"
+content="VASU AI PRO, AI Chat, GST Calculator, Invoice Generator, PDF Tools, Image Tools, Business Tools, AIHubPro">
+
+<meta name="author"
+content="Vasu Enterprises">
+
+<meta name="robots"
+content="index,follow">
+
+<meta name="theme-color"
+content="#0f172a">
+
+<link rel="canonical"
+href="https://aihubpro.in">
+
+<!-- Open Graph -->
+
+<meta property="og:type"
+content="website">
+
+<meta property="og:title"
+content="VASU AI PRO">
+
+<meta property="og:description"
+content="India's Powerful AI Platform">
+
+<meta property="og:image"
+content="assets/images/logo.png">
+
+<meta property="og:url"
+content="https://aihubpro.in">
+
+<!-- Twitter -->
+
+<meta name="twitter:card"
+content="summary_large_image">
+
+<meta name="twitter:title"
+content="VASU AI PRO">
+
+<meta name="twitter:description"
+content="India's Smart AI Platform">
+
+<meta name="twitter:image"
+content="assets/images/logo.png">
+
+<!-- PWA -->
+
+<link rel="manifest"
+href="manifest.json">
+
+<link rel="icon"
+href="assets/icons/favicon.png">
+
+<meta name="apple-mobile-web-app-capable"
+content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style"
+content="black">
+
+<meta name="apple-mobile-web-app-title"
+content="VASU AI PRO">
+
+<!-- Google Fonts -->
+
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<!-- CSS -->
+
+<link rel="stylesheet"
+href="style.css">
+
 </head>
+
 <body>
-<header class="header"><div class="container header-inner">
-<a class="logo" href="#">⚡ <span>AiHubPro</span></a>
-<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-<div class="lang-switch"><button class="lang-btn active">हिंदी</button><button class="lang-btn">English</button><button class="lang-btn">Hinglish</button></div>
-<div id="trialTimer" class="trial-pill show">Trial: <span id="timeLeft">5:00</span></div>
-<button class="btn">👨‍👩‍👧 Family</button><button class="btn-dark btn">Login</button>
-</div></div></header>
 
-<section class="hero"><div class="container">
-<h1>World's Best AI + <span>18 Free Tools</span></h1>
-<p>ChatGPT Alternative + GST Calculator + PDF Tools + EMI Calculator - Sab Free</p>
-<div style="margin-top:20px"><button class="btn-dark btn" style="padding:14px 28px;border-radius:12px">Explore Tools →</button> <button class="btn" style="background:#10b981;color:#fff;padding:14px 28px;border-radius:12px">Start AI Chat 🤖</button></div>
-</div></section>
+<!-- Loading Screen -->
 
-<section class="container" style="padding:40px 20px">
-<h2 style="text-align:center;font-size:28px;color:var(--dark)">💼 Business Tools</h2>
-<div class="tools-grid">
-<div class="tool-card"><div style="font-size:28px">📊</div><b>GST Calculator</b><p style="font-size:13px;color:var(--muted)">CGST/SGST/IGST breakdown</p><span style="background:#dcfce7;color:#166534;font-size:11px;padding:4px 10px;border-radius:999px">100% Free</span></div>
-<div class="tool-card"><div style="font-size:28px">🧾</div><b>Invoice Generator</b><p style="font-size:13px;color:var(--muted)">Professional GST invoices PDF</p><span style="background:#dcfce7;color:#166534;font-size:11px;padding:4px 10px;border-radius:999px">100% Free</span></div>
-<div class="tool-card"><div style="font-size:28px">🏦</div><b>EMI Calculator</b><p style="font-size:13px;color:var(--muted)">Home/Car loan EMI</p><span style="background:#dcfce7;color:#166534;font-size:11px;padding:4px 10px;border-radius:999px">100% Free</span></div>
-<div class="tool-card"><div style="font-size:28px">📈</div><b>SIP Calculator</b><p style="font-size:13px;color:var(--muted)">Mutual Fund returns</p><span style="background:#dcfce7;color:#166534;font-size:11px;padding:4px 10px;border-radius:999px">100% Free</span></div>
+<div id="loader">
+
+<div class="loader-logo">
+
+VASU AI PRO
+
 </div>
 
-<h2 style="text-align:center;font-size:28px;color:var(--dark);margin-top:50px">🤖 AIHUBPRO AI Assistant</h2>
-<p style="text-align:center;color:var(--muted)">Ask anything in Hindi, English or Hinglish - 5 min free daily</p>
-<div style="max-width:900px;margin:20px auto;background:#fff;border:1px solid var(--border);border-radius:20px;padding:20px">
-<div style="background:#f1f5f9;padding:14px;border-radius:12px">Hi! Main AIHUBPRO AI hun. Kya help chahiye? 😊<br><small>5 min free trial active hai</small></div>
-<div style="display:flex;gap:8px;margin-top:14px"><input type="text" placeholder="Message..." style="flex:1;padding:12px;border:1px solid #cbd5e1;border-radius:999px"><button class="btn-dark btn" style="border-radius:50%;width:44px;height:44px">➤</button></div>
+<div class="loader-text">
+
+Loading...
+
 </div>
+
+</div>
+
+<!-- Header -->
+
+<header>
+
+<div class="logo">
+
+🚀 VASU AI PRO
+
+</div>
+
+<nav>
+
+<ul>
+
+<li><a href="#">Home</a></li>
+
+<li><a href="#tools">Tools</a></li>
+
+<li><a href="#pricing">Pricing</a></li>
+
+<li><a href="#blog">Blog</a></li>
+
+<li><a href="#faq">FAQ</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+</nav>
+
+<div class="header-buttons">
+
+<button id="themeBtn">
+
+🌙
+
+</button>
+
+<button id="languageBtn">
+
+🌐
+
+</button>
+
+<button id="loginBtn">
+
+Login
+
+</button>
+
+</div>
+
+</header>
+
+<!-- Hero -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+
+India's Most Powerful AI Platform
+
+</h1>
+
+<p>
+
+AI Chat • Business Tools • PDF Tools • Image Tools • Developer Tools
+
+</p>
+
+<div class="hero-buttons">
+
+<button id="chatBtn">
+
+🤖 Start AI Chat
+
+</button>
+
+<button id="toolsBtn">
+
+🛠 Explore Tools
+
+</button>
+
+</div>
+
+</div>
+
+<div class="hero-image">
+
+<img
+src="assets/images/hero.png"
+alt="VASU AI PRO">
+
+</div>
+
 </section>
 
-<footer class="footer"><div class="container footer-grid">
-<div><h4 style="color:#fff">🏢 Firm Details</h4><p><b>AIHUBPRO Enterprises</b><br>Yamunanagar, Haryana 135001<br>vasu081120@gmail.com<br>GST: 06TGWPS3896F1Z0</p></div>
-<div><h4 style="color:#fff">⚖️ Legal</h4><p>Yamunanagar District Court Only<br>IT Act Sec 79 Compliant<br>No Refund Policy</p></div>
-<div><h4 style="color:#fff">🔒 Security</h4><p>✅ 256-bit SSL<br>✅ Cloudflare DDoS<br>✅ Daily Backup<br>✅ 99.9% Uptime<br>✅ India Server Only</p></div>
-<div><h4 style="color:#fff">💰 Pricing & Support</h4><p><b>Free:</b> 5 Min Daily<br><b>Standard:</b> ₹666/mo - With Ads<br><b>Premium:</b> ₹999/mo - No Ads<br><b>Support:</b> 10 AM - 6 PM IST</p></div>
-</div>
-<div style="text-align:center;margin-top:30px;border-top:1px solid #1e293b;padding-top:16px;font-size:12px">© 2026 AIHUBPRO • AIHUBPRO ENTERPRISES • Made in India 🇮🇳 | All disputes Yamunanagar District Court</div>
-</footer>
+<!-- Search -->
 
-<script>
-// Trial Timer
-let sec=300; const left=document.getElementById('timeLeft');
-setInterval(()=>{ if(sec<=0) return; sec--; const m=Math.floor(sec/60), s=sec%60; left.textContent=`${m}:${String(s).padStart(2,'0')}`; },1000);
-</script>
+<section class="search-section">
+
+<input
+type="text"
+id="searchBox"
+placeholder="Search any tool...">
+
+<button>
+
+Search
+
+</button>
+
+</section>
+
+<!-- Main Content Starts Here -->
+
+<main id="tools">
+
+<!-- Tool Cards will be added in Part 2 -->
+
+</main>
+
+<script src="script.js"></script>
+
 </body>
 </html>
