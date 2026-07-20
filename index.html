@@ -7,35 +7,41 @@
 <meta name="description" content="AIHUBPRO - India's Smart AI Platform">
 <meta name="theme-color" content="#f8fafc">
 <link rel="manifest" href="manifest.json">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <style>
 :root{--bg:#f8fafc;--card:#ffffff;--border:#e2e8f0;--text:#0f172a;--accent:#3b82f6}
 *{margin:0;padding:0;box-sizing:border-box} body{font-family:'Poppins',system-ui;background:var(--bg);color:var(--text)}
-#loader{position:fixed;inset:0;background:#f8fafc;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
-header{display:flex;justify-content:space-between;align-items:center;padding:16px 24px;background:#ffffff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
-.logo{font-weight:800;font-size:22px} nav ul{display:flex;gap:16px;list-style:none} nav a{color:#475569;text-decoration:none;font-weight:500}
-.hero{text-align:center;padding:70px 20px;background:linear-gradient(180deg,#ffffff 0%,#f1f5f9 100%)} .hero h1{font-size:42px;font-weight:800} .hero p{color:#64748b;margin-top:8px}
-.hero-buttons button{padding:14px 28px;border:none;border-radius:12px;font-weight:700;margin:6px;cursor:pointer} #chatBtn{background:#3b82f6;color:white} #toolsBtn{background:white;border:1px solid #e2e8f0}
-.search-section{text-align:center;padding:24px} #searchBox{padding:12px 16px;width:380px;max-width:75%;border-radius:12px;border:1px solid var(--border);outline:none}
-.tools-section{max-width:1200px;margin:0 auto;padding:20px} .section-title{font-size:28px;text-align:center;margin:20px 0} .tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
-.tool-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;padding:24px;box-shadow:0 4px 6px rgba(0,0,0,0.05);transition:0.3s} .tool-card:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,0.08)}
-.tool-icon{font-size:36px;margin-bottom:10px} .tool-card h3{font-size:18px;margin-bottom:6px} .tool-card p{color:#94a3b8;font-size:14px;margin-bottom:10px} .tool-btn{display:inline-block;padding:10px 18px;background:#3b82f6;color:#fff;text-decoration:none;border-radius:8px;font-size:14px}
-.chat-widget{position:fixed;top:85px;right:20px;width:390px;height:560px;background:#ffffff;border:1px solid #e2e8f0;border-radius:20px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);display:none;flex-direction:column;z-index:99999;overflow:hidden}
-.chat-header{padding:14px 16px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;font-weight:700;background:white}
-.chat-box{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#f8fafc}
-.message{padding:10px 14px;border-radius:14px;max-width:85%;font-size:14px;white-space:pre-line} .ai-msg{background:white;border:1px solid #e2e8f0;align-self:flex-start} .user-msg{background:#3b82f6;color:white;align-self:flex-end}
-.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid #e2e8f0;background:white} .chat-input input{flex:1;padding:11px;border-radius:10px;border:1px solid #e2e8f0;outline:none}
-@media(max-width:768px){.hero h1{font-size:32px} .tools-grid{grid-template-columns:1fr} .chat-widget{width:95%;right:2.5%;top:70px;height:75vh}}
+#loader{position:fixed;inset:0;background:#f8fafc;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:9999}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:white;border-bottom:1px solid var(--border)}
+.logo{font-weight:800;font-size:22px} nav ul{display:flex;gap:16px;list-style:none}
+.hero{text-align:center;padding:70px 20px;background:linear-gradient(180deg,#fff,#f8fafc)}
+.hero-buttons button{padding:14px 28px;border:none;border-radius:12px;font-weight:600;cursor:pointer;margin:5px}
+#chatBtn{background:var(--accent);color:white} #toolsBtn{background:white;border:1px solid var(--border)!important}
+.search-section{text-align:center;padding:24px} #searchBox{padding:12px 16px;border:1px solid var(--border);border-radius:12px;width:90%;max-width:500px}
+.tools-section{max-width:1200px;margin:0 auto;padding:20px} .section-title{font-size:22px;margin-bottom:16px}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.tool-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;padding:20px}
+.tool-icon{font-size:36px;margin-bottom:10px} .tool-card h3{font-size:18px;margin-bottom:5px} .tool-card p{font-size:13px;color:#64748b}
+.tool-card button{margin-top:10px;padding:8px 16px;background:#3b82f6;color:white;border:none;border-radius:8px;cursor:pointer}
+.chat-widget{position:fixed;top:85px;right:20px;width:390px;height:560px;background:white;border:1px solid var(--border);border-radius:16px;display:none;flex-direction:column;z-index:999;box-shadow:0 10px 30px rgba(0,0,0,0.1)}
+.chat-header{padding:14px 16px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.chat-box{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.message{padding:10px 14px;border-radius:14px;max-width:85%;font-size:14px}
+.ai-msg{background:#f1f5f9;align-self:flex-start} .user-msg{background:#3b82f6;color:white;align-self:flex-end}
+.chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid #e2e8f0}
+.chat-input input{flex:1;padding:10px;border:1px solid var(--border);border-radius:8px}
+.chat-input button{padding:10px 14px;background:var(--accent);color:white;border:none;border-radius:8px;cursor:pointer}
+@media(max-width:768px){.hero h1{font-size:32px} .tools-grid{grid-template-columns:1fr 1fr} .chat-widget{width:95%;right:2.5%;height:80vh;top:10%}}
 </style>
 </head>
 <body>
 
-<div id="loader"><div style="font-weight:800;font-size:24px">⚡ AIHUBPRO</div><div style="color:#94a3b8;margin-top:8px">Loading...</div></div>
+<div id="loader"><div style="font-weight:800;font-size:24px">⚡ AIHUBPRO</div><div>Loading...</div></div>
 
-<header><div class="logo">⚡ AIHUBPRO</div><nav><ul><li><a href="#">Home</a></li><li><a href="#tools">Tools</a></li><li><a href="#pricing">Pricing</a></li></ul></nav></header>
+<header><div class="logo">⚡ AIHUBPRO</div><nav><ul><li><a href="#">Home</a></li><li><a href="#tools">Tools</a></li><li><a href="#">Pricing</a></li></ul></nav></header>
 
 <section class="hero">
 <h1>India's Most Powerful AI Platform</h1>
@@ -43,89 +49,130 @@ header{display:flex;justify-content:space-between;align-items:center;padding:16p
 <div class="hero-buttons"><button id="chatBtn">🤖 Start AI Chat</button><button id="toolsBtn">🛠️ Explore Tools</button></div>
 </section>
 
-<div id="topAd" style="text-align:center;padding:10px;background:#f1f5f9;display:none"><small style="color:#64748b">Advertisement • PLUS Plan me ads dikhte hai</small><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1234567890123456" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins></div>
+<div id="topAd" style="text-align:center;padding:10px;background:#f1f5f9;display:none;">Advertisement • PLUS Plan me ads nahi • <a href="#" onclick="pay(666)">Upgrade</a></div>
 
 <section class="search-section"><input type="text" id="searchBox" placeholder="Search any tool... e.g. GST, PDF, QR"></section>
 
 <main id="tools">
 <!-- BUSINESS -->
-<section class="tools-section"><h2 class="section-title">💼 Business Tools</h2>
-<div class="tools-grid">
-<div class="tool-card"><div class="tool-icon">📊</div><h3>GST Calculator</h3><p>Inclusive, Exclusive, Reverse GST</p><a href="tools/gst-calculator" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">🧾</div><h3>Invoice Generator</h3><p>Create GST Invoice with PDF</p><a href="tools/invoice" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">📝</div><h3>Quotation Generator</h3><p>Create Professional Quotations</p><a href="tools/quotation" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">💰</div><h3>Profit Margin Calculator</h3><p>Calculate Profit, Margin</p><a href="tools/profit" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">🏷️</div><h3>GST Rate Finder</h3><p>Search GST Rates Quickly</p><a href="tools/gst-rate" class="tool-btn">Open</a></div>
+<section class="tools-section"><h2 class="section-title">💼 Business Tools</h2><div class="tools-grid">
+<div class="tool-card"><div class="tool-icon">📊</div><h3>GST Calculator</h3><p>Inclusive, Exclusive, Reverse GST</p><button onclick="openTool('gst-calculator')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">🧾</div><h3>Invoice Generator</h3><p>Create GST Invoice with PDF</p><button onclick="openTool('invoice-generator')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">📝</div><h3>Quotation Generator</h3><p>Create Professional Quotations</p><button onclick="openTool('quotation-generator')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">💰</div><h3>Profit Margin Calculator</h3><p>Calculate Profit, Margin</p><button onclick="openTool('profit-margin')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">🏷️</div><h3>GST Rate Finder</h3><p>Search GST Rates Quickly</p><button onclick="openTool('gst-rate-finder')">Open</button></div>
 </div></section>
-
 <!-- FINANCE -->
-<section class="tools-section"><h2 class="section-title">💰 Finance Tools</h2>
-<div class="tools-grid">
-<div class="tool-card"><div class="tool-icon">🏦</div><h3>EMI Calculator</h3><p>Loan EMI Calculator with Charts</p><a href="tools/emi" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">📈</div><h3>SIP Calculator</h3><p>Future Wealth Calculator</p><a href="tools/sip" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">💳</div><h3>Loan Calculator</h3><p>Complete Loan Analysis</p><a href="tools/loan" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">📊</div><h3>GST Advanced</h3><p>Advanced GST Calculations</p><a href="tools/gst-advanced" class="tool-btn">Open</a></div>
+<section class="tools-section"><h2 class="section-title">💰 Finance Tools</h2><div class="tools-grid">
+<div class="tool-card"><div class="tool-icon">🏦</div><h3>EMI Calculator</h3><p>Loan EMI Calculator with Charts</p><button onclick="openTool('emi-calculator')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">📈</div><h3>SIP Calculator</h3><p>Future Wealth Calculator</p><button onclick="openTool('sip-calculator')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">💳</div><h3>Loan Calculator</h3><p>Complete Loan Analysis</p><button onclick="openTool('loan-calculator')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">📊</div><h3>GST Advanced</h3><p>Advanced GST Calculations</p><button onclick="openTool('gst-advanced')">Open</button></div>
 </div></section>
-
 <!-- PDF -->
-<section class="tools-section"><h2 class="section-title">📄 PDF Tools</h2>
-<div class="tools-grid">
-<div class="tool-card"><div class="tool-icon">📑</div><h3>Merge PDF</h3><p>Merge Unlimited PDFs</p><a href="tools/merge-pdf" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">✂️</div><h3>Split PDF</h3><p>Split PDF by Pages</p><a href="tools/split-pdf" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">🗜️</div><h3>Compress PDF</h3><p>Reduce PDF Size</p><a href="tools/compress" class="tool-btn">Open</a></div>
+<section class="tools-section"><h2 class="section-title">📄 PDF Tools</h2><div class="tools-grid">
+<div class="tool-card"><div class="tool-icon">📑</div><h3>Merge PDF</h3><p>Merge Multiple PDFs</p><button onclick="openTool('merge-pdf')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">✂️</div><h3>Split PDF</h3><p>Split PDF Pages</p><button onclick="openTool('split-pdf')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">🗜️</div><h3>Compress PDF</h3><p>Reduce PDF Size</p><button onclick="openTool('compress-pdf')">Open</button></div>
 </div></section>
-
 <!-- IMAGE -->
-<section class="tools-section"><h2 class="section-title">🖼️ Image Tools</h2>
-<div class="tools-grid">
-<div class="tool-card"><div class="tool-icon">📷</div><h3>Image Compressor</h3><p>Compress Images Online</p><a href="tools/image-compress" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">📐</div><h3>Image Resizer</h3><p>Resize Images Easily</p><a href="tools/image-resize" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">🖼️</div><h3>JPG → PNG</h3><p>Convert JPG & PNG</p><a href="tools/jpg-png" class="tool-btn">Open</a></div>
+<section class="tools-section"><h2 class="section-title">🖼️ Image Tools</h2><div class="tools-grid">
+<div class="tool-card"><div class="tool-icon">📷</div><h3>Image Compressor</h3><p>Compress Images</p><button onclick="openTool('image-compressor')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">📐</div><h3>Image Resizer</h3><p>Resize Images Quickly</p><button onclick="openTool('image-resizer')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">🖼️</div><h3>JPG → PNG</h3><p>Convert Image Format</p><button onclick="openTool('jpg-to-png')">Open</button></div>
 </div></section>
-
 <!-- DEV -->
-<section class="tools-section"><h2 class="section-title">💻 Developer Tools</h2>
-<div class="tools-grid">
-<div class="tool-card"><div class="tool-icon">🔳</div><h3>QR Generator</h3><p>Create QR Codes</p><a href="tools/qr-generator" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">🔐</div><h3>Password Generator</h3><p>Strong Secure Passwords</p><a href="tools/password" class="tool-btn">Open</a></div>
-<div class="tool-card"><div class="tool-icon">{ }</div><h3>JSON Formatter</h3><p>Beautify & Validate JSON</p><a href="tools/json" class="tool-btn">Open</a></div>
+<section class="tools-section"><h2 class="section-title">💻 Developer Tools</h2><div class="tools-grid">
+<div class="tool-card"><div class="tool-icon">⬛</div><h3>QR Generator</h3><p>Create QR Codes</p><button onclick="openTool('qr-generator')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">🔐</div><h3>Password Generator</h3><p>Secure Passwords</p><button onclick="openTool('password-generator')">Open</button></div>
+<div class="tool-card"><div class="tool-icon">{ }</div><h3>JSON Formatter</h3><p>Format JSON Data</p><button onclick="openTool('json-formatter')">Open</button></div>
 </div></section>
 </main>
 
 <div class="chat-widget" id="chatWidget">
-<div class="chat-header">🤖 AIHUBPRO <button onclick="closeChat()" style="background:none;border:none;font-size:18px;cursor:pointer">✕</button></div>
+<div class="chat-header">🤖 AIHUBPRO <button onclick="closeChat()" style="border:none;background:none;cursor:pointer">X</button></div>
 <div class="chat-box" id="chatBox"><div class="message ai-msg">Hi! Main AIHUBPRO hun. 5 min free trial hai! 😊</div></div>
-<div class="chat-input"><input type="text" id="chatInput" placeholder="Message likho..." onkeypress="if(event.key==='Enter')sendChat()"><button onclick="sendChat()" style="background:#3b82f6;color:white;border:none;padding:10px 16px;border-radius:8px;cursor:pointer">Send</button></div>
+<div class="chat-input"><input type="text" id="chatInput" placeholder="Message likho..."><button onclick="sendChat()">Send</button></div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75); z-index:10000; justify-content:center; align-items:center;">
+  <div style="background:white; padding:24px; border-radius:16px; width:92%; max-width:400px; text-align:center;">
+    <h2>⏰ 5 Minute Free Trial Khatam!</h2>
+    <p>Agla Free Access: <span id="nextTime"></span></p>
+    <div style="display:flex; gap:10px; margin:18px 0;">
+      <div onclick="pay(666)" style="flex:1; border:2px solid #3b82f6; border-radius:12px; padding:14px; cursor:pointer;"><h3>₹666</h3><p style="font-size:12px">1 Month PLUS</p><button style="margin-top:8px; background:#3b82f6; color:white; border:none; padding:6px 12px; border-radius:6px;">Buy</button></div>
+      <div onclick="pay(999)" style="flex:1; border:2px solid #f59e0b; border-radius:12px; padding:14px; cursor:pointer;"><h3>₹999</h3><p style="font-size:12px">3 Month PRO</p><button style="margin-top:8px; background:#f59e0b; color:white; border:none; padding:6px 12px; border-radius:6px;">Buy</button></div>
+    </div>
+    <p style="font-size:11px;">⚖️ Jurisdiction: Yamunanagar Court Only</p>
+  </div>
 </div>
 
 <script>
-window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('loader').style.opacity='0';setTimeout(()=>document.getElementById('loader').style.display='none',300)},500)});
-document.getElementById('toolsBtn').addEventListener('click',()=>{document.getElementById('tools').scrollIntoView({behavior:'smooth'})});
-document.getElementById('chatBtn').addEventListener('click',()=>{openChat()});
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('loader').style.display='none'},400);
+  document.getElementById('toolsBtn').addEventListener('click',()=>{document.getElementById('tools').scrollIntoView({behavior:'smooth'})});
+  document.getElementById('chatBtn').addEventListener('click',()=>{openChat()});
+  document.getElementById('searchBox').addEventListener('input',function(){
+    const q=this.value.toLowerCase();
+    document.querySelectorAll('.tool-card').forEach(c=>{ c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none'; });
+  });
+});
 function openChat(){document.getElementById('chatWidget').style.display='flex';}
 function closeChat(){document.getElementById('chatWidget').style.display='none';}
-document.getElementById('searchBox').addEventListener('input',function(){const q=this.value.toLowerCase();document.querySelectorAll('.tool-card').forEach(c=>{c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none'})});
-function isPro(){ return localStorage.getItem('plan')==='pro'; }
-if(!isPro()){ document.getElementById('topAd').style.display='block'; try{(adsbygoogle=window.adsbygoogle||[]).push({});}catch(e){} }
+function isPro(){return localStorage.getItem('plan')==='pro' || localStorage.getItem('isPaid')==='true';}
+if(!isPro()){document.getElementById('topAd').style.display='block';}
+
+// TRIAL LOGIC - 5 MIN FREE
+let trialStart = localStorage.getItem('trialStart');
+if(!trialStart){ localStorage.setItem('trialStart', Date.now()); trialStart=Date.now(); } else trialStart=parseInt(trialStart);
+function showLock(){
+  const next = new Date(Date.now()+24*60*60*1000);
+  document.getElementById('nextTime').innerText = next.toLocaleString('en-IN');
+  document.getElementById('paymentModal').style.display='flex';
+}
+function checkTrial(){ if(isPro()) return true; if(Date.now()-trialStart > 5*60*1000){ showLock(); return false; } return true; }
+setInterval(checkTrial, 3000);
+
+function openTool(name){
+  if(!checkTrial()) return;
+  // Tumhara purana logic yahi tha, bas alert hata diya
+  window.location.href='/tools/'+name;
+}
 
 let currentTrialData=null;
 async function sendChat(){
-  const input=document.getElementById('chatInput'); const msg=input.value.trim(); if(!msg)return;
-  const box=document.getElementById('chatBox'); box.innerHTML+=`<div class="message user-msg">${msg}</div>`; input.value='';
-  const loadId='load-'+Date.now(); box.innerHTML+=`<div class="message ai-msg" id="${loadId}">Soch raha hu...</div>`; box.scrollTop=box.scrollHeight;
+  if(!checkTrial()) return;
+  const input=document.getElementById('chatInput'); const msg=input.value.trim(); if(!msg) return;
+  const box=document.getElementById('chatBox'); box.innerHTML+=`<div class="message user-msg">${msg}</div>`;
+  input.value=''; const loadId='load-'+Date.now(); box.innerHTML+=`<div class="message ai-msg" id="${loadId}">...</div>`; box.scrollTop=box.scrollHeight;
   try{
     const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg})});
     const data=await res.json(); const el=document.getElementById(loadId);
-    if(data.reply==='TRIAL_ENDED'){ currentTrialData=data; el.innerHTML=`<div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:white;padding:16px;border-radius:16px"><div style="font-weight:800;text-align:center">⏰ 5 Min Trial Khatam!</div><div style="text-align:center;margin:8px 0;font-size:13px">Kal phir 1 free trial milega</div><div style="display:flex;gap:8px"><button onclick="pay(666)" style="flex:1;background:white;color:#4f46e5;padding:12px;border-radius:10px;border:none;font-weight:800">₹666<br><span style="font-size:11px">PLUS - 28 Din</span></button><button onclick="pay(999)" style="flex:1;background:#facc15;color:black;padding:12px;border-radius:10px;border:none;font-weight:800">₹999<br><span style="font-size:11px">PRO - 28 Din</span></button></div></div>`; }
+    if(data.reply==='TRIAL_ENDED'){ currentTrialData=data; el.innerHTML=`<div>⏰ Trial Khatam! <button onclick="pay(666)">₹666</button> <button onclick="pay(999)">₹999</button></div>`; showLock(); }
     else { el.innerHTML=window.marked?marked.parse(data.reply||''):data.reply; }
   }catch(e){ document.getElementById(loadId).innerHTML='❌ /api/chat error: '+e.message; }
   box.scrollTop=box.scrollHeight;
 }
+
 async function pay(amount){
-  const key=currentTrialData?.razorpay_key; if(!key){ alert('Cloudflare me RAZORPAY_KEY_ID daalo!'); return; }
-  let orderId=null; try{ const oRes=await fetch('/functions/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:amount, plan: amount==666?'plus':'pro'})}); const oData=await oRes.json(); orderId=oData.orderId||oData.order_id; }catch(e){}
-  const options={key:key,amount:amount*100,currency:'INR',name:'AIHUBPRO',description:amount==666?'PLUS - 28 Days - With Ads':'PRO - 28 Days - No Ads',order_id:orderId,handler: async function(res){ await fetch('/functions/payment-success',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({payment_id:res.razorpay_payment_id, amount:amount})}); localStorage.setItem('plan',amount==666?'plus':'pro'); alert(amount==666?'✅ PLUS Active 28 Din!':'✅ PRO Active 28 Din!'); location.reload(); },theme:{color:'#4f46e5'}};
-  new Razorpay(options).open();
+  const key = currentTrialData?.razorpay_key; // agar backend se aaye to
+  try{
+    let orderId=null;
+    try{
+      const oRes=await fetch('/api/create-order',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount:amount*100})});
+      const oData=await oRes.json(); orderId=oData.id;
+      if(!oData.keyId && !key){ alert('Cloudflare me RAZORPAY_KEY_ID daalo'); return; }
+    }catch(err){ console.log('order skip',err); }
+    const options={key: key || 'rzp_live_YOUR_KEY', amount:amount*100, currency:'INR', name:'AIHUBPRO', description: amount+' Plan', order_id: orderId,
+      handler: async function(response){
+        try{ await fetch('/api/verify-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...response, amount})}); }catch(e){}
+        localStorage.setItem('isPaid','true'); localStorage.setItem('plan','pro');
+        alert('✅ Payment Complete! ₹'+amount+' Plan Activated!'); document.getElementById('paymentModal').style.display='none'; location.reload();
+      }
+    };
+    new Razorpay(options).open();
+  }catch(e){ alert('Pay error:'+e.message); }
 }
 </script>
 </body>
