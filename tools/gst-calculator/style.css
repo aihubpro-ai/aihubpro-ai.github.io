@@ -1,0 +1,944 @@
+/* ==========================================
+   VASU AI PRO
+   GST CALCULATOR
+   STYLE.CSS
+   PART 1
+========================================== */
+
+/* ========= RESET ========= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+font-family:Inter,Arial,sans-serif;
+
+background:#f4f7fb;
+
+color:#222;
+
+line-height:1.6;
+
+}
+
+/* ========= CONTAINER ========= */
+
+.container{
+
+width:95%;
+
+max-width:1200px;
+
+margin:auto;
+
+padding:20px;
+
+}
+
+/* ========= HEADER ========= */
+
+.header{
+
+background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+color:#fff;
+
+padding:45px 20px;
+
+text-align:center;
+
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+.header h1{
+
+font-size:38px;
+
+font-weight:700;
+
+margin-bottom:10px;
+
+}
+
+.header p{
+
+font-size:17px;
+
+opacity:.95;
+
+}
+
+/* ========= CARD ========= */
+
+.card{
+
+background:#fff;
+
+padding:25px;
+
+margin-top:25px;
+
+border-radius:16px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-3px);
+
+}
+
+/* ========= TITLE ========= */
+
+.card h2{
+
+font-size:24px;
+
+margin-bottom:20px;
+
+color:#2563eb;
+
+}
+
+/* ========= FORM ========= */
+
+.form-group{
+
+margin-bottom:22px;
+
+}
+
+.form-group label{
+
+display:block;
+
+font-weight:600;
+
+margin-bottom:8px;
+
+}
+
+.form-group input,
+
+.form-group select{
+
+width:100%;
+
+padding:14px;
+
+font-size:16px;
+
+border:1px solid #d1d5db;
+
+border-radius:10px;
+
+outline:none;
+
+transition:.3s;
+
+}
+
+.form-group input:focus,
+
+.form-group select:focus{
+
+border-color:#2563eb;
+
+box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+/* ========= BUTTON ========= */
+
+.btn{
+
+display:inline-block;
+
+width:100%;
+
+padding:15px;
+
+background:#2563eb;
+
+color:#fff;
+
+font-size:17px;
+
+font-weight:600;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#1d4ed8;
+
+}
+/* ==========================================
+   VASU AI PRO
+   GST CALCULATOR
+   STYLE.CSS
+   PART 2
+========================================== */
+
+
+/* ==========================================
+   RESULT SECTION
+========================================== */
+
+.result-card{
+
+background:linear-gradient(
+
+135deg,
+
+#eff6ff,
+
+#ffffff
+
+);
+
+border-left:5px solid #2563eb;
+
+}
+
+
+.result-grid{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+}
+
+
+.result-box{
+
+background:#ffffff;
+
+padding:20px;
+
+border-radius:14px;
+
+border:1px solid #e5e7eb;
+
+text-align:center;
+
+}
+
+
+.result-box span{
+
+display:block;
+
+font-size:14px;
+
+color:#64748b;
+
+margin-bottom:8px;
+
+}
+
+
+.result-box h3{
+
+font-size:24px;
+
+color:#1e293b;
+
+}
+
+
+.result-box.total{
+
+background:#2563eb;
+
+color:white;
+
+}
+
+
+.result-box.total span,
+
+.result-box.total h2{
+
+color:white;
+
+}
+
+
+.result-box.total h2{
+
+font-size:32px;
+
+}
+
+
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
+
+
+.action-grid{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(180px,1fr));
+
+gap:15px;
+
+}
+
+
+.action-grid button{
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:15px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+#copyBtn{
+
+background:#2563eb;
+
+color:white;
+
+}
+
+
+#printBtn{
+
+background:#16a34a;
+
+color:white;
+
+}
+
+
+#pdfBtn{
+
+background:#f59e0b;
+
+color:#111;
+
+}
+
+
+#resetBtn{
+
+background:#dc2626;
+
+color:white;
+
+}
+
+
+.action-grid button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 8px 15px rgba(0,0,0,.15);
+
+}
+
+
+/* ==========================================
+   GST INFORMATION
+========================================== */
+
+
+.gst-info{
+
+list-style:none;
+
+display:grid;
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(150px,1fr));
+
+gap:15px;
+
+}
+
+
+.gst-info li{
+
+background:#eff6ff;
+
+padding:15px;
+
+border-radius:10px;
+
+font-weight:600;
+
+color:#2563eb;
+
+}
+
+
+/* ==========================================
+   FAQ
+========================================== */
+
+
+details{
+
+background:#f8fafc;
+
+padding:15px;
+
+margin-bottom:12px;
+
+border-radius:10px;
+
+border:1px solid #e2e8f0;
+
+cursor:pointer;
+
+}
+
+
+summary{
+
+font-weight:600;
+
+color:#2563eb;
+
+}
+
+
+details p{
+
+margin-top:10px;
+
+color:#475569;
+
+}
+
+
+/* ==========================================
+   RELATED TOOLS
+========================================== */
+
+
+.related-tools{
+
+display:grid;
+
+grid-template-columns:
+
+repeat(auto-fit,minmax(180px,1fr));
+
+gap:15px;
+
+}
+
+
+.related-tools a{
+
+text-decoration:none;
+
+background:#f1f5f9;
+
+padding:15px;
+
+border-radius:12px;
+
+color:#2563eb;
+
+font-weight:600;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+
+.related-tools a:hover{
+
+background:#2563eb;
+
+color:white;
+
+}
+
+
+/* ==========================================
+   ADS SECTION
+========================================== */
+
+
+.ads-section{
+
+min-height:120px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:#f8fafc;
+
+color:#64748b;
+
+}
+
+
+/* ==========================================
+   SHARE BUTTONS
+========================================== */
+
+
+.share-buttons{
+
+display:flex;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+
+.share-buttons button{
+
+padding:14px 25px;
+
+border:none;
+
+border-radius:50px;
+
+background:#2563eb;
+
+color:white;
+
+font-weight:600;
+
+cursor:pointer;
+
+}
+
+
+/* ==========================================
+   BREADCRUMB
+========================================== */
+
+
+.breadcrumb{
+
+padding:20px;
+
+font-size:14px;
+
+color:#64748b;
+
+}
+
+
+.breadcrumb a{
+
+color:#2563eb;
+
+text-decoration:none;
+
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+
+.footer{
+
+background:#0f172a;
+
+color:white;
+
+padding:30px;
+
+text-align:center;
+
+margin-top:40px;
+
+}
+
+
+.footer strong{
+
+color:#60a5fa;
+
+}
+/* ==========================================
+   VASU AI PRO
+   GST CALCULATOR
+   STYLE.CSS
+   PART 3 (FINAL)
+========================================== */
+
+/* ==========================================
+   MOBILE RESPONSIVE
+========================================== */
+
+@media (max-width:992px){
+
+.container{
+
+width:97%;
+
+padding:15px;
+
+}
+
+.result-grid{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+.action-grid{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
+
+@media (max-width:768px){
+
+.header{
+
+padding:30px 15px;
+
+}
+
+.header h1{
+
+font-size:30px;
+
+}
+
+.card{
+
+padding:20px;
+
+}
+
+.result-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.action-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.related-tools{
+
+grid-template-columns:1fr;
+
+}
+
+.share-buttons{
+
+flex-direction:column;
+
+}
+
+.share-buttons button{
+
+width:100%;
+
+}
+
+}
+
+@media (max-width:480px){
+
+.header h1{
+
+font-size:26px;
+
+}
+
+.card h2{
+
+font-size:20px;
+
+}
+
+.form-group input,
+
+.form-group select{
+
+font-size:15px;
+
+padding:12px;
+
+}
+
+.btn{
+
+font-size:16px;
+
+padding:13px;
+
+}
+
+}
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.dark{
+
+background:#0f172a;
+
+color:#f8fafc;
+
+}
+
+body.dark .card{
+
+background:#1e293b;
+
+color:#f8fafc;
+
+border:1px solid #334155;
+
+}
+
+body.dark .form-group input,
+
+body.dark .form-group select{
+
+background:#0f172a;
+
+color:white;
+
+border:1px solid #475569;
+
+}
+
+body.dark .result-box{
+
+background:#0f172a;
+
+color:white;
+
+border:1px solid #334155;
+
+}
+
+body.dark .result-box h3{
+
+color:white;
+
+}
+
+body.dark .gst-info li{
+
+background:#1e3a8a;
+
+color:white;
+
+}
+
+body.dark details{
+
+background:#1e293b;
+
+border:1px solid #334155;
+
+color:white;
+
+}
+
+body.dark .related-tools a{
+
+background:#334155;
+
+color:white;
+
+}
+
+body.dark .related-tools a:hover{
+
+background:#2563eb;
+
+}
+
+/* ==========================================
+   PRINT
+========================================== */
+
+@media print{
+
+.header,
+
+.footer,
+
+.action-grid,
+
+.ads-section,
+
+.share-buttons{
+
+display:none;
+
+}
+
+body{
+
+background:white;
+
+}
+
+.card{
+
+box-shadow:none;
+
+border:1px solid #ccc;
+
+}
+
+}
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+.card{
+
+animation:fadeUp .5s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+.btn{
+
+transition:.30s;
+
+}
+
+.btn:hover{
+
+transform:translateY(-2px);
+
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+button:focus,
+
+input:focus,
+
+select:focus,
+
+a:focus{
+
+outline:3px solid #2563eb;
+
+outline-offset:2px;
+
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#e5e7eb;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#2563eb;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#1d4ed8;
+
+}
+
+/* ==========================================
+   END
+========================================== */
